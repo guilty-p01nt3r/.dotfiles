@@ -31,22 +31,11 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # change volume or toggle mute
-bindsym $mod+kp_end exec ~/.config/i3/blocks/set-volume = 10; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_downarrow exec ~/.config/i3/blocks/set-volume = 20; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_leftarrow exec ~/.config/i3/blocks/set-volume = 40; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_5 exec ~/.config/i3/blocks/set-volume = 50; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_rightarrow exec ~/.config/i3/blocks/set-volume = 60; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_home exec ~/.config/i3/blocks/set-volume = 70; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_uparrow exec ~/.config/i3/blocks/set-volume = 80; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_pgup exec ~/.config/i3/blocks/set-volume = 90; exec pkill -SIGRTMIN+10 i3blocks
-bindsym $mod+kp_enter exec ~/.config/i3/blocks/set-volume = 100; exec pkill -SIGRTMIN+10 i3blocks
-#bindsym kp_ins 
-#bindsym kp_del 
-#bindsym kp_plus 
-#bindsym kp_minus 
-#bindsym kp_multiply 
-#bindsym kp_slash 
-#bindsym kp_numlock 
+bindsym $mod+Shift+x exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
+bindsym $mod+Shift+z exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+bindsym $mod+Shift+b exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+# Mic toggle
+bindsym $mod+Shift+v exec amixer -q -D pulse sset Capture toggle && pkill -RTMIN+11 i3blocks
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -60,6 +49,7 @@ bindsym $mod+Shift+q kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons -config ~/.config/rofi/config
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.

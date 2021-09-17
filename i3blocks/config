@@ -42,6 +42,12 @@ signal=10
 #SCONTROL=[determined automatically]
 #NATURAL_MAPPING=0
 
+[microphone]
+command=$SCRIPT_DIR/microphone
+LABEL=🎤
+interval=once
+signal=11
+
 [calendar]
 command=$SCRIPT_DIR/calendar
 interval=1

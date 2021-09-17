@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+status=$(awk -F" " '/\[[a-z]*\]/{ gsub(/\[|\]/,"");print $5 }' <(amixer -D pulse get Capture))
+
+if [ $status == 'on' ]; then
+  echo "$LABEL ON"
+elif [ $status == 'off' ]; then
+ echo "$LABEL OFF"
+fi
+
