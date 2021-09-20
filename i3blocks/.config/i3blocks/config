@@ -29,6 +29,31 @@ command=$SCRIPT_DIR/hdd_space
 LABEL=💽
 interval=30
 
+[bandwidth]
+command=$SCRIPT_DIR/bandwidth2 
+interval=persist
+markup=pango
+LABEL=🌐
+UP_LABEL=U
+DOWN_LABEL=D
+#INTERFACE=(checks all interfaces)
+#USE_BITS=0
+#USE_BYTES=1
+#WARN_RX=0
+#WARN_TX=0
+#CRIT_RX=0
+#CRIT_TX=0
+#USE_SI=0
+
+#[network]
+#command=$SCRIPT_DIR/network
+#LABEL=🌐
+#interval=15
+#INTERFACE=eth0
+#INLABEL=⬇️ 
+#OUTLABEL=⬆️ 
+#TREAT_UNKNOWN_AS_UP=0
+
 [temperature]
 command=$SCRIPT_DIR/temperature
 label=🌡️
