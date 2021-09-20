@@ -1,0 +1,5 @@
+# Bindings
+bindkey -s ^f "tmux-sessionizer\n"
+
+bindkey -s ^g "find ~ \\\( -path ~/work -prune -o -path ~/personal -prune -o -path ~/.npm -prune \\\) -o -print | fzf\n"  
+
