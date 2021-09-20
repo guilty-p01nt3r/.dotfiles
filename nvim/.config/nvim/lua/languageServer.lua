@@ -83,7 +83,7 @@ local function tailwindcss()
   require'lspconfig'.tailwindcss.setup{}
 end
 
-function config()
+function Config()
   cpp()
   css()
   html()
@@ -94,4 +94,4 @@ function config()
 end
 
 
-config()
+Config()
