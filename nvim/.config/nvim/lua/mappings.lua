@@ -7,6 +7,10 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- Fix opening url with gx
+map('n', 'gx', ':silent execute "!xdg-open " . shellescape("<cWORD>")<CR>')
+-- map('v', 'gx', '<Esc>:silent execute "!xdg-open " . shellescape("<C-r>*") . " &"<CR>')
+
 
 -- <Tab> to navigate the completion menu
 map('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<Tab>"', {expr = true})
@@ -16,6 +20,17 @@ map('n', '<C-l>', '<cmd>noh<CR>')    -- Clear highlights
 map('n', '<leader>o', 'm`o<Esc>``')  -- Insert a newline in normal mode
 
 -- Telescope (fuzzy finder)
+require('telescope').setup{
+   pickers = {
+    buffers = {
+      mappings = {
+       i = {
+         ["<c-d>"] = "delete_buffer",
+        }
+      }
+    }
+  }
+}
 vim.api.nvim_set_keymap('n', '<leader>ff', ':lua require("telescope.builtin").find_files()<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fg', ':lua require("telescope.builtin").live_grep()<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>', { noremap = true })
@@ -27,6 +42,7 @@ vim.api.nvim_set_keymap("n", "<C-b>", ":NERDTreeToggle<CR>", {noremap = true})
 -- reveal open buffer in NERDTree
 vim.api.nvim_set_keymap("n", "<leader>nr", ":NERDTreeFind<CR>", {noremap = true})
 
+-- Move between diagnostic
 vim.api.nvim_set_keymap("n", "<C-N>", ":bnext<CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<C-P>", ":bprev<CR>", {noremap = true})
 
