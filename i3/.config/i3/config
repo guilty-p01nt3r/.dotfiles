@@ -199,7 +199,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/SpaceMonster.jpg
+exec_always --no-startup-id feh --bg-fill ~/Pictures/_think__plan__execute__redraw_by_cyanjdroid_dab7y9n.png --bg-fill ~/Pictures/SpaceMonster.jpg 
 
 #######
 #THEME#
@@ -313,3 +313,4 @@ mode "$mode_gaps_outer" {
 ## Blocks configs
 # Bugfix for yad (time and calendar)
 for_window [class="Yad"] floating enable
+
