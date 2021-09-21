@@ -1,4 +1,3 @@
-
 SCRIPT_DIR=i3blocks_script
 
 [cpu_usage]
@@ -33,9 +32,10 @@ interval=30
 command=$SCRIPT_DIR/bandwidth2 
 interval=persist
 markup=pango
-LABEL=🌐
-UP_LABEL=U
-DOWN_LABEL=D
+LABEL=🌐 
+LABEL=
+UP_LABEL=祝
+DOWN_LABEL=
 #INTERFACE=(checks all interfaces)
 #USE_BITS=0
 #USE_BYTES=1

@@ -41,6 +41,7 @@ vim.cmd("set completeopt=menuone,noinsert,noselect")
 vim.cmd("set colorcolumn=80")
 vim.cmd("set signcolumn=yes")
 vim.cmd("set nohlsearch ")
+vim.cmd("set encoding=UTF-8")
 --
 -- -- Give more space for displaying messages
 vim.cmd("set cmdheight=2")
