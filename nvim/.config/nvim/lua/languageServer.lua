@@ -1,4 +1,6 @@
 -- Language Server Configuration
+local global_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 
 local function cpp()
   require'lspconfig'.clangd.setup{}
@@ -6,7 +8,8 @@ end
 
 local function css()
   --Enable (broadcasting) snippet capability for completion
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  --local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local capabilities = global_capabilities
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   require'lspconfig'.cssls.setup {
@@ -16,7 +19,9 @@ end
 
 local function html()
   --Enable (broadcasting) snippet capability for completion
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  -- local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local capabilities = global_capabilities
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
   capabilities.textDocument.completion.completionItem.snippetSupport = true
 
   require'lspconfig'.html.setup {
@@ -72,15 +77,64 @@ local function lua()
 end
 
 local function php()
-  require'lspconfig'.intelephense.setup{}
+  local capabilities = global_capabilities
+  require'lspconfig'.intelephense.setup{
+    capabilities = capabilities,
+  }
+  -- require'lspconfig'.phpactor.setup{
+  --   capabilities = capabilities,
+  --   cmd = { "phpactor", "language-server" },
+  --   filetypes = { "php" },
+  -- }
 end
 
 local function python()
-  require'lspconfig'.pyright.setup{}
+  local capabilities = global_capabilities
+  require'lspconfig'.pyright.setup{
+      capabilities = capabilities
+  }
 end
 
 local function tailwindcss()
-  require'lspconfig'.tailwindcss.setup{}
+  local capabilities = global_capabilities
+  require'lspconfig'.tailwindcss.setup {
+    capabilities = capabilities,
+    cmd = { "tailwindcss-language-server", "--stdio" },
+    filetypes = { "aspnetcorerazor", "astro", "astro-markdown", "blade", "django-html", "edge", "eelixir", "ejs", "erb", "eruby", "gohtml", "haml", "handlebars", "hbs", "html", "html-eex", "jade", "leaf", "liquid", "markdown", "mdx", "mustache", "njk", "nunjucks", "php", "razor", "slim", "twig", "css", "less", "postcss", "sass", "scss", "stylus", "sugarss", "javascript", "javascriptreact", "reason", "rescript", "typescript", "typescriptreact", "vue", "svelte" };
+    init_options = {
+      userLanguages = {
+        eelixir = "html-eex",
+        eruby = "erb"
+      }
+    },
+    on_new_config = function(new_config)
+          if not new_config.settings then
+            new_config.settings = {}
+          end
+          if not new_config.settings.editor then
+            new_config.settings.editor = {}
+          end
+          if not new_config.settings.editor.tabSize then
+            -- set tab size for hover
+            new_config.settings.editor.tabSize = vim.lsp.util.get_effective_tabstop()
+          end
+        end,
+    -- root_dir = root_pattern('tailwind.config.js', 'tailwind.config.ts', 'postcss.config.js', 'postcss.config.ts', 'package.json', 'node_modules', '.git'),
+    settings = {
+      tailwindCSS = {
+        lint = {
+          cssConflict = "warning",
+          invalidApply = "error",
+          invalidConfigPath = "warning", -- should be error
+          invalidScreen = "error",
+          invalidTailwindDirective = "error",
+          invalidVariant = "error",
+          recommendedVariantOrder = "warning"
+        },
+        validate = true
+      }
+    }
+  }
 end
 
 function Config()

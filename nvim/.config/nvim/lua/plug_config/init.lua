@@ -1,52 +1,39 @@
 pluginsConfig = {}
 
-local function compe()
-  require'compe'.setup {
-    enabled = true;
-    autocomplete = true;
-    debug = false;
-    min_length = 1;
-    preselect = 'enable';
-    throttle_time = 80;
-    source_timeout = 200;
-    incomplete_delay = 400;
-    max_abbr_width = 100;
-    max_kind_width = 100;
-    max_menu_width = 100;
-    documentation = false;
+-- Setup nvim-cmp.
+local function nvim_cmp()
+  local cmp = require'cmp'
 
-    source = {
-      path = true;
-      buffer = true;
-      calc = true;
-      vsnip = true;
-      nvim_lsp = true;
-      nvim_lua = true;
-      spell = true;
-      tags = true;
-      snippets_nvim = true;
-      treesitter = true;
-    };
-  }
-
-  local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-  end
-  _G.s_tab_complete = function()
-    if vim.fn.pumvisible() == 1 then
-      return t "<C-p>"
-    elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-      return t "<Plug>(vsnip-jump-prev)"
-    else
-      return t "<S-Tab>"
-    end
-  end
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        -- For `vsnip` user.
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+      end,
+    },
+    mapping = {
+      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.close(),
+      ['<CR>'] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true
+      }),
+      ['<TAB>'] =   cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+      ['<S-TAB>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' })
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+      -- For vsnip user.
+      { name = 'vsnip' },
+      { name = 'buffer' },
+    }
+  })
 end
 
-
-
 function pluginsConfig.config()
-  compe()
+	nvim_cmp()
 end
 
 
