@@ -50,10 +50,11 @@ vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_next()<C
 ]])
 
 -- -- Custom Commands
-vim.api.nvim_command([[command Exec set splitright | vnew | set filetype=sh | read !sh #]])
 
 -- Executing current file
+vim.api.nvim_command([[command Exec set splitright | vnew | set filetype=sh | read !sh #]])
 map('n', '<leader>r', ':!sh %<CR>')
+map('n', '<leader><S-r>', ':Exec<CR>') -- look two line above
 
 -- Clear highlights
 map('n', '<C-l>', '<cmd>noh<CR>')
@@ -65,3 +66,9 @@ map('n', '<leader>o', 'm`o<Esc>``')
 vim.api.nvim_set_keymap("n", "<C-N>", ":bnext<CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<C-P>", ":bprev<CR>", {noremap = true})
 
+-- Move between tabs
+vim.api.nvim_set_keymap("n", "<S-h>", ":tabprev<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("n", "<S-l>", ":tabnext<CR>", {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap("n", "<leader><S-h>", ":tabmove -1<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader><S-l>", ":tabmove +1<CR>", {noremap = true})
