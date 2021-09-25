@@ -52,8 +52,8 @@ vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_next()<C
 -- -- Custom Commands
 
 -- Executing current file
-vim.api.nvim_command([[command Exec set splitright | vnew | set filetype=sh | read !sh #]])
-map('n', '<leader>r', ':!sh %<CR>')
+vim.api.nvim_command([[command Exec set splitright | vnew | set filetype=sh | read !bash #]])
+map('n', '<leader>r', ':!bash %<CR>')
 map('n', '<leader><S-r>', ':Exec<CR>') -- look two line above
 
 -- Clear highlights

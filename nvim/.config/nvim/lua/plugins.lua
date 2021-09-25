@@ -36,6 +36,9 @@ return require('packer').startup(function()
    use 'hrsh7th/cmp-vsnip'
    use 'hrsh7th/vim-vsnip'
 
+   -- Tabnine
+   use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+
    -- Pandoc
    use 'vim-pandoc/vim-pandoc'
    use 'vim-pandoc/vim-pandoc-syntax'

@@ -77,6 +77,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
   },
+  ["cmp-tabnine"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-tabnine"
+  },
   ["cmp-vsnip"] = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-vsnip"
