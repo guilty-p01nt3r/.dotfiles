@@ -7,6 +7,11 @@ local function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- -- Vim Fugitive
+vim.api.nvim_set_keymap('n', '<leader>gj', ':diffget //3<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gf', ':diffget //2<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>gs', ':G<CR>', { noremap = true })
+
 -- -- Telescope (fuzzy finder)
 require('telescope').setup{
    pickers = {
@@ -48,6 +53,15 @@ vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_next()<C
  vim.api.nvim_command([[
    autocmd BufWritePre *.* lua vim.lsp.buf.formatting_sync(nil, 100)
 ]])
+
+-- Auto closing tag
+-- map('i', '"', '""<left>', {noremap = true, silent = true})
+-- map('i', "'", "''<left>", {noremap = true, silent = true})
+-- map('i', '(', '()<left>', {noremap = true, silent = true})
+-- map('i', '[', '[]<left>', {noremap = true, silent = true})
+-- map('i', '{', '{}<left>', {noremap = true, silent = true})
+-- map('i', '{<CR>', '{<CR>}<ESC>O', {noremap = true, silent = true})
+
 
 -- -- Custom Commands
 

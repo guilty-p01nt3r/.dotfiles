@@ -42,9 +42,17 @@ local function cmp_tabnine()
     })
 end
 
+local function vdebug_config()
+    vim.cmd("let g:vdebug_options = {'ide_key': 'docker'}");
+    vim.cmd("let g:vdebug_options = {'break_on_open': 0}")
+    vim.cmd("let g:vdebug_options = {'server': ''}")
+    vim.cmd("let g:vdebug_options = {'port': '9001'}")
+end
+
 function pluginsConfig.config()
 	nvim_cmp()
 	cmp_tabnine()
+    vdebug_config()
 end
 
 
