@@ -1,0 +1,26 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1056,
+       "width": 1916,
+       "x": 14,
+       "y": 34
+    },
+    "marks": [],
+    "name": "Google - Brave",
+    "percent": 1,
+    "swallows": [
+       {
+       "class": "^Brave\\-browser$",
+       "instance": "^brave\\-browser$",
+       "machine": "^vince\\-LX$",
+       //"title": "^i3\\:\\ Layout\\ saving\\ in\\ i3\\ \\-\\ Brave$",
+       "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+
