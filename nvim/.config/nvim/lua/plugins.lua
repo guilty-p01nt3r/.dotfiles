@@ -3,7 +3,7 @@
 require('plug_config')
 pluginsConfig.config()
 
-return require('packer').startup(function()
+return require('packer').startup(function(use)
    -- Packer can manage itself
    use 'wbthomason/packer.nvim'
 
@@ -29,6 +29,9 @@ return require('packer').startup(function()
 
    -- Debug
    use 'vim-vdebug/vdebug'
+   -- Errors
+   use 'folke/trouble.nvim'
+
 
    -- -- Successor of use 'hrsh7th/nvim-compe'
    use 'hrsh7th/cmp-nvim-lsp'
@@ -38,6 +41,10 @@ return require('packer').startup(function()
    -- for vsnip user.
    use 'hrsh7th/cmp-vsnip'
    use 'hrsh7th/vim-vsnip'
+
+   -- Emmet & closing xhtml tags
+   use 'mattn/emmet-vim'
+   use 'alvan/vim-closetag'
 
    -- Tabnine
    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}

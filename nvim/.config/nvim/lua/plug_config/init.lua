@@ -49,10 +49,16 @@ local function vdebug_config()
     vim.cmd("let g:vdebug_options = {'port': '9001'}")
 end
 
+local function trouble_config()
+    local trouble = require("trouble")
+    trouble.setup {}
+end
+
 function pluginsConfig.config()
 	nvim_cmp()
 	cmp_tabnine()
     vdebug_config()
+    trouble_config()
 end
 
 

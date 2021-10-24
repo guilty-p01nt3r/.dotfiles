@@ -317,15 +317,15 @@ for_window [class="Yad"] floating enable
 
 ## application rules
 #Steam 
-assign [class="^steam$"] 5
+assign [class="^steam$"] $ws5
 for_window [class="^steam$"] floating enable
 # Discord
-assign [class="^discord$"] 10
+assign [class="^discord$"] $ws10
 for_window [class="^discord$"] fullscreen
 
 # Load layouts
-exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
+exec --no-startup-id "i3-msg 'workspace 1:VIM; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
 exec --no-startup-id "kitty"
-exec --no-startup-id "i3-msg 'workspace 2; append_layout ~/.config/i3/layout_tree/workspaces-2.json'"
+exec --no-startup-id "i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2.json'"
 exec --no-startup-id "brave-browser"
 
