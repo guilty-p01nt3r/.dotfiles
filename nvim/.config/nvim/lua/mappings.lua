@@ -57,6 +57,13 @@ vim.api.nvim_set_keymap("n", "<leader>vll", "<cmd>lua LspLocationList()<CR>", {n
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", {noremap = true, silent = true})
 
+-- Commenting lines / blocks
+vim.api.nvim_set_keymap("n", "<C-k>", ":AutoInlineComment<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "<C-k>", ":AutoInlineComment<CR>", {noremap = true, silent = true})
+
+vim.api.nvim_set_keymap("n", "<C-K>", ":AutoBlockComment<CR>", {noremap = true, silent = true})
+vim.api.nvim_set_keymap("v", "<C-K>", ":AutoBlockComment<CR>", {noremap = true, silent = true})
+
 -- -- autocmd
  vim.api.nvim_command([[
    autocmd BufWritePre *.* lua vim.lsp.buf.formatting_sync(nil, 100)

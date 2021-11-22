@@ -32,7 +32,6 @@ return require('packer').startup(function(use)
    -- Errors
    use 'folke/trouble.nvim'
 
-
    -- -- Successor of use 'hrsh7th/nvim-compe'
    use 'hrsh7th/cmp-nvim-lsp'
    use 'hrsh7th/cmp-buffer'
@@ -46,12 +45,15 @@ return require('packer').startup(function(use)
    use 'mattn/emmet-vim'
    use 'alvan/vim-closetag'
 
+   -- Autocommenter
+   use 'KarimElghamry/vim-auto-comment'
+
    -- Tabnine
    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
    -- Pandoc
-   use 'vim-pandoc/vim-pandoc'
-   use 'vim-pandoc/vim-pandoc-syntax'
+   -- use 'vim-pandoc/vim-pandoc'
+   -- use 'vim-pandoc/vim-pandoc-syntax'
 
    -- Themes
    use 'gruvbox-community/gruvbox'

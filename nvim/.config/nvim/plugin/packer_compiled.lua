@@ -85,6 +85,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-vsnip"
   },
+  ["emmet-vim"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/emmet-vim"
+  },
   gruvbox = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/gruvbox"
@@ -129,9 +133,25 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
+  ["trouble.nvim"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/trouble.nvim"
+  },
   undotree = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/undotree"
+  },
+  vdebug = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vdebug"
+  },
+  ["vim-auto-comment"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-auto-comment"
+  },
+  ["vim-closetag"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-closetag"
   },
   ["vim-devicons"] = {
     loaded = true,
@@ -140,14 +160,6 @@ _G.packer_plugins = {
   ["vim-fugitive"] = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-fugitive"
-  },
-  ["vim-pandoc"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-pandoc"
-  },
-  ["vim-pandoc-syntax"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-pandoc-syntax"
   },
   ["vim-vsnip"] = {
     loaded = true,

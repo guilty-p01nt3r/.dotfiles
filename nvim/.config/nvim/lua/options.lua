@@ -46,3 +46,19 @@ vim.cmd("set encoding=UTF-8")
 -- -- Give more space for displaying messages
 vim.cmd("set cmdheight=2")
 vim.cmd("set updatetime=50")
+
+
+-- Plugins
+-- Auto-Commenter
+vim.g.inline_comment_dict = {
+    ['//'] = {'js', 'ts', 'cpp', 'c', 'php'},
+    ['#'] = {'py', 'sh'},
+    ['"'] = {'vim'}
+}
+
+vim.g.block_comment_dict = {
+    ['/*'] = {"php"},
+    ['<!--'] = {"html"},
+ 	['/*'] = {"js", "ts", "cpp", "c", "dart"},
+    ['"""'] = {'py'},
+}
