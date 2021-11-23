@@ -206,24 +206,32 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/_think__plan__execute__redr
 #######
 #THEME#
 #######
+#
+# Defines a variable named $black by querying for the "color0" resource,
+# using a fallback of "#000000" if it cannot be found
+set_from_resource $bg           background  #282828
+set_from_resource $fg           foreground  #ebdbb2
+set_from_resource $red          color1      #cc241d
+set_from_resource $darkyellow   color3      #928374
+set_from_resource $darkgreen    color2      #98971a
+set_from_resource $blue         color4      #458588
+set_from_resource $purple       color5      #b16286
+set_from_resource $cyan         color6      #689d6a
+set_from_resource $lightgrey    color7      #a89984
+set_from_resource $darkgray     color8      #928374
+set_from_resource $green        color10     #98971a
+set_from_resource $yellow       color11     #d79921
+set_from_resource $white        color15     #ebdbb2
 
-# set primary gruvbox colorscheme colors
-set $bg #282828
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
+
+
 
 # class                 border  bground text    indicator child_border
-client.focused          $green $green $darkgray $purple $grey
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.focused          $darkgray $darkgreen $darkgray $white $white
+client.focused_inactive $darkgray $darkgreen $darkgray $darkgray $darkgray
+client.unfocused        $darkgray $darkgray $lightgrey $darkgray $darkgray
 client.urgent           $red $red $white $red $red
-client.background       #F8F8F2
+#client.background       #F8F8F2
 
 exec_always --no-startup-id "i3altlayout"
 exec --no-startup-id compton -b
@@ -250,16 +258,16 @@ bar {
 
 # gaps
 # Change window border size and color
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 
-gaps inner 6
-gaps outer 2
+gaps inner 20
+gaps outer 3
 
-bindsym $mod+Shift+g gaps inner all set 6; gaps outer all set 2
+bindsym $mod+Shift+g gaps inner all set 6; gaps outer all set 20
 bindsym $mod+Shift+n gaps inner all set 0; gaps outer all set 0
 
 # Only enable gaps on a workspace when there is at least one container
-smart_gaps on
+#smart_gaps on
 
 # Activate smart borders (always)
 #smart_borders on
