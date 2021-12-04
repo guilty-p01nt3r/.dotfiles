@@ -16,6 +16,7 @@ local function css()
 
   require'lspconfig'.cssls.setup {
     capabilities = capabilities,
+    cmd = {"css-languageserver", "--stdio"}, 
 }
 end
 
@@ -26,7 +27,13 @@ local function html()
 
   require'lspconfig'.html.setup {
     capabilities = capabilities,
-     filetypes = { "html", "php", "jsx", "js"}
+     cmd = {"html-languageserver", "--stdio"}, 
+     configurationSection = { "html", "css", "javascript"},
+     embeddedLanguages = {
+         css = true,
+         javascript = true,
+     },
+     filetypes = { "html", "php", "jsx", "js"},
   }
 end
 
@@ -43,8 +50,8 @@ local function lua()
   end
 
   -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-  local sumneko_root_path = '/opt/language-servers/lua-language-server'
-  local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+  local sumneko_root_path = '/opt/language-servers/lua-language-server/lua-language-server'
+  local sumneko_binary = sumneko_root_path
 
   local runtime_path = vim.split(package.path, ';')
   table.insert(runtime_path, "lua/?.lua")
@@ -118,7 +125,7 @@ function Config()
   php()
   python()
   tailwindcss()
-  cmp_tabnine()
+  -- cmp_tabnine()
 end
 
 

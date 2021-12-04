@@ -16,7 +16,7 @@
        {
        "class": "^Brave\\-browser$",
        "instance": "^brave\\-browser$",
-       "machine": "^vince\\-LX$",
+       "machine": "^vince\\-archlx$",
        //"title": "^i3\\:\\ Layout\\ saving\\ in\\ i3\\ \\-\\ Brave$",
        "window_role": "^browser$"
        }

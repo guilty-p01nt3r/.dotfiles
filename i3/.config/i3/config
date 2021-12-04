@@ -201,7 +201,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/_think__plan__execute__redraw_by_cyanjdroid_dab7y9n.png --bg-fill ~/Pictures/SpaceMonster.jpg 
+exec_always --no-startup-id feh --bg-fill ~/Pictures/ThinkPlanExecute.png --bg-fill ~/Pictures/getCapeWearCapeFly.jpg 
 
 #######
 #THEME#
@@ -260,14 +260,14 @@ bar {
 # Change window border size and color
 for_window [class="^.*"] border pixel 1
 
-gaps inner 20
-gaps outer 3
+gaps inner 6
+gaps outer 6
 
-bindsym $mod+Shift+g gaps inner all set 6; gaps outer all set 20
+bindsym $mod+Shift+g gaps inner all set 6; gaps outer all set 6
 bindsym $mod+Shift+n gaps inner all set 0; gaps outer all set 0
 
 # Only enable gaps on a workspace when there is at least one container
-#smart_gaps on
+smart_gaps on
 
 # Activate smart borders (always)
 #smart_borders on

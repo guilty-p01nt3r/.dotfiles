@@ -54,10 +54,16 @@ local function trouble_config()
     trouble.setup {}
 end
 
+local function telescope_config()
+    local trouble = require("telescope")
+    trouble.setup {defaults = {file_ignore_patterns = {"node_modules"}}}
+end
+
 function pluginsConfig.config()
-	nvim_cmp()
-	cmp_tabnine()
+    nvim_cmp()
+    -- cmp_tabnine()
     vdebug_config()
+    telescope_config()
     trouble_config()
 end
 

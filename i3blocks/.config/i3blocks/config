@@ -25,7 +25,7 @@ interval=30
 
 [hdd_space]
 command=$SCRIPT_DIR/hdd_space
-LABEL=💽
+LABEL= 
 interval=30
 
 [bandwidth]
@@ -56,7 +56,7 @@ DOWN_LABEL=
 
 [temperature]
 command=$SCRIPT_DIR/temperature
-label=🌡️
+label=🌡️ 
 interval=10
 #T_WARN=70
 #T_CRIT=90
@@ -74,7 +74,7 @@ signal=10
 
 [microphone]
 command=$SCRIPT_DIR/microphone
-LABEL=🎤
+LABEL=
 interval=once
 signal=11
 
@@ -82,6 +82,7 @@ signal=11
 command=$SCRIPT_DIR/calendar
 interval=1
 LABEL= ⏳ 
+LABEL=    
 DATEFMT=+%a %d/%m %H:%M 
 # SHORTFMT=+%H:%M:%S
 HEIGHT=180

@@ -10,14 +10,14 @@
        "y": 0
     },
     "marks": [],
-    "name": "vince@vince-LX:~",
+    "name": "vince@archlx:~",
     "percent": 1,
     "swallows": [
        {
         "class": "^kitty$",
         "instance": "^kitty$",
-        "machine": "^vince\\-LX$",
-        "title": "^vince\\@vince\\-LX\\:\\~$"
+        "machine": "^vince\\-archlx$",
+        "title": "^vince\\@archlx\\:\\~$"
        }
     ],
     "type": "con"

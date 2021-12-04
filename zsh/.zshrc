@@ -13,6 +13,7 @@ SOLARIZE_THEME="dark"
 ZSH_THEME="spaceship"
 SPACESHIP_VI_MODE_SHOW=false
 SPACESHIP_CHAR_SYMBOL='> '
+VI_MODE_SET_CURSOR=true
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -111,8 +112,6 @@ bindkey -v
 ## Theme options
 # Autosuggestion foreground color
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
-
-
 
 PATH="/home/vince/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/vince/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;

@@ -1,11 +1,11 @@
 -- Plugins
-
 require('plug_config')
 pluginsConfig.config()
 
 return require('packer').startup(function(use)
    -- Packer can manage itself
    use 'wbthomason/packer.nvim'
+
 
    use 'tpope/vim-fugitive'
 
@@ -49,13 +49,23 @@ return require('packer').startup(function(use)
    use 'KarimElghamry/vim-auto-comment'
 
    -- Tabnine
-   use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+   -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 
    -- Pandoc
    -- use 'vim-pandoc/vim-pandoc'
    -- use 'vim-pandoc/vim-pandoc-syntax'
 
+   -- Helpers -- learning
+   -- use 'antonk52/bad-practices.nvim'
+
    -- Themes
+
+   -- Display Indentation
+   use 'Yggdroot/indentLine'
+
+   -- Notifications
+   use 'rcarriga/nvim-notify'
+
    use 'gruvbox-community/gruvbox'
    use 'ryanoasis/vim-devicons'
    use 'kyazdani42/nvim-web-devicons'

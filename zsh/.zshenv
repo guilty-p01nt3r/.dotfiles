@@ -1,5 +1,3 @@
-source "$HOME/.cargo/env"
-
 
 ## Exports
 export NVM_DIR="$HOME/.nvm"
