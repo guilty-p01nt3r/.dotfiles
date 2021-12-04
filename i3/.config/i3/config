@@ -1,4 +1,3 @@
-
 # It will not be overwritten, so edit it as you like.
 #
 # Should you change your keyboard layout some time, delete
@@ -222,6 +221,8 @@ bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
 # Disable notification shortcut
 #bindsym Control+grave nop
 
+
+bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh setxkbmap us
 
 #######
 #THEME#
