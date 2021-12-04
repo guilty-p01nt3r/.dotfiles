@@ -1,25 +1,24 @@
 // vim:ts=4:sw=4:et
 {
     "border": "pixel",
-    "current_border_width": 2,
+    "current_border_width": 1,
     "floating": "auto_off",
     "geometry": {
-       "height": 1056,
-       "width": 1916,
+       "height": 1058,
+       "width": 1918,
        "x": 0,
        "y": 0
     },
     "marks": [],
-    "name": "vince@archlx:~",
+    "name": "fish /home/vince",
     "percent": 1,
     "swallows": [
        {
         "class": "^kitty$",
         "instance": "^kitty$",
-        "machine": "^vince\\-archlx$",
-        "title": "^vince\\@archlx\\:\\~$"
+        "machine": "^archlx$",
+        "title": "^fish\\ \\/home\\/vince$"
        }
     ],
     "type": "con"
 }
-

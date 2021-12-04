@@ -337,5 +337,5 @@ for_window [class="^discord$"] fullscreen
 exec --no-startup-id "i3-msg 'workspace 1:VIM; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
 exec --no-startup-id "kitty"
 exec --no-startup-id "i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2.json'"
-exec --no-startup-id "brave-browser"
+exec --no-startup-id "brave"
 

@@ -7,6 +7,7 @@ end
 set -x PATH $PATH /sbin/
 
 fish_add_path /home/vince/.local/share/gem/ruby/3.0.0/bin
+eval (keychain --eval --quiet --confhost)
 
 ## Perl
 fish_add_path /home/vince/.perl5/bin
@@ -38,3 +39,5 @@ set fish_cursor_visual line
 
 # Starship theme
 starship init fish | source
+
+
