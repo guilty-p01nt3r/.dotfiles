@@ -31,11 +31,12 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # change volume or toggle mute
-bindsym $mod+Shift+x exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
-bindsym $mod+Shift+z exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-bindsym $mod+Shift+b exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
+## Using i3blocks
+#bindsym $mod+Shift+x exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
+#bindsym $mod+Shift+z exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
+#bindsym $mod+Shift+b exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
 # Mic toggle
-bindsym $mod+Shift+v exec amixer -q -D pulse sset Capture toggle && pkill -RTMIN+11 i3blocks
+#bindsym $mod+Shift+v exec amixer -q -D pulse sset Capture toggle && pkill -RTMIN+11 i3blocks
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -107,18 +108,25 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# Disable notification shortcut
-bindsym Control+grave nop
-
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
+#set $ws1 "VIM"
+#set $ws2 "BROWSER"
+#set $ws3 "TERM:A"
+#set $ws4 "MISC:A"
+#set $ws5 "FUN"
+#set $ws6 "MISC:B"
+#set $ws7 "TERM:B"
+#set $ws8 "B_LOCALHOST"
+#set $ws9 "BROWSER"
+#set $ws10 "SOCIAL"
 set $ws1 "1:VIM"
 set $ws2 "2:BROWSER"
-set $ws3 "3:TERM"
-set $ws4 "4"
-set $ws5 "5:STUFF"
-set $ws6 "6:STUFF"
-set $ws7 "7"
+set $ws3 "3:TERM:A"
+set $ws4 "4:MISC:A"
+set $ws5 "5:FUN"
+set $ws6 "6:MISC:B"
+set $ws7 "7:TERM:B"
 set $ws8 "8:B_LOCALHOST"
 set $ws9 "9:BROWSER"
 set $ws10 "10:SOCIAL"
@@ -128,28 +136,28 @@ set $mon1 DP-4
 set $mon2 HDMI-0
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # move workspace between monitor
 bindsym $mod+Ctrl+1 move workspace to output $mon1
@@ -201,7 +209,19 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/ThinkPlanExecute.png --bg-fill ~/Pictures/getCapeWearCapeFly.jpg 
+exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/BatteryWallpaper.png ~/Pictures/ThinkPlanExecute-Soft.png 
+
+# Notification Manager 
+exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
+## dunst shortcut
+bindsym Ctrl+space exec --no-startup-id dunstctl close
+bindsym Ctrl+Shift+space exec --no-startup-id dunstctl close-all
+bindsym Ctrl+Shift+. exec --no-startup-id dunstctl context
+bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
+
+# Disable notification shortcut
+#bindsym Control+grave nop
+
 
 #######
 #THEME#
@@ -222,46 +242,45 @@ set_from_resource $darkgray     color8      #928374
 set_from_resource $green        color10     #98971a
 set_from_resource $yellow       color11     #d79921
 set_from_resource $white        color15     #ebdbb2
-
-
+set_from_resource $black        color0      #000000
 
 
 # class                 border  bground text    indicator child_border
-client.focused          $darkgray $darkgreen $darkgray $white $white
-client.focused_inactive $darkgray $darkgreen $darkgray $darkgray $darkgray
-client.unfocused        $darkgray $darkgray $lightgrey $darkgray $darkgray
+client.focused          $darkgray $bg $white $green $green
+client.focused_inactive $darkgray $darkgray $bg $darkgray $darkgray
+client.unfocused        $darkgray $lightgrey $fg $darkgray $darkgray
 client.urgent           $red $red $white $red $red
 #client.background       #F8F8F2
 
 exec_always --no-startup-id "i3altlayout"
-exec --no-startup-id compton -b
+exec --no-startup-id picom --experimental-backends --backend glx --xrender-sync-fence
 
-#exec_always --no-startup-id ~/.config/i3/polybar.sh &
-bar {
-  position top
-  colors {
-    background #3c3836
-    statusline #ebdbb2
-    separator  #666666
-
-    # class            border   backgr  text
-    focused_workspace  #458588 #458588 #ebdbb2
-    active_workspace   #83a598 #83a598 #ebdbb2
-    inactive_workspace #504945 #504945 #ebdbb2
-    urgent_workspace   #cc241d #cc241d #504945
-  }
-
-  status_command i3blocks
-}
+exec_always --no-startup-id ~/.config/i3/polybar.sh &
+#bar {
+#  position top
+#  colors {
+#    background #3c3836
+#    statusline #ebdbb2
+#    separator  #666666
+#
+#    # class            border   backgr  text
+#    focused_workspace  #458588 #458588 #ebdbb2
+#    active_workspace   #83a598 #83a598 #ebdbb2
+#    inactive_workspace #504945 #504945 #ebdbb2
+#    urgent_workspace   #cc241d #cc241d #504945
+#  }
+#
+#  status_command i3blocks
+#}
 
 #bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu%'"
 
 # gaps
 # Change window border size and color
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 2
 
-gaps inner 6
-gaps outer 6
+gaps inner 4
+gaps outer 4
 
 bindsym $mod+Shift+g gaps inner all set 6; gaps outer all set 6
 bindsym $mod+Shift+n gaps inner all set 0; gaps outer all set 0
