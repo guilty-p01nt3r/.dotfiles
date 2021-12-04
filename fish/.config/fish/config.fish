@@ -20,7 +20,6 @@ set PERL5LIB /home/vince/.perl5/lib
 bind \cf tmux-sessionizer
 
 # Alias ( Alias is an alias for fish functions lol)
-alias r=". ranger"
 alias calc="python3"
 alias vim="nvim"
 alias vi="nvim"
