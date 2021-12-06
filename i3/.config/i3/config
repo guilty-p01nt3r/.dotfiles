@@ -36,6 +36,12 @@ exec --no-startup-id nm-applet
 #bindsym $mod+Shift+b exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
 # Mic toggle
 #bindsym $mod+Shift+v exec amixer -q -D pulse sset Capture toggle && pkill -RTMIN+11 i3blocks
+### Using polybar (pamixer)
+bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-increase
+bindsym $mod+Shift+z exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-decrease
+bindsym $mod+Shift+b exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-tmute
+# Mic toggle
+bindsym $mod+Shift+v exec --no-startup-id ~/.config/i3/audioManager.sh source-default-tmute
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -222,8 +228,7 @@ bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
 #bindsym Control+grave nop
 
 
-bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh setxkbmap us
-
+bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh
 #######
 #THEME#
 #######
