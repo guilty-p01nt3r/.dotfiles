@@ -8,7 +8,7 @@ END_COLOR="%{F-}"  # For Polybar colors
 status() {
   #DNAME=$(pactl info | sed -En 's/Default Source: (.*)/\1/p')
   DNAME=$(pactl get-default-source)
-  if [ ${#DNAME} > 10 ]; then
+  if [ ${#DNAME} -gt 10 ]; then
       DNAME=$(echo $DNAME |  awk ' {print substr($0, 12, 20);}') 
   fi
   MUTED=$(pamixer --default-source --get-mute)
