@@ -2,7 +2,6 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
-
 # Global Variables
 set -x PATH $PATH /sbin/
 
@@ -15,9 +14,6 @@ fish_add_path /home/vince/.perl5/bin
 set PERL_MM_OPT "INSTALL_BASE=/home/vince/.perl5"
 set PERL5LIB /home/vince/.perl5/lib
 #eval eval (perl -I $HOME/.perl5/lib/perl5 -Mlocal::lib)
-
-# Bindings
-bind \cf tmux-sessionizer
 
 # Alias ( Alias is an alias for fish functions lol)
 alias calc="python3"
@@ -34,7 +30,6 @@ set fish_cursor_default block
 set fish_cursor_insert line
 set fish_cursor_replace_one underscore
 set fish_cursor_visual block
-
 
 # Starship theme
 starship init fish | source
