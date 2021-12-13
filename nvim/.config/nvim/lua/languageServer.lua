@@ -1,8 +1,8 @@
--- Language Server Configuration
-local global_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+--Language Server Configuration
 local lspconfig = require'lspconfig'
-local configs = require'lspconfig/configs'
-local util = require 'lspconfig/util'
+local configs = require'lspconfig.configs'
+local global_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+global_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local function cpp()
   require'lspconfig'.clangd.setup{}
@@ -16,8 +16,30 @@ local function css()
 
   require'lspconfig'.cssls.setup {
     capabilities = capabilities,
-    cmd = {"css-languageserver", "--stdio"}, 
+    cmd = {"css-languageserver", "--stdio"},
 }
+end
+
+local function emmet()
+if not configs.ls_emmet then
+  configs.ls_emmet = {
+    default_config = {
+      cmd = { 'ls_emmet', '--stdio' };
+      filetypes = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'haml',
+        'xml', 'xsl', 'pug', 'slim', 'sass', 'stylus', 'less', 'sss'};
+      root_dir = function(fname)
+        return vim.loop.cwd()
+      end;
+      settings = {};
+    };
+  }
+end
+
+lspconfig.ls_emmet.setup{ capabilities = capabilities }
+end
+
+local function golsp()
+    require'lspconfig'.gopls.setup{}
 end
 
 local function html()
@@ -27,7 +49,7 @@ local function html()
 
   require'lspconfig'.html.setup {
     capabilities = capabilities,
-     cmd = {"html-languageserver", "--stdio"}, 
+     cmd = {"html-languageserver", "--stdio"},
      configurationSection = { "html", "css", "javascript"},
      embeddedLanguages = {
          css = true,
@@ -38,20 +60,9 @@ local function html()
 end
 
 local function lua()
-  local system_name
-  if vim.fn.has("mac") == 1 then
-    system_name = "macOS"
-  elseif vim.fn.has("unix") == 1 then
-    system_name = "Linux"
-  elseif vim.fn.has('win32') == 1 then
-    system_name = "Windows"
-  else
-    print("Unsupported system for sumneko")
-  end
-
   -- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-  local sumneko_root_path = '/opt/language-servers/lua-language-server/lua-language-server'
-  local sumneko_binary = sumneko_root_path
+  local sumneko_root_path = '/opt/language-servers/lua-language-server'
+  local sumneko_binary = sumneko_root_path .. "/Linux/lua-language-server"
 
   local runtime_path = vim.split(package.path, ';')
   table.insert(runtime_path, "lua/?.lua")
@@ -84,6 +95,14 @@ local function lua()
   }
 end
 
+local function json()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    require'lspconfig'.jsonls.setup {
+    capabilities = capabilities,
+}
+end
+
 local function php()
   local capabilities = global_capabilities
   require'lspconfig'.intelephense.setup{
@@ -107,24 +126,22 @@ local function tailwindcss()
     require'lspconfig'.tailwindcss.setup{}
 end
 
-local function cmp_tabnine()
-    local tabnine = require('cmp_tabnine.config')
-    tabnine:setup({
-        max_lines = 1000;
-        max_num_results = 20;
-        sort = true;
-        run_on_every_keystroke = true;
-    })
+local function tsserver()
+    require'lspconfig'.tsserver.setup{}
 end
 
 function Config()
   cpp()
   css()
+  emmet()
+  golsp()
   html()
   lua()
+  json()
   php()
   python()
   tailwindcss()
+  tsserver()
   -- cmp_tabnine()
 end
 

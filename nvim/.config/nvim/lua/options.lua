@@ -62,3 +62,6 @@ vim.g.block_comment_dict = {
  	['/*'] = {"js", "ts", "cpp", "c", "dart"},
     ['"""'] = {'py'},
 }
+
+-- Default Notify
+vim.notify = require("notify");

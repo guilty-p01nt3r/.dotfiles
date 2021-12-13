@@ -53,16 +53,8 @@ vim.api.nvim_set_keymap("n", "<leader>vn", "<cmd>lua vim.lsp.diagnostic.goto_nex
 vim.api.nvim_set_keymap("n", "<leader>vll", "<cmd>lua LspLocationList()<CR>", {noremap = true, silent = true})
 
 -- Moving lines up and down
-
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", {noremap = true, silent = true})
 vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", {noremap = true, silent = true})
-
--- Commenting lines / blocks
-vim.api.nvim_set_keymap("n", "<C-k>", ":AutoInlineComment<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "<C-k>", ":AutoInlineComment<CR>", {noremap = true, silent = true})
-
-vim.api.nvim_set_keymap("n", "<C-K>", ":AutoBlockComment<CR>", {noremap = true, silent = true})
-vim.api.nvim_set_keymap("v", "<C-K>", ":AutoBlockComment<CR>", {noremap = true, silent = true})
 
 -- -- autocmd
  vim.api.nvim_command([[
@@ -81,10 +73,10 @@ vim.api.nvim_set_keymap("v", "<C-K>", ":AutoBlockComment<CR>", {noremap = true, 
 vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
   {silent = true, noremap = true}
 )
-vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>",
   {silent = true, noremap = true}
 )
-vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>",
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>",
   {silent = true, noremap = true}
 )
 vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
@@ -108,7 +100,7 @@ map('n', '<leader><S-r>', ':Exec<CR>') -- look two line above
 map('n', '<C-l>', '<cmd>noh<CR>')
 
 -- Insert a newline in normal mode
-map('n', '<leader>o', 'm`o<Esc>``')  
+map('n', '<leader>o', 'm`o<Esc>``')
 
 -- Move between diagnostic
 vim.api.nvim_set_keymap("n", "<C-N>", ":bnext<CR>", {noremap = true})
@@ -120,3 +112,9 @@ vim.api.nvim_set_keymap("n", "<S-l>", ":tabnext<CR>", {noremap = true, silent = 
 
 vim.api.nvim_set_keymap("n", "<leader><S-h>", ":tabmove -1<CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "<leader><S-l>", ":tabmove +1<CR>", {noremap = true})
+
+
+-- Replace double quotes with single quotes
+vim.api.nvim_set_keymap("n", "<leader>\"", ":%s/\\\"\\([^\"]*\\)\\\"/'\\1'/g<CR>", {noremap = true})
+-- Replace single quotes with double quotes
+vim.api.nvim_set_keymap("n", "<leader>'", ":%s/\\'\\([^']*\\)\\'/\\\"\\1\\\"/g<CR>", {noremap = true})

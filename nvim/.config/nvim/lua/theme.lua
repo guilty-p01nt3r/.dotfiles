@@ -4,7 +4,7 @@ vim.g.gruvbox_transparent_bg=1
 vim.cmd([[colorscheme gruvbox]])
 
 -- Workaround for creating transparent bg
-vim.cmd([[autocmd SourcePost * highlight Normal     ctermbg=NONE guibg=NONE |    highlight LineNr     ctermbg=NONE guibg=NONE |    highlight SignColumn ctermbg=NONE guibg=NONE]])
+vim.cmd([[autocmd SourcePost * highlight Normal ctermbg=NONE guibg=NONE |    highlight LineNr     ctermbg=NONE guibg=NONE |    highlight SignColumn ctermbg=NONE guibg=NONE]])
 
 require('lualine').setup(
 {

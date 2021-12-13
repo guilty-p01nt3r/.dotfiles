@@ -1,12 +1,10 @@
 -- Plugins
-require('plug_config')
-pluginsConfig.config()
 
-return require('packer').startup(function(use)
+require('packer').startup(function(use)
    -- Packer can manage itself
    use 'wbthomason/packer.nvim'
 
-
+   -- Git
    use 'tpope/vim-fugitive'
 
    -- Fuzzy finder
@@ -41,40 +39,32 @@ return require('packer').startup(function(use)
    use 'hrsh7th/cmp-vsnip'
    use 'hrsh7th/vim-vsnip'
 
-   -- Emmet & closing xhtml tags
-   use 'mattn/emmet-vim'
+   -- Closing xhtml tags
    use 'alvan/vim-closetag'
 
    -- Autocommenter
-   use 'KarimElghamry/vim-auto-comment'
-
-   -- Tabnine
-   -- use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
-
-   -- Pandoc
-   -- use 'vim-pandoc/vim-pandoc'
-   -- use 'vim-pandoc/vim-pandoc-syntax'
-
-   -- Helpers -- learning
-   -- use 'antonk52/bad-practices.nvim'
+   use 'tpope/vim-commentary'
 
    -- Themes
-
    -- Display Indentation
    use 'Yggdroot/indentLine'
+   use 'gruvbox-community/gruvbox'
+   use 'ryanoasis/vim-devicons'
+   use 'kyazdani42/nvim-web-devicons'
+   use {
+       'hoob3rt/lualine.nvim',
+       requires = {'kyazdani42/nvim-web-devicons', opt = true}}
+
 
    -- Notifications
    use 'rcarriga/nvim-notify'
 
-   use 'gruvbox-community/gruvbox'
-   use 'ryanoasis/vim-devicons'
-   use 'kyazdani42/nvim-web-devicons'
 
-   use {
-     'hoob3rt/lualine.nvim',
-     requires = {'kyazdani42/nvim-web-devicons', opt = true}}
-  end
+   end
 )
 
+-- Plugin config
+require('plug_config')
+pluginsConfig.config()
 
 

@@ -84,11 +84,6 @@ _G.packer_plugins = {
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
-  ["emmet-vim"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/emmet-vim",
-    url = "https://github.com/mattn/emmet-vim"
-  },
   gruvbox = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/gruvbox",
@@ -169,15 +164,15 @@ _G.packer_plugins = {
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/vdebug",
     url = "https://github.com/vim-vdebug/vdebug"
   },
-  ["vim-auto-comment"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-auto-comment",
-    url = "https://github.com/KarimElghamry/vim-auto-comment"
-  },
   ["vim-closetag"] = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-closetag",
     url = "https://github.com/alvan/vim-closetag"
+  },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
   },
   ["vim-devicons"] = {
     loaded = true,
