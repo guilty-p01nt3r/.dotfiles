@@ -100,7 +100,8 @@ map('n', '<leader><S-r>', ':Exec<CR>') -- look two line above
 map('n', '<C-l>', '<cmd>noh<CR>')
 
 -- Insert a newline in normal mode
-map('n', '<leader>o', 'm`o<Esc>``')
+map('n', '<leader>o', 'm`o<esc>``')
+map('n', '<leader><S-o>', 'm`O<esc>``')
 
 -- Move between diagnostic
 vim.api.nvim_set_keymap("n", "<C-N>", ":bnext<CR>", {noremap = true})

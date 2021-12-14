@@ -2,23 +2,29 @@
 #### CONFIG ####
 COLOR_MUTED="%{F#6b6b6b}"
 END_COLOR="%{F-}"  # For Polybar colors
-
+ICON_HIGHV=""
+ICON_LOWV=""
+ICON_MUTE=""
 #################
 
 status() {
   #DNAME=$(pactl info | sed -En 's/Default Source: (.*)/\1/p')
-  DNAME=$(pactl get-default-source)
+  DNAME=$(pactl get-default-sink)
   if [ ${#DNAME} -gt 10 ]; then
       DNAME=$(echo $DNAME |  awk -F. '{print substr($0, index($0,$2),20)}') 
   fi
-  MUTED=$(pamixer --default-source --get-mute)
+  MUTED=$(pamixer --get-mute)
 
   if [ "$MUTED" = "true" ]; then
-    echo "${COLOR_MUTED}  MUTE ${DNAME} ${END_COLOR}"
+    echo "${COLOR_MUTED} $ICON_MUTE MUTE ${DNAME} ${END_COLOR}"
   else
-    VOL=$(pamixer --default-source --get-volume)
-    VOL=$(pamixer --default-source --get-volume)
-    echo " ${VOL}% ${DNAME}"; 
+    VOL=$(pamixer --get-volume)
+    if [ ${VOL} -gt 49 ]; then
+        ICON=$ICON_HIGHV;
+    else 
+        ICON=$ICON_LOWV;
+    fi
+    echo "$ICON ${VOL}% ${DNAME}"; 
   fi
 }
 
@@ -26,22 +32,22 @@ listen() {
     status
 
     LANG=EN; pactl subscribe | while read -r event; do
-        if echo "$event" | grep -q "source" || echo "$event" | grep -q "server"; then
+        if echo "$event" | grep -q "sink" || echo "$event" | grep -q "server"; then
             status
         fi
     done
 }
 
 toggle() {
-    pamixer --default-source --toggle-mute
+    pamixer --toggle-mute
 }
 
 increase() {
-    pamixer --default-source --increase 5
+    pamixer --increase 5
 }
 
 decrease() {
-    pamixer --default-source --decrease 5
+    pamixer --decrease 5
 }
 
 

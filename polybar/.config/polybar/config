@@ -62,7 +62,7 @@ font-6 = Font Awesome 5 Brands: pixelsize=11
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-control pulseaudio-microphone xkeyboard date powermenu
+modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -116,7 +116,7 @@ font-6 = Font Awesome 5 Brands: pixelsize=11
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-control pulseaudio-microphone xkeyboard date powermenu
+modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -293,11 +293,12 @@ ramp-signal-foreground = ${colors.foreground-alt}
 type = internal/network
 interface = enp34s0
 interval = 3.0
+accumulate-stats = true 
 
 format-connected-underline = #0a6cf5
 format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+label-connected =  %local_ip%    %downspeed%  -   %upspeed%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -471,13 +472,23 @@ tail = true
 format-underline = #996633
 label-padding = 2
 label-foreground = ${colors.foreground}
-exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description" --sink-nickname "alsa_output.pci-0000_00_1b.0.analog-stereo:  Speakers" --sink-nickname "alsa_output.usb-Kingston_HyperX_Virtual_Surround_Sound_00000000-00.analog-stereo:  Headphones" listen
+exec = pulseaudio-control --icons-volume " , " --icon-muted " " --sink-nicknames-from "device.description"  listen
 click-right = exec pavucontrol &
 click-left = pulseaudio-control togmute
 click-middle = pulseaudio-control --sink-blacklist "alsa_output.pci-0000_01_00.1.hdmi-stereo-extra2" next-sink
 scroll-up = pulseaudio-control --volume-max 130 up
 scroll-down = pulseaudio-control --volume-max 130 down
 
+
+[module/pulseaudio-speaker]
+type = custom/script
+exec = ~/.config/i3/polybar_scripts/pulseaudio-speaker.sh
+tail = true
+format-underline = #996633
+click-right = exec pavucontrol &
+click-left = ~/.config/i3/polybar_scripts/pulseaudio-speaker.sh --toggle &
+scroll-up = ~/.config/i3/polybar_scripts/pulseaudio-speaker.sh --increase &
+scroll-down =~/.config/i3/polybar_scripts/pulseaudio-speaker.sh --decrease &
 
 [module/pulseaudio-microphone]
 type = custom/script
