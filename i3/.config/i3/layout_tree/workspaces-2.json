@@ -4,22 +4,21 @@
     "current_border_width": 1,
     "floating": "auto_off",
     "geometry": {
-       "height": 1058,
-       "width": 1918,
-       "x": 1931,
-       "y": 31
+        "height": 1058,
+        "width": 1918,
+        "x": 1931,
+        "y": 31
     },
     "marks": [],
     "name": "Google - Brave",
     "percent": 1,
     "swallows": [
-       {
-        "class": "^Brave\\-browser$",
-        "instance": "^brave\\-browser$",
-        "machine": "^archlx$",
-        "title": "^Google\\ \\-\\ Brave$",
-        "window_role": "^browser$"
-       }
+        {
+            "class": "^Brave\\-browser$",
+            "instance": "^brave\\-browser$",
+            "machine": "^archlx$",
+            "window_role": "^browser$"
+        }
     ],
     "type": "con"
 }

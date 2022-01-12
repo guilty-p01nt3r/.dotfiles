@@ -84,6 +84,16 @@ _G.packer_plugins = {
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
+  fzf = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/fzf",
+    url = "https://github.com/junegunn/fzf"
+  },
+  ["fzf.vim"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/fzf.vim",
+    url = "https://github.com/junegunn/fzf.vim"
+  },
   gruvbox = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/gruvbox",

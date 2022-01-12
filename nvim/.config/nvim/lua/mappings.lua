@@ -116,6 +116,6 @@ vim.api.nvim_set_keymap("n", "<leader><S-l>", ":tabmove +1<CR>", {noremap = true
 
 
 -- Replace double quotes with single quotes
-vim.api.nvim_set_keymap("n", "<leader>\"", ":%s/\\\"\\([^\"]*\\)\\\"/'\\1'/g<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>r\"", ":%s/\\\"\\([^\"]*\\)\\\"/'\\1'/g<CR>", {noremap = true})
 -- Replace single quotes with double quotes
-vim.api.nvim_set_keymap("n", "<leader>'", ":%s/\\'\\([^']*\\)\\'/\\\"\\1\\\"/g<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>r'", ":%s/\\'\\([^']*\\)\\'/\\\"\\1\\\"/g<CR>", {noremap = true})

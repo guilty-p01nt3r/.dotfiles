@@ -64,8 +64,8 @@ modules-left = i3
 ;modules-center = mpd
 modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date powermenu
 
-tray-position = right
-tray-padding = 2
+;tray-position = right
+;tray-padding = 2
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
@@ -296,9 +296,9 @@ interval = 3.0
 accumulate-stats = true 
 
 format-connected-underline = #0a6cf5
-format-connected-prefix = " "
+format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
-label-connected =  %local_ip%    %downspeed%  -   %upspeed%
+label-connected = %local_ip%    %downspeed%  -   %upspeed%
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>

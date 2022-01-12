@@ -8,6 +8,7 @@ require('packer').startup(function(use)
    use 'tpope/vim-fugitive'
 
    -- Fuzzy finder
+   use 'junegunn/fzf.vim'
    use {
       'nvim-telescope/telescope.nvim',
       requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}

@@ -224,6 +224,10 @@ bindsym Ctrl+Shift+space exec --no-startup-id dunstctl close-all
 bindsym Ctrl+Shift+. exec --no-startup-id dunstctl context
 bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
 
+# Session Manager (gui)
+#exec --no-startup-id /usr/bin/lxpolkit &
+
+
 # Disable notification shortcut
 #bindsym Control+grave nop
 

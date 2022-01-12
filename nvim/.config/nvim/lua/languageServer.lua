@@ -38,8 +38,16 @@ end
 lspconfig.ls_emmet.setup{ capabilities = capabilities }
 end
 
+local function eslint()
+    require'lspconfig'.eslint.setup{}
+end
+
 local function golsp()
     require'lspconfig'.gopls.setup{}
+end
+
+local function graphql()
+    require'lspconfig'.graphql.setup{}
 end
 
 local function html()
@@ -134,7 +142,9 @@ function Config()
   cpp()
   css()
   emmet()
+  eslint()
   golsp()
+  graphql()
   html()
   lua()
   json()

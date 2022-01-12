@@ -42,10 +42,12 @@ vim.cmd("set colorcolumn=80")
 vim.cmd("set signcolumn=yes")
 vim.cmd("set nohlsearch ")
 vim.cmd("set encoding=UTF-8")
+vim.cmd("set nofoldenable")
 --
 -- -- Give more space for displaying messages
 vim.cmd("set cmdheight=2")
 vim.cmd("set updatetime=50")
+
 
 
 -- Plugins
@@ -62,6 +64,13 @@ vim.g.block_comment_dict = {
  	['/*'] = {"js", "ts", "cpp", "c", "dart"},
     ['"""'] = {'py'},
 }
+
+-- fzf
+vim.cmd("set rtp+=~/.fzf")
+
+--TreeSitter
+vim.cmd('set foldmethod=expr')
+vim.cmd('set foldexpr=nvim_treesitter#foldexpr()')
 
 -- Default Notify
 vim.notify = require("notify");
