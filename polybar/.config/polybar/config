@@ -64,8 +64,8 @@ modules-left = i3
 ;modules-center = mpd
 modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date powermenu
 
-;tray-position = right
-;tray-padding = 2
+tray-position = right
+tray-padding = 2
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm
@@ -118,8 +118,8 @@ modules-left = i3
 ;modules-center = mpd
 modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date powermenu
 
-tray-position = right
-tray-padding = 2
+;tray-position = right
+;tray-padding = 2
 ;tray-background = #0063ff
 
 ;wm-restack = bspwm

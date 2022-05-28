@@ -15,6 +15,9 @@ set PERL_MM_OPT "INSTALL_BASE=/home/vince/.perl5"
 set PERL5LIB /home/vince/.perl5/lib
 #eval eval (perl -I $HOME/.perl5/lib/perl5 -Mlocal::lib)
 
+## Add local pip install
+fish_add_path /home/vince/.dotfiles/bin/.local/bin
+
 # Alias ( Alias is an alias for fish functions lol)
 alias calc="python3"
 alias vim="nvim"

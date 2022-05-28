@@ -27,7 +27,9 @@ require('packer').startup(function(use)
    use 'neovim/nvim-lspconfig'
 
    -- Debug
-   use 'vim-vdebug/vdebug'
+   use 'mfussenegger/nvim-dap'
+   use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
    -- Errors
    use 'folke/trouble.nvim'
 

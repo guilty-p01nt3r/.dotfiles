@@ -10,14 +10,13 @@
         "y": 31
     },
     "marks": [],
-    "name": "Firefox Developer Edition",
+    "name": "Google - Brave",
     "percent": 1,
     "swallows": [
         {
-            "class": "^firefoxdeveloperedition$",
-            // "instance": "^Navigator$",
-            // "machine": "^archlx$",
-            // "title": "^Firefox\\ Developer\\ Edition$"
+            "class": "^Brave\\-browser$",
+            "instance": "^brave\\-browser$",
+            "machine": "^archlx$",
             "window_role": "^browser$"
         }
     ],

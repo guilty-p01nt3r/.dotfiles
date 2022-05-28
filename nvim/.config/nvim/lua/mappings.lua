@@ -119,3 +119,24 @@ vim.api.nvim_set_keymap("n", "<leader><S-l>", ":tabmove +1<CR>", {noremap = true
 vim.api.nvim_set_keymap("n", "<leader>r\"", ":%s/\\\"\\([^\"]*\\)\\\"/'\\1'/g<CR>", {noremap = true})
 -- Replace single quotes with double quotes
 vim.api.nvim_set_keymap("n", "<leader>r'", ":%s/\\'\\([^']*\\)\\'/\\\"\\1\\\"/g<CR>", {noremap = true})
+
+vim.api.nvim_set_keymap("n", "<leader>dab", ":%bd|e#<cr>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>ca", ":only", {noremap = true})
+
+-- DEBUGGER
+vim.api.nvim_set_keymap("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>dso", ":lua require'dap'.step_out()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>dsi", ":lua require'dap'.step_into()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>dn", ":lua require'dap'.step_over()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>dc", ":lua require'dap'.continue()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>d$", ":lua require'dap'.run_last()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require'dap'.repl.open({}, vsplit)<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>di", ":lua require'dap.ui.widgets'.hover()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("v", "<leader>di", ":lua require'dap.ui.variables'.visual_hover()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>d?", ":lua local widgets=require'dap.ui.widgets';widgets.centered_float(widgets.scopes)<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>de", ":lua require'dap'.set_exception_breakpoints()<CR>", {noremap = true})
+
+vim.api.nvim_set_keymap("n", "<F2>", ":lua require'dap'.step_over()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<F3>", ":lua require'dap'.step_into()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<F4>", ":lua require'dap'.step_out()<CR>", {noremap = true})
+-- vim.api.nvim_set_keymap("n", "<leader>da", ":lua require'debugHelper'.attach()<CR>", {noremap = true})

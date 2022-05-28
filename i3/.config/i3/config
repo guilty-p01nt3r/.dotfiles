@@ -23,11 +23,11 @@ font pango:Ubuntu NerdFont 9
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # Screenshot software
 #exec --nostartup-id flameshot &;
@@ -269,7 +269,7 @@ client.urgent           $red $red $white $red $red
 exec_always --no-startup-id "i3altlayout"
 exec --no-startup-id picom --experimental-backends --backend glx --xrender-sync-fence
 
-exec_always --no-startup-id ~/.config/i3/polybar.sh &
+exec_always --no-startup-id "sleep 1; ~/.config/i3/polybar.sh &"
 #bar {
 #  position top
 #  colors {
@@ -369,6 +369,8 @@ for_window [class="^discord$"] fullscreen
 # Load layouts
 exec --no-startup-id "i3-msg 'workspace 1:VIM; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
 exec --no-startup-id "kitty"
-exec --no-startup-id "i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2.json'"
-exec --no-startup-id "brave"
+exec --no-startup-id "sleep 2; i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
+exec --no-startup-id "firefox-developer-edition"
+#exec --no-startup-id "sleep 2; i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2.json'"
+#exec --no-startup-id "brave"
 

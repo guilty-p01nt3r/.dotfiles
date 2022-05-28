@@ -103,6 +103,10 @@ local function lua()
   }
 end
 
+local function dapui()
+    require("dapui").setup()
+end
+
 local function json()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -147,6 +151,7 @@ function Config()
   graphql()
   html()
   lua()
+  dapui()
   json()
   php()
   python()

@@ -43,6 +43,8 @@ vim.cmd("set signcolumn=yes")
 vim.cmd("set nohlsearch ")
 vim.cmd("set encoding=UTF-8")
 vim.cmd("set nofoldenable")
+
+
 --
 -- -- Give more space for displaying messages
 vim.cmd("set cmdheight=2")
@@ -71,6 +73,11 @@ vim.cmd("set rtp+=~/.fzf")
 --TreeSitter
 vim.cmd('set foldmethod=expr')
 vim.cmd('set foldexpr=nvim_treesitter#foldexpr()')
+vim.cmd("set foldtext=getline(v:foldstart).'...'.trim(getline(v:foldend))")
+vim.cmd("set fillchars=fold:\\")
+vim.cmd("set foldnestmax=3")
+vim.cmd("set foldminlines=1")
+
 
 -- Default Notify
 vim.notify = require("notify");

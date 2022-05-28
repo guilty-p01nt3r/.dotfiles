@@ -1,5 +1,35 @@
 pluginsConfig = {}
 
+-- Setup Dap (Debug Adapater Protocol)
+local function dap_config()
+    local dap, dapui = require("dap"), require("dapui")
+    dap.listeners.after.event_initialized["dapui_config"] = function()
+      dapui.open()
+    end
+    dap.listeners.before.event_terminated["dapui_config"] = function()
+      dapui.close()
+    end
+    dap.listeners.before.event_exited["dapui_config"] = function()
+      dapui.close()
+    end
+    dap.adapters.php = {
+      type = 'executable',
+      command = 'node',
+      args = { '/opt/language-servers/vscode-php-debug/out/phpDebug.js' }
+    }
+
+    dap.configurations.php = {
+      {
+        type = 'php',
+        request = 'launch',
+        name = 'Listen for Xdebug (neovim DAP)',
+        port = 9001,
+        serverSourceRoot= '/var/www/site/',
+        localSourceRoot= '/home/vince/work/KeyAssociati/giudici_store/code/'
+      }
+    }
+end
+
 -- Setup nvim-cmp.
 local function nvim_cmp()
   local cmp = require'cmp'
@@ -32,13 +62,6 @@ local function nvim_cmp()
   })
 end
 
-local function vdebug_config()
-    vim.cmd("let g:vdebug_options = {'ide_key': 'docker'}");
-    vim.cmd("let g:vdebug_options = {'break_on_open': 0}")
-    vim.cmd("let g:vdebug_options = {'server': ''}")
-    vim.cmd("let g:vdebug_options = {'port': '9001'}")
-end
-
 local function telescope_config()
     local trouble = require("telescope")
     trouble.setup {defaults = {file_ignore_patterns = {"node_modules"}}}
@@ -50,10 +73,10 @@ local function tresitter_config()
         context_commentstring = {enable = true},
         ensure_installed = "all", -- or maintained
         highlight = {
-            enable = true,
+            enable = false,
             additional_vim_regex_highlighting = false
         },
-        indent = {enable = false},
+        indent = {enable = true},
     }
 
     local ft_str =
@@ -79,7 +102,7 @@ local function notify_config()
     local notify = require("notify")
     notify.setup({
         -- Animation style (see below for details)
-      stages = "fade_in_slide_out",
+      stages = "static",
 
       -- Function called when a new window is opened, use for changing win settings/config
       on_open = nil,
@@ -112,8 +135,8 @@ local function notify_config()
 end
 
 function pluginsConfig.config()
+    dap_config()
     nvim_cmp()
-    vdebug_config()
     telescope_config()
     notify_config()
     tresitter_config()

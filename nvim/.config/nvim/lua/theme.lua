@@ -1,3 +1,4 @@
+vim.cmd("set termguicolors")
 vim.o.background = "dark" -- or "light" for light mode
 vim.g.gruvbox_contrast_dark = 'soft'
 vim.g.gruvbox_transparent_bg=1
