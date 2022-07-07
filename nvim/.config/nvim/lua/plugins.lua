@@ -18,7 +18,7 @@ require('packer').startup(function(use)
    use "preservim/nerdtree"
 
    -- Undo history
-   use 'mbbill/undotree'
+   -- use 'mbbill/undotree'
 
    -- Syntax Tree
    use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}  -- We recommend updating the parsers on update

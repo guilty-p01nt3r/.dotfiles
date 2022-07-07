@@ -10,13 +10,12 @@
         "y": 31
     },
     "marks": [],
-    "name": "Google - Brave",
+    "name": "Restore Session — Firefox Developer Edition",
     "percent": 1,
     "swallows": [
         {
-            "class": "^Brave\\-browser$",
-            "instance": "^brave\\-browser$",
-            "machine": "^archlx$",
+            "class": "^firefoxdeveloperedition$",
+            "instance": "^Navigator$",
             "window_role": "^browser$"
         }
     ],

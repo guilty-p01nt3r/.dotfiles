@@ -1,8 +1,14 @@
 pluginsConfig = {}
 
+local function isEmpty(s)
+    return s == nil or s == ''
+end
 -- Setup Dap (Debug Adapater Protocol)
 local function dap_config()
     local dap, dapui = require("dap"), require("dapui")
+    local local_root = require'lspconfig'.util.root_pattern(".git")
+    local server_root = os.getenv("SERVER_SOURCE_ROOT")
+    server_root = ((not isEmpty(server_root)) and server_root) or '/var/www/html/'
     dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open()
     end
@@ -12,22 +18,66 @@ local function dap_config()
     dap.listeners.before.event_exited["dapui_config"] = function()
       dapui.close()
     end
+
+    -- Adapters
+    -- -- PHP
     dap.adapters.php = {
       type = 'executable',
       command = 'node',
       args = { '/opt/language-servers/vscode-php-debug/out/phpDebug.js' }
     }
-
     dap.configurations.php = {
       {
         type = 'php',
         request = 'launch',
         name = 'Listen for Xdebug (neovim DAP)',
         port = 9001,
-        serverSourceRoot= '/var/www/site/',
-        localSourceRoot= '/home/vince/work/KeyAssociati/giudici_store/code/'
+        localSourceRoot = local_root(vim.fn.getcwd()),
+        serverSourceRoot= server_root,
+        -- serverSourceRoot = '/var/www/site/',
+        -- localSourceRoot = '/home/vince/work/KeyAssociati/giudici_store/code/',
+        -- serverSourceRoot= '/var/www/html/',
+        -- localSourceRoot= '/home/vince/work/KeyAssociati/strega/code/'
       }
     }
+    -- DEBUG
+    --print(dap.configurations.php[1]["localSourceRoot"])
+    --print(dap.configurations.php[1]["serverSourceRoot"])
+
+    -- -- Python
+    local venv = os.getenv("VIRTUAL_ENV")
+    dap.adapters.python = {
+      type = 'executable';
+      command = string.format("%s/bin/python",venv);
+      args = { '-m', 'debugpy.adapter' };
+    }
+    dap.configurations.python = {
+    {
+      -- The first three options are required by nvim-dap
+      type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
+      request = 'launch';
+      name = "Launch file";
+
+      -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+
+      program = "${file}"; -- This configuration will launch the current file if used.
+      pythonPath = function()
+        -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
+        -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
+        -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
+        local cwd = vim.fn.getcwd()
+        if vim.fn.executable(venv .. '/bin/python') == 1 then
+            return venv .. '/bin/python'
+        elseif vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+            return cwd .. '/venv/bin/python'
+        elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+            return cwd .. '/.venv/bin/python'
+        else
+            return '/usr/bin/python'
+        end
+      end;
+    },
+}
 end
 
 -- Setup nvim-cmp.
@@ -73,8 +123,8 @@ local function tresitter_config()
         context_commentstring = {enable = true},
         ensure_installed = "all", -- or maintained
         highlight = {
-            enable = false,
-            additional_vim_regex_highlighting = false
+            enable = true,
+            additional_vim_regex_highlighting = true
         },
         indent = {enable = true},
     }

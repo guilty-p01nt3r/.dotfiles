@@ -155,7 +155,7 @@ function Config()
   json()
   php()
   python()
-  tailwindcss()
+  --tailwindcss()
   tsserver()
   -- cmp_tabnine()
 end

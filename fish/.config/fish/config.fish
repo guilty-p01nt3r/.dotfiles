@@ -4,6 +4,7 @@ end
 
 # Global Variables
 set -x PATH $PATH /sbin/
+export PAGER=less
 
 fish_add_path /home/vince/.local/share/gem/ruby/3.0.0/bin
 eval (keychain --eval --quiet --confhost)
@@ -11,15 +12,15 @@ eval (keychain --eval --quiet --confhost)
 ## Perl
 fish_add_path /home/vince/.perl5/bin
 
-set PERL_MM_OPT "INSTALL_BASE=/home/vince/.perl5"
-set PERL5LIB /home/vince/.perl5/lib
+export PERL_MM_OPT="INSTALL_BASE=/home/vince/.perl5"
+export PERL5LIB=/home/vince/.perl5/lib
 #eval eval (perl -I $HOME/.perl5/lib/perl5 -Mlocal::lib)
 
 ## Add local pip install
 fish_add_path /home/vince/.dotfiles/bin/.local/bin
 
 # Alias ( Alias is an alias for fish functions lol)
-alias calc="python3"
+alias calc="python3 -i -c 'import math' "
 alias vim="nvim"
 alias vi="nvim"
 alias gitl="git log --graph --pretty=oneline --all --abbrev-commit"
@@ -36,5 +37,5 @@ set fish_cursor_visual block
 
 # Starship theme
 starship init fish | source
-
-
+# Icons in terminal
+source ~/.local/share/icons-in-terminal/icons.fish

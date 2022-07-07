@@ -1,23 +1,23 @@
 // vim:ts=4:sw=4:et
 {
     "border": "pixel",
-    "current_border_width": 1,
+    "current_border_width": 2,
     "floating": "auto_off",
     "geometry": {
-        "height": 1058,
-        "width": 1918,
-        "x": 1931,
-        "y": 31
+        "height": 1056,
+        "width": 1916,
+        "x": 14,
+        "y": 34
     },
     "marks": [],
-    "name": "Firefox Developer Edition",
+    "name": "Google - Brave",
     "percent": 1,
     "swallows": [
         {
-            "class": "^firefoxdeveloperedition$",
-            // "instance": "^Navigator$",
-            // "machine": "^archlx$",
-            // "title": "^Firefox\\ Developer\\ Edition$"
+            "class": "^Brave\\-browser$",
+            "instance": "^brave\\-browser$",
+            "machine": "^vince\\-LX$",
+            //"title": "^i3\\:\\ Layout\\ saving\\ in\\ i3\\ \\-\\ Brave$",
             "window_role": "^browser$"
         }
     ],
