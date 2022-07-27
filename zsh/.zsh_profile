@@ -1,5 +1,0 @@
-# Bindings
-bindkey -s ^f "tmux-sessionizer\n"
-
-bindkey -s ^g "find ~ \\\( -path '*/.*' -prune -o -path '$HOME/work' -prune -o -path '$HOME/personal' -prune  -o -path '$HOME/Android' -prune \\\) -o -path '$HOME/.config' | fzf\n"  
-
