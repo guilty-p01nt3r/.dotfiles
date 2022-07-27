@@ -50,6 +50,10 @@ local function graphql()
     require'lspconfig'.graphql.setup{}
 end
 
+local function go()
+    require'lspconfig'.gopls.setup{}
+end
+
 local function html()
   --Enable (broadcasting) snippet capability for completion
   local capabilities = global_capabilities
@@ -149,6 +153,7 @@ function Config()
   eslint()
   golsp()
   graphql()
+  go()
   html()
   lua()
   dapui()

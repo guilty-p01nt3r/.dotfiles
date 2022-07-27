@@ -20,12 +20,46 @@ local function dap_config()
     end
 
     -- Adapters
+    --  -- GO
+    dap.adapters.delve = {
+      type = 'server',
+      port = '38697',
+      executable = {
+        command = 'dlv',
+        args = {'dap', '-l', '127.0.0.1:38697'},
+      }
+    }
+    dap.configurations.go = {
+      {
+        type = "delve",
+        name = "Debug",
+        request = "launch",
+        program = "${file}"
+      },
+      {
+        type = "delve",
+        name = "Debug test", -- configuration for debugging test files
+        request = "launch",
+        mode = "test",
+        program = "${file}"
+      },
+      -- works with go.mod packages and sub packages
+      {
+        type = "delve",
+        name = "Debug test (go.mod)",
+        request = "launch",
+        mode = "test",
+        program = "./${relativeFileDirname}"
+      }
+    }
+
     -- -- PHP
     dap.adapters.php = {
       type = 'executable',
       command = 'node',
       args = { '/opt/language-servers/vscode-php-debug/out/phpDebug.js' }
     }
+
     dap.configurations.php = {
       {
         type = 'php',

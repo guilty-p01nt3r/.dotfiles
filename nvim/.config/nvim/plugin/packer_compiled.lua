@@ -89,10 +89,10 @@ _G.packer_plugins = {
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/fzf.vim",
     url = "https://github.com/junegunn/fzf.vim"
   },
-  gruvbox = {
+  ["gruvbox-material"] = {
     loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/gruvbox",
-    url = "https://github.com/gruvbox-community/gruvbox"
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/gruvbox-material",
+    url = "https://github.com/sainnhe/gruvbox-material"
   },
   indentLine = {
     loaded = true,

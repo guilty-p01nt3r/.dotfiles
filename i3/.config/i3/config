@@ -14,6 +14,9 @@ set $mod Mod1
 # is used in the bar {} block below.
 font pango:Ubuntu NerdFont 9
 
+# Load NVIDIA settings
+exec --no-startup-id nvidia-settings --load-config-only
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
@@ -119,26 +122,26 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-#set $ws1 "VIM"
-#set $ws2 "BROWSER"
-#set $ws3 "TERM:A"
-#set $ws4 "MISC:A"
-#set $ws5 "FUN"
-#set $ws6 "MISC:B"
-#set $ws7 "TERM:B"
-#set $ws8 "B_LOCALHOST"
-#set $ws9 "BROWSER"
-#set $ws10 "SOCIAL"
-set $ws1 "1:VIM"
-set $ws2 "2:BROWSER"
-set $ws3 "3:TERM:A"
-set $ws4 "4:MISC:A"
-set $ws5 "5:FUN"
-set $ws6 "6:MISC:B"
-set $ws7 "7:TERM:B"
-set $ws8 "8:B_LOCALHOST"
-set $ws9 "9:BROWSER"
-set $ws10 "10:SOCIAL"
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+#set $ws1 "1:VIM"
+#set $ws2 "2:BROWSER"
+#set $ws3 "3:TERM:A"
+#set $ws4 "4:MISC:A"
+#set $ws5 "5:FUN"
+#set $ws6 "6:MISC:B"
+#set $ws7 "7:TERM:B"
+#set $ws8 "8:B_LOCALHOST"
+#set $ws9 "9:BROWSER"
+#set $ws10 "10:SOCIAL"
 
 # Define names for monitors
 set $mon1 DP-4
@@ -268,6 +271,7 @@ client.urgent           $red $red $white $red $red
 
 exec_always --no-startup-id "i3altlayout"
 #exec --no-startup-id picom --experimental-backends --backend glx --xrender-sync-fence
+exec --no-startup-id picom
 
 exec_always --no-startup-id "sleep 3; ~/.config/i3/polybar.sh &"
 #bar {
@@ -367,9 +371,9 @@ assign [class="^discord$"] $ws10
 for_window [class="^discord$"] fullscreen
 
 # Load layouts
-exec --no-startup-id "i3-msg 'workspace 1:VIM; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
+exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
 exec --no-startup-id "kitty"
-exec --no-startup-id "sleep 2; i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
+exec --no-startup-id "sleep 2; i3-msg 'workspace 2; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
 exec --no-startup-id "sleep 2; firefox-developer-edition"
 #exec --no-startup-id "sleep 2; i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2.json'"
 #exec --no-startup-id "brave"
