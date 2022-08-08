@@ -60,3 +60,4 @@
 
 @import "gruvbox-common.rasi"
 
+rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi
