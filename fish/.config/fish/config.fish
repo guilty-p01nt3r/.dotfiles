@@ -2,27 +2,34 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
 end
 
+
 # Global Variables
 set -x PATH $PATH /sbin/
 export PAGER=less
 
-fish_add_path /home/vince/.local/share/gem/ruby/3.0.0/bin
-eval (keychain --eval --quiet --confhost)
+#fish_add_path /home/vince/.local/share/gem/ruby/3.0.0/bin
+#eval (keychain --eval --quiet --confhost)
+
+# GO 
+#export GOROOT=$HOME/.lang/go
+export GOPATH=$HOME/.lang/go
 
 ## Perl
-fish_add_path /home/vince/.perl5/bin
-
-export PERL_MM_OPT="INSTALL_BASE=/home/vince/.perl5"
-export PERL5LIB=/home/vince/.perl5/lib
+#fish_add_path /home/vince/.perl5/bin
+#export PERL_MM_OPT="INSTALL_BASE=/home/vince/.perl5"
+#export PERL5LIB=/home/vince/.perl5/lib
 #eval eval (perl -I $HOME/.perl5/lib/perl5 -Mlocal::lib)
 
+## NVM
+
 ## Add local pip install
-fish_add_path /home/vince/.dotfiles/bin/.local/bin
+#fish_add_path /home/vince/.dotfiles/bin/.local/bin
 
 # Alias ( Alias is an alias for fish functions lol)
 alias calc="python3 -i -c 'import math' "
 alias vim="nvim"
 alias vi="nvim"
+alias v="nvim"
 alias gitl="git log --graph --pretty=oneline --all --abbrev-commit"
 #alias luamake=/home/vince/.config/nvim/lua-language-server/3rd/luamake/luamake
 
@@ -35,7 +42,9 @@ set fish_cursor_insert line
 set fish_cursor_replace_one underscore
 set fish_cursor_visual block
 
+
 # Starship theme
-starship init fish | source
+#starship init fish | source
+
 # Icons in terminal
-source ~/.local/share/icons-in-terminal/icons.fish
+#source ~/.local/share/icons-in-terminal/icons.fish

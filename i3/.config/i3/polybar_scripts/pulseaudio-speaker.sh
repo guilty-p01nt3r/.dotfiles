@@ -9,7 +9,7 @@ ICON_MUTE=""
 
 status() {
   #DNAME=$(pactl info | sed -En 's/Default Source: (.*)/\1/p')
-  DNAME=$(pactl get-default-sink)
+  #DNAME=$(pactl get-default-sink)
   if [ ${#DNAME} -gt 10 ]; then
       DNAME=$(echo $DNAME |  awk -F. '{print substr($0, index($0,$2),20)}') 
   fi

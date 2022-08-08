@@ -46,10 +46,10 @@ tmux_running=$(pgrep tmux)
 # If session doesn't not exist create it
 if ! tmux has-session -t $selected_name 2> /dev/null; then
     tmux new-session -ds $selected_name -c $selected
-fi
 
-# Execute the project scoped custom script if exists
-load_csession_script $selected
+    # Execute the project scoped custom script if exists
+    load_csession_script $selected
+fi
 
 # If i'm not in TMUX attach the session, switch to it otherwise
 if [[ -z $TMUX ]]; then

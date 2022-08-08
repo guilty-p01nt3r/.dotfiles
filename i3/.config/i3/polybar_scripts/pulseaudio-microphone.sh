@@ -7,7 +7,7 @@ END_COLOR="%{F-}"  # For Polybar colors
 
 status() {
   #DNAME=$(pactl info | sed -En 's/Default Source: (.*)/\1/p')
-  DNAME=$(pactl get-default-source)
+  #DNAME=$(pactl get-default-source)
   if [ ${#DNAME} -gt 10 ]; then
       DNAME=$(echo $DNAME |  awk -F. '{print substr($0, index($0,$2),20)}') 
   fi

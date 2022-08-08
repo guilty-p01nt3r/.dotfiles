@@ -1,4 +1,3 @@
-
 function r -w 'ranger' -d 'Automatically change the directory in fish after closing ranger'
     set -l tempfile (mktemp -t tmp.XXXXXX)
 
