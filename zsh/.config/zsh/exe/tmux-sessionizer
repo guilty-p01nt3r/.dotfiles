@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+## Configs
+shellPath="/usr/bin/bash"
+script_folder_name=".tmux_session"
+
+
+# tmux send-keys ($1=arg $2="C-m")
+tsk() {
+    tmux send-keys -t "$sname:$window" "clear" C-m
+    tmux send-keys -t "$sname:$window" "$1" $2
+}
+export -f tsk
+
+# tmux new window
+tnw() {
+    tmux new-window -c "#{pane_current_path}" -t "$sname" -n "$window";
+}
+
+export -f tnw 
+
+# Execute custom session script
+load_csession_script() {
+    script_path="$1/${script_folder_name}/session.sh";
+    if [[ -e $script_path ]]; then 
+        $shellPath $script_path "$selected_name"
+        return 0;
+    fi
+    return 1
+}
+
+# Select folder or fuzzy find it
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/work ~/personal -mindepth 1 -maxdepth 2 -type d | fzf)
+fi
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Set TMUX helper variables
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# If session doesn't not exist create it
+if ! tmux has-session -t $selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+# Execute the project scoped custom script if exists
+load_csession_script $selected
+
+# If i'm not in TMUX attach the session, switch to it otherwise
+if [[ -z $TMUX ]]; then
+    tmux attach-session -t $selected_name
+else
+    tmux switch-client -t $selected_name
+fi

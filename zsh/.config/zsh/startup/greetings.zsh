@@ -3,5 +3,4 @@ function greetings(){
 
 }
 
-
 greetings
