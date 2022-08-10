@@ -10,11 +10,11 @@
         "y": 31
     },
     "marks": [],
-    "name": "Restore Session — Firefox Developer Edition",
+    "name": "Firefox Developer Edition",
     "percent": 1,
     "swallows": [
         {
-            "class": "^firefoxdeveloperedition$",
+            "class": "^firefox",
             "instance": "^Navigator$",
             "window_role": "^browser$"
         }

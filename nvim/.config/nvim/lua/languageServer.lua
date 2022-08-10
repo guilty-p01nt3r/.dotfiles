@@ -59,7 +59,6 @@ local function html()
 
     require 'lspconfig'.html.setup {
         capabilities = capabilities,
-        cmd = { "html-languageserver", "--stdio" },
         configurationSection = { "html", "css", "javascript" },
         embeddedLanguages = {
             css = true,

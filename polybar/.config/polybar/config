@@ -53,16 +53,14 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
-font-1 = FiraCode NF:pixelsize=10;1
+font-1 = UbuntuMono NF:pixelsize=9;1
 font-2 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-3 = siji:pixelsize=10;1
-font-4 = Font Awesome 5 Free: style=Solid: pixelsize=11
-font-5 = Font Awesome 5 Free: style=Solid: pixelsize=11
-font-6 = Font Awesome 5 Brands: pixelsize=11
+font-4 = FontAwesome: style=Regular: pixelsize=14
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date powermenu
+modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date
 
 tray-position = right
 tray-padding = 2
@@ -107,16 +105,14 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = fixed:pixelsize=10;1
-font-1 = FiraCode NF:pixelsize=10;1
+font-1 = UbuntuMono NF:pixelsize=10;1
 font-2 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-3 = siji:pixelsize=10;1
-font-4 = Font Awesome 5 Free: style=Solid: pixelsize=11
-font-5 = Font Awesome 5 Free: style=Solid: pixelsize=11
-font-6 = Font Awesome 5 Brands: pixelsize=11
+font-4 = FontAwesome: style=Regular: pixelsize=11
 
 modules-left = i3
 ;modules-center = mpd
-modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date powermenu
+modules-right = filesystem cpu temperature memory system-nvidia-smi eth pulseaudio-speaker pulseaudio-microphone xkeyboard date
 
 ;tray-position = right
 ;tray-padding = 2
@@ -157,7 +153,7 @@ label-indicator-padding = 2
 label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 #label-indicator-underline = ${colors.secondary}
-label-indicator-underline = $ffff66
+label-indicator-underline = #ffff66
 
 [module/filesystem]
 type = internal/fs
@@ -253,7 +249,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+#format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4c268c 
 ;format-underline = #f90000
@@ -262,7 +258,7 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+#format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #9933ff
 label = %percentage_used%% : %gb_used% / %gb_total%
@@ -316,7 +312,7 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-format-prefix = 
+#format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #ffffff
 
@@ -329,7 +325,7 @@ format-volume = <label-volume> <bar-volume>
 label-volume = VOL %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = 🔇 muted
+;label-muted = 🔇 muted
 label-muted-foreground = #666
 
 bar-volume-width = 10
@@ -356,7 +352,7 @@ format-volume = <label-volume> <bar-volume>
 label-volume = VOL
 label-volume-foreground = ${root.foreground}
 
-format-muted-prefix = " "
+;format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
@@ -437,7 +433,7 @@ expand-right = true
 
 format-spacing = 1
 
-label-open = 
+#label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
