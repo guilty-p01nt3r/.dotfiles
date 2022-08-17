@@ -4,6 +4,12 @@ local configs = require 'lspconfig.configs'
 local global_capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 global_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+local function aerial()
+    require("lspconfig").vimls.setup {
+        on_attach = require("aerial").on_attach,
+    }
+end
+
 local function cpp()
     require 'lspconfig'.clangd.setup {}
 end
@@ -64,7 +70,7 @@ local function html()
             css = true,
             javascript = true,
         },
-        filetypes = { "html", "php", "jsx", "js" },
+        filetypes = { "html", "jsx", "js" },
     }
 end
 
@@ -125,6 +131,9 @@ local function php()
     local capabilities = global_capabilities
     require 'lspconfig'.intelephense.setup {
         capabilities = capabilities,
+        init_options = {
+            globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+        },
     }
     -- require'lspconfig'.phpactor.setup{
     --   capabilities = capabilities,
@@ -149,6 +158,7 @@ local function tsserver()
 end
 
 function Config()
+    aerial()
     cpp()
     css()
     emmet()

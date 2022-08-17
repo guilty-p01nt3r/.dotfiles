@@ -1,4 +1,5 @@
 -- -- Set Vim Options
+vim.cmd("set shell=/bin/bash")
 vim.cmd("set path +=* ")
 --
 -- -- Nice menu when typing `:find *.py`
@@ -7,13 +8,13 @@ vim.cmd("set wildmenu")
 --
 -- -- Ignore files
 vim.cmd("set wildignore =" ..
-     '*.pyc' ..
-     '*_build/*' ..
-     '**/coverage/*' ..
-     '**/node_modules/*' ..
-     '**/android/*' ..
-     '**/ios/*' ..
-     '**/.git/*')
+    '*.pyc' ..
+    '*_build/*' ..
+    '**/coverage/*' ..
+    '**/node_modules/*' ..
+    '**/android/*' ..
+    '**/ios/*' ..
+    '**/.git/*')
 
 vim.cmd("set stl+=%{expand('%:~:.')}")
 vim.cmd("set mouse=a")
@@ -55,16 +56,16 @@ vim.cmd("set updatetime=50")
 -- Plugins
 -- Auto-Commenter
 vim.g.inline_comment_dict = {
-    ['//'] = {'js', 'ts', 'cpp', 'c', 'php'},
-    ['#'] = {'py', 'sh'},
-    ['"'] = {'vim'}
+    ['//'] = { 'js', 'ts', 'cpp', 'c', 'php' },
+    ['#'] = { 'py', 'sh' },
+    ['"'] = { 'vim' }
 }
 
 vim.g.block_comment_dict = {
-    ['/*'] = {"php"},
-    ['<!--'] = {"html"},
- 	['/*'] = {"js", "ts", "cpp", "c", "dart"},
-    ['"""'] = {'py'},
+    ['/*'] = { "php" },
+    ['<!--'] = { "html" },
+    ['/*'] = { "js", "ts", "cpp", "c", "dart" },
+    ['"""'] = { 'py' },
 }
 
 -- fzf
@@ -85,7 +86,7 @@ vim.notify = require("notify");
 
 -- Diagnostics
 
-local signs = { Error = "", Warn = "" , Hint = "", Info = "" }
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
 --for type, icon in pairs(signs) do
 --  local hl = "DiagnosticSign" .. type
 --  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

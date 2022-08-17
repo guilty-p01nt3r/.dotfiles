@@ -69,6 +69,18 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["aerial.nvim"] = {
+    config = { "\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vaerial\frequire\0" },
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/aerial.nvim",
+    url = "https://github.com/stevearc/aerial.nvim"
+  },
+  ["cinnamon.nvim"] = {
+    config = { "\27LJ\2\n«\1\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\t\22horizontal_scroll\2\16hide_cursor\1\18default_delay\3\2\rcentered\2\18always_scroll\1\21extended_keymaps\2\18extra_keymaps\2\17scroll_limit\0032\15max_length\3ˇˇˇˇ\15\nsetup\rcinnamon\frequire\0" },
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/cinnamon.nvim",
+    url = "https://github.com/declancm/cinnamon.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -78,11 +90,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
-  },
-  ["cmp-vsnip"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
   },
   ["copilot.vim"] = {
     loaded = true,
@@ -99,6 +106,21 @@ _G.packer_plugins = {
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/gruvbox-material",
     url = "https://github.com/sainnhe/gruvbox-material"
   },
+  harpoon = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/harpoon",
+    url = "https://github.com/ThePrimeagen/harpoon"
+  },
+  ["indent-blankline.nvim"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["indent-o-matic"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/indent-o-matic",
+    url = "https://github.com/Darazaki/indent-o-matic"
+  },
   indentLine = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/indentLine",
@@ -108,6 +130,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/lspkind.nvim",
     url = "https://github.com/onsails/lspkind.nvim"
+  },
+  ["lspsaga.nvim"] = {
+    config = { "\27LJ\2\n’\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3B\1\2\1K\0\1\0\26code_action_lightbulb\1\0\5\venable\1\17virtual_text\1\18sign_priority\3\20\21enable_in_insert\2\tsign\2\22diagnostic_header\1\0\0\1\5\0\0\tüò°\tüò•\tüò§\tüòê\18init_lsp_saga\flspsaga\frequire\0" },
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -134,6 +162,11 @@ _G.packer_plugins = {
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-comment"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/nvim-comment",
+    url = "https://github.com/terrortylor/nvim-comment"
+  },
   ["nvim-dap"] = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/nvim-dap",
@@ -143,6 +176,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
     url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  ["nvim-dap-virtual-text"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
+    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -163,6 +201,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
     url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+  },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    url = "https://github.com/windwp/nvim-ts-autotag"
   },
   ["nvim-web-devicons"] = {
     loaded = true,
@@ -194,39 +237,31 @@ _G.packer_plugins = {
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
   },
-  ["vim-closetag"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-closetag",
-    url = "https://github.com/alvan/vim-closetag"
-  },
-  ["vim-commentary"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-commentary",
-    url = "https://github.com/tpope/vim-commentary"
-  },
-  ["vim-devicons"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-devicons",
-    url = "https://github.com/ryanoasis/vim-devicons"
-  },
   ["vim-emoji"] = {
     loaded = true,
     path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-emoji",
     url = "https://github.com/junegunn/vim-emoji"
   },
-  ["vim-fugitive"] = {
+  ["vim-illuminate"] = {
     loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-fugitive",
-    url = "https://github.com/tpope/vim-fugitive"
-  },
-  ["vim-vsnip"] = {
-    loaded = true,
-    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
+    path = "/home/vince/.local/share/nvim/site/pack/packer/start/vim-illuminate",
+    url = "https://github.com/RRethy/vim-illuminate"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: cinnamon.nvim
+time([[Config for cinnamon.nvim]], true)
+try_loadstring("\27LJ\2\n«\1\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\t\22horizontal_scroll\2\16hide_cursor\1\18default_delay\3\2\rcentered\2\18always_scroll\1\21extended_keymaps\2\18extra_keymaps\2\17scroll_limit\0032\15max_length\3ˇˇˇˇ\15\nsetup\rcinnamon\frequire\0", "config", "cinnamon.nvim")
+time([[Config for cinnamon.nvim]], false)
+-- Config for: aerial.nvim
+time([[Config for aerial.nvim]], true)
+try_loadstring("\27LJ\2\n4\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\vaerial\frequire\0", "config", "aerial.nvim")
+time([[Config for aerial.nvim]], false)
+-- Config for: lspsaga.nvim
+time([[Config for lspsaga.nvim]], true)
+try_loadstring("\27LJ\2\n’\1\0\0\5\0\b\0\v6\0\0\0'\2\1\0B\0\2\0029\1\2\0005\3\4\0005\4\3\0=\4\5\0035\4\6\0=\4\a\3B\1\2\1K\0\1\0\26code_action_lightbulb\1\0\5\venable\1\17virtual_text\1\18sign_priority\3\20\21enable_in_insert\2\tsign\2\22diagnostic_header\1\0\0\1\5\0\0\tüò°\tüò•\tüò§\tüòê\18init_lsp_saga\flspsaga\frequire\0", "config", "lspsaga.nvim")
+time([[Config for lspsaga.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

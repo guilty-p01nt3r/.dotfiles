@@ -5,7 +5,8 @@ end
 
 # Global Variables
 set -x PATH $PATH /sbin/
-export PAGER=less
+export PAGER="less -R"
+export LANG="en_US.UTF-8"
 
 #fish_add_path /home/vince/.local/share/gem/ruby/3.0.0/bin
 #eval (keychain --eval --quiet --confhost)
@@ -30,6 +31,8 @@ alias calc="python3 -i -c 'import math' "
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
+alias diff="colordiff"
+alias less="less -R"
 alias gitl="git log --graph --pretty=oneline --all --abbrev-commit"
 #alias luamake=/home/vince/.config/nvim/lua-language-server/3rd/luamake/luamake
 

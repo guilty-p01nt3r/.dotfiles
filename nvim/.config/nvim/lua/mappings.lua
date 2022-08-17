@@ -31,30 +31,25 @@ vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telescope.builtin").he
 
 -- -- NERDTree
 -- toggle NERDTree show/hide using <C-n> and <leader>n
-vim.api.nvim_set_keymap("n", "<C-b>", ":NERDTreeToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<C-e>", ":NERDTreeToggle<CR>", { noremap = true })
 
 -- reveal open buffer in NERDTree
 vim.api.nvim_set_keymap("n", "<leader>nr", ":NERDTreeFind<CR>", { noremap = true })
 
 -- Fix opening url with gx
-map('n', 'gx', ':silent execute "!xdg-open " . shellescape("<cWORD>")<CR>')
+--vim.g.netrw_browsex_viewer = "setsid xdg-open"
+vim.api.nvim_set_keymap('n', 'gx', ':execute "!xdg-open " . shellescape("<cWORD>")<CR>',
+    { noremap = true, silent = true })
 
 -- LSP Navigation
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vh", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vsh", "<cmd>lua vim.lsp.buf.signature_help()<CR>",
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vsd", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>",
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vp", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vn", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-    { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>vll", "<cmd>lua LspLocationList()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>vh", "<cmd>lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>vrn", "<cmd>lua vim.lsp.buf.rename()<CR>", { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap("n", "<leader>vsh", "<cmd>lua vim.lsp.buf.signature_help()<CR>",
+--{ noremap = true, silent = true })
 
 -- Moving lines up and down
 vim.api.nvim_set_keymap("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
@@ -93,7 +88,67 @@ vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
     { silent = true, noremap = true }
 )
 
+
 -- -- Custom Command
+-- LspSaga
+-- -- Lsp Finder
+vim.keymap.set("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+
+-- -- Code Action
+vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
+vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = true })
+
+-- -- Hover Doc
+vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+local action = require("lspsaga.action")
+-- scroll down hover doc or scroll in definition preview
+vim.keymap.set("n", "<C-f>", function()
+    action.smart_scroll_with_saga(1)
+end, { silent = true })
+-- scroll up hover doc
+vim.keymap.set("n", "<C-b>", function()
+    action.smart_scroll_with_saga(-1)
+end, { silent = true })
+
+-- -- Signature Help
+vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
+
+-- --
+-- Rename
+-- close rename win use <C-c> in insert mode or `q` in normal mode or `:q`
+vim.keymap.set("n", "gR", "<cmd>Lspsaga rename<CR>", { silent = true })
+
+-- -- Definition
+vim.keymap.set("n", "<leader>vh", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
+
+
+vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
+vim.keymap.set("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
+
+-- -- Errors
+vim.keymap.set("n", "[E", function()
+    require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
+end, { silent = true })
+vim.keymap.set("n", "]E", function()
+    require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
+end, { silent = true })
+-- or use command
+vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
+vim.keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
+
+-- -- Terminal
+vim.keymap.set("n", "<C-t>", "<cmd>Lspsaga open_floaterm <CR>", { silent = true })
+vim.keymap.set("t", "<C-t>", "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>", { silent = true })
+
+-- Symbols (Aerial)
+-- Toggle the aerial window with <leader>a
+vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>', {})
+-- Jump forwards/backwards with '{' and '}'
+vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', {})
+vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', {})
+-- Jump up the tree with '[[' or ']]'
+vim.keymap.set('n', '[[', '<cmd>AerialPrevUp<CR>', {})
+vim.keymap.set('n', ']]', '<cmd>AerialNextUp<CR>', {})
 
 -- Executing current file
 vim.api.nvim_command([[command Exec set splitright | vnew | set filetype=sh | read !bash #]])
@@ -107,9 +162,9 @@ map('n', '<C-l>', '<cmd>noh<CR>')
 map('n', '<leader>o', 'm`o<esc>``')
 map('n', '<leader><S-o>', 'm`O<esc>``')
 
--- Move between diagnostic
-vim.api.nvim_set_keymap("n", "<C-N>", ":bnext<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-P>", ":bprev<CR>", { noremap = true })
+-- Move between buffers
+--vim.api.nvim_set_keymap("n", "<C-N>", ":bnext<CR>", { noremap = true })
+--vim.api.nvim_set_keymap("n", "<C-P>", ":bprev<CR>", { noremap = true })
 
 -- Move between tabs
 vim.api.nvim_set_keymap("n", "<S-h>", ":tabprev<CR>", { noremap = true, silent = true })
@@ -125,7 +180,7 @@ vim.api.nvim_set_keymap("n", "<leader>r\"", ":%s/\\\"\\([^\"]*\\)\\\"/'\\1'/g<CR
 vim.api.nvim_set_keymap("n", "<leader>r'", ":%s/\\'\\([^']*\\)\\'/\\\"\\1\\\"/g<CR>", { noremap = true })
 
 vim.api.nvim_set_keymap("n", "<leader>dab", ":%bd|e#<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>ca", ":only", { noremap = true })
+--vim.api.nvim_set_keymap("n", "<leader>", ":only", { noremap = true })
 
 -- DEBUGGER
 vim.api.nvim_set_keymap("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", { noremap = true })
@@ -170,6 +225,24 @@ vim.api.nvim_set_keymap("i", "<C-a>", 'copilot#Accept("<CR>")', { silent = true,
 -- vim.api.nvim_command([[
 --     autocmd BufWritePre *.go lua OrgImports(1000)
 -- ]])
+
+
+-- Harpoon
+vim.api.nvim_set_keymap("n", "<leader>vm", ':lua require("harpoon.ui").toggle_quick_menu()<CR>',
+    { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>m", ':lua require("harpoon.mark").add_file()<CR>',
+    { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "g1", ':lua require("harpoon.ui").nav_file(1)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "g2", ':lua require("harpoon.ui").nav_file(2)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "g3", ':lua require("harpoon.ui").nav_file(3)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "g4", ':lua require("harpoon.ui").nav_file(4)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "g5", ':lua require("harpoon.ui").nav_file(5)<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "g6", ':lua require("harpoon.ui").nav_file(6)<CR>', { noremap = true, silent = true })
+
+-- -- Moving
+vim.api.nvim_set_keymap("n", "<C-n>", ':lua require("harpoon.ui").nav_next()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-p>", ':lua require("harpoon.ui").nav_prev()<CR>', { noremap = true, silent = true })
+
 
 vim.api.nvim_command([[
 	autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()

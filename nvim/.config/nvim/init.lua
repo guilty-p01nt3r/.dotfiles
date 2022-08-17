@@ -5,5 +5,3 @@ require('mappings')
 require('options')
 require('theme')
 require('languageServer')
-
-
