@@ -237,14 +237,16 @@ bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
 
 # Session Manager (gui)
 #exec --no-startup-id /usr/bin/lxpolkit &
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+#exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
 
 # Disable notification shortcut
 #bindsym Control+grave nop
 
 
+# Language Keyboard Layout Toggle
 bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh
+
 #######
 #THEME#
 #######

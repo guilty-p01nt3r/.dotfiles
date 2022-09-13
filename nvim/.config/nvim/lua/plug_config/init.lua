@@ -76,8 +76,8 @@ local function dap_config()
         }
     }
     -- DEBUG
-    --print(dap.configurations.php[1]["localSourceRoot"])
-    --print(dap.configurations.php[1]["serverSourceRoot"])
+    -- print(dap.configurations.php[1]["localSourceRoot"])
+    -- print(dap.configurations.php[1]["serverSourceRoot"])
 
     -- -- Python
     local venv = os.getenv("VIRTUAL_ENV")
@@ -167,8 +167,8 @@ local function nvim_cmp()
     cmp.setup({
         snippet = {
             expand = function(args)
-                -- For `vsnip` user.
-                vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+                --vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` user.
+                require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             end,
         },
         mapping = {
@@ -186,7 +186,8 @@ local function nvim_cmp()
         sources = {
             { name = 'nvim_lsp' },
             -- For vsnip user.
-            { name = 'vsnip' },
+            --{ name = 'nvim_' },
+            { name = 'luasnip' },
             { name = 'buffer' },
         },
         formatting = {
@@ -239,6 +240,10 @@ local function tresitter_config()
         ","
     )
     vim.cmd("autocmd Filetype " .. ft_str .. " setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()")
+end
+
+local function treesitterContextConfig()
+    -- require'treesitter-context'.setup{}
 end
 
 local function trouble_config()

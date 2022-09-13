@@ -32,6 +32,8 @@ vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telescope.builtin").he
 -- -- NERDTree
 -- toggle NERDTree show/hide using <C-n> and <leader>n
 vim.api.nvim_set_keymap("n", "<C-e>", ":NERDTreeToggle<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<C-e>", ":20Lexplore<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<leader><C-e>", ":20Lexplore expand('%:h')<CR>", { noremap = true })
 
 -- reveal open buffer in NERDTree
 vim.api.nvim_set_keymap("n", "<leader>nr", ":NERDTreeFind<CR>", { noremap = true })
@@ -100,23 +102,23 @@ vim.keymap.set("v", "<leader>ca", "<cmd><C-U>Lspsaga range_code_action<CR>", { s
 
 -- -- Hover Doc
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
-local action = require("lspsaga.action")
--- scroll down hover doc or scroll in definition preview
-vim.keymap.set("n", "<C-f>", function()
-    action.smart_scroll_with_saga(1)
-end, { silent = true })
--- scroll up hover doc
-vim.keymap.set("n", "<C-b>", function()
-    action.smart_scroll_with_saga(-1)
-end, { silent = true })
-
+-- local action = require("lspsaga.action")
+-- -- scroll down hover doc or scroll in definition preview
+-- vim.keymap.set("n", "<C-f>", function()
+--     action.smart_scroll_with_saga(1)
+-- end, { silent = true })
+-- -- scroll up hover doc
+-- vim.keymap.set("n", "<C-b>", function()
+--     action.smart_scroll_with_saga(-1)
+-- end, { silent = true })
+--
 -- -- Signature Help
 vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
 
 -- --
 -- Rename
 -- close rename win use <C-c> in insert mode or `q` in normal mode or `:q`
-vim.keymap.set("n", "gR", "<cmd>Lspsaga rename<CR>", { silent = true })
+vim.keymap.set("n", "<leader>gR", "<cmd>Lspsaga rename<CR>", { silent = true })
 
 -- -- Definition
 vim.keymap.set("n", "<leader>vh", "<cmd>Lspsaga preview_definition<CR>", { silent = true })
@@ -247,3 +249,78 @@ vim.api.nvim_set_keymap("n", "<C-p>", ':lua require("harpoon.ui").nav_prev()<CR>
 vim.api.nvim_command([[
 	autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()
 ]])
+
+-- Custom Autocmd
+AutoCmd_enabled = {}
+
+-- Read .env file from root of project
+local function read_env_file()
+    local env_file = io.open(".env", "r")
+    if env_file then
+        for line in env_file:lines() do
+            local key, value = line:match("([^=]+)=(.+)")
+            vim.env[key] = value
+        end
+        env_file:close()
+    end
+end
+
+-- Rsync on Save (lua)
+-- function syncBuff()
+--     io.popen(string.format("rsync"))
+-- end
+
+local function rsyncLocal(buffer) read_env_file()
+    local user = os.getenv("VS_SYNC_USER")
+    if user == nil then
+        print("No VS_SYNC_USER set in .env file")
+        return
+    end
+    local host = os.getenv("VS_SYNC_HOST")
+    if host == nil then
+        print("No VS_SYNC_HOST set in .env file")
+        return
+    end
+    local path = os.getenv("VS_SYNC_PATH")
+    if path == nil then
+        print("No VS_SYNC_PATH set in .env file")
+        return
+    end
+    local ssh_hostid = os.getenv("VS_SYNC_SSH_HOSTID")
+    if path == nil then
+        print("No VS_SYNC_SSH_KEY set in .env file")
+        return
+    end
+
+    local relative_buffer_path = string.gsub(vim.api.nvim_buf_get_name(0), vim.loop.cwd(), '')
+    local remote_buffer_path = path .. relative_buffer_path
+
+    --print(string.format('rsync -avzn %s %s:%s', buffer, ssh_hostid, remote_buffer_path))
+    vim.cmd(string.format('!rsync -avz %s %s:%s', buffer, ssh_hostid, remote_buffer_path))
+    -- io.popen(string.format('rsync -avzn %s %s:%s', buffer, ssh_hostid, remote_buffer_path))
+
+end
+
+-- Create group for print file full path on save
+-- the group is toggled on and off with the command :TogglePrintPath
+vim.api.nvim_create_augroup("rsyncLocal", { clear = true })
+
+function EnableSyncRemote()
+    print("Enabling remote sync")
+    vim.api.nvim_create_autocmd("BufWritePost",
+        { pattern = "*",
+            callback = function()
+                rsyncLocal(vim.api.nvim_buf_get_name(0))
+            end,
+            group = "rsyncLocal"
+        }
+    )
+    vim.cmd("autocmd rsyncLocal")
+    AutoCmd_enabled["rsyncLocal"] = true
+end
+
+function DisableSyncRemote()
+    print("Disabling remote sync")
+    vim.cmd("autocmd! rsyncLocal")
+    AutoCmd_enabled["rsyncLocal"] = false
+end

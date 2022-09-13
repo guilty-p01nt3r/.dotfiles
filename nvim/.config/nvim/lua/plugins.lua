@@ -23,6 +23,7 @@ require('packer').startup(
         -- Syntax Tree
         use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- We recommend updating the parsers on update
         use 'nvim-treesitter/nvim-treesitter-textobjects'
+        use 'nvim-treesitter/nvim-treesitter-context'
 
         -- Language Server
         use 'neovim/nvim-lspconfig'
@@ -62,9 +63,15 @@ require('packer').startup(
 
         -- -- Successor of use 'hrsh7th/nvim-compe'
         -- Completion
+        use 'neovim/nvim-lspconfig'
         use 'hrsh7th/cmp-nvim-lsp'
         use 'hrsh7th/cmp-buffer'
+        use 'hrsh7th/cmp-path'
+        use 'hrsh7th/cmp-cmdline'
         use 'hrsh7th/nvim-cmp'
+
+        use 'saadparwaiz1/cmp_luasnip'
+        use({ "L3MON4D3/LuaSnip", tag = "v<CurrentMajor>.*" })
 
 
         use {
@@ -72,9 +79,6 @@ require('packer').startup(
             config = function() require('aerial').setup() end
         }
 
-        -- for vsnip user.
-        -- use 'hrsh7th/cmp-vsnip'
-        -- use 'hrsh7th/vim-vsnip'
 
         -- Closing html tags
         use 'windwp/nvim-ts-autotag'
@@ -99,26 +103,26 @@ require('packer').startup(
         }
 
         -- Smooth scrolling
-        use {
-            'declancm/cinnamon.nvim',
-            config = function() require('cinnamon').setup(
-                    {
-                        extra_keymaps = true,
-                        extended_keymaps = true,
-                        -- OPTIONS:
-                        always_scroll = false, -- Scroll the cursor even when the window hasn't scrolled.
-                        centered = true, -- Keep cursor centered in window when using window scrolling.
-                        default_delay = 2, -- The default delay (in ms) between each line when scrolling.
-                        hide_cursor = false, -- Hide the cursor while scrolling. Requires enabling termguicolors!
-                        horizontal_scroll = true, -- Enable smooth horizontal scrolling when view shifts left or right.
-                        max_length = -1, -- Maximum length (in ms) of a command. The line delay will be
-                        -- re-calculated. Setting to -1 will disable this option.
-                        scroll_limit = 50, -- Max number of lines moved before scrolling is skipped. Setting
-                        -- to -1 will disable this option.
-                    }
-                )
-            end
-        }
+        -- use {
+        --     'declancm/cinnamon.nvim',
+        --     config = function() require('cinnamon').setup(
+        --             {
+        --                 extra_keymaps = true,
+        --                 extended_keymaps = true,
+        --                 -- OPTIONS:
+        --                 always_scroll = false, -- Scroll the cursor even when the window hasn't scrolled.
+        --                 centered = true, -- Keep cursor centered in window when using window scrolling.
+        --                 default_delay = 2, -- The default delay (in ms) between each line when scrolling.
+        --                 hide_cursor = false, -- Hide the cursor while scrolling. Requires enabling termguicolors!
+        --                 horizontal_scroll = true, -- Enable smooth horizontal scrolling when view shifts left or right.
+        --                 max_length = -1, -- Maximum length (in ms) of a command. The line delay will be
+        --                 -- re-calculated. Setting to -1 will disable this option.
+        --                 scroll_limit = 50, -- Max number of lines moved before scrolling is skipped. Setting
+        --                 -- to -1 will disable this option.
+        --             }
+        --         )
+        --     end
+        -- }
 
         -- Indentation helper
         use 'Darazaki/indent-o-matic'
