@@ -14,7 +14,14 @@ require('packer').startup(
 
         -- navigating the file tree
         -- TODO: Replace with something new or native netrw
-        use "preservim/nerdtree"
+        -- use "preservim/nerdtree"
+        use {
+            'kyazdani42/nvim-tree.lua',
+            requires = {
+                'kyazdani42/nvim-web-devicons', -- optional, for file icons
+            },
+            -- tag = 'nightly' -- optional, updated every week. (see issue #1193)
+        }
         use 'ThePrimeagen/harpoon'
 
         -- Undo history
@@ -40,12 +47,25 @@ require('packer').startup(
                         sign = true,
                         enable_in_insert = true,
                         sign_priority = 20,
-                        virtual_text = false,
+                        virtual_text = true,
                     },
+                    symbol_in_winbar = {
+                        in_custom = true,
+                        enable = true,
+                    }
                 })
             end,
         })
-        use 'github/copilot.vim'
+        use { 'github/copilot.vim',
+            config = function()
+                vim.g.copilot_filetypes = {
+                    ['dap-repl'] = false,
+                    ['dapui_watches'] = false,
+                    ['dapui_console'] = false,
+
+                }
+            end,
+        }
 
         -- LSP Gui
         use {
@@ -92,11 +112,12 @@ require('packer').startup(
         -- use { 'fgheng/winbar.nvim' }
         -- Display Indentation
         use 'Yggdroot/indentLine'
-        --use 'gruvbox-community/gruvbox'
+        -- use 'gruvbox-community/gruvbox'
         use 'sainnhe/gruvbox-material'
+        -- use { "ellisonleao/gruvbox.nvim" }
+        -- use { "catppuccin/nvim", as = "catppuccin" }
         --use 'ryanoasis/vim-devicons'
         use 'kyazdani42/nvim-web-devicons'
-        --use 'folke/tokyonight.nvim'
         use {
             'hoob3rt/lualine.nvim',
             requires = { 'kyazdani42/nvim-web-devicons', opt = true }

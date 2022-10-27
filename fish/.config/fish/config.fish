@@ -35,8 +35,7 @@ alias diff="colordiff"
 alias less="less -R"
 alias gitl="git log --graph --pretty=oneline --all --abbrev-commit"
 #alias luamake=/home/vince/.config/nvim/lua-language-server/3rd/luamake/luamake
-
-
+alias kubectl="minikube kubectl --"
 
 # Fish Configs
 fish_vi_key_bindings insert

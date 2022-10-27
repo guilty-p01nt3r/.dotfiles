@@ -130,10 +130,10 @@ local function notify_config()
         stages = "static",
 
         -- Function called when a new window is opened, use for changing win settings/config
-        on_open = nil,
+        -- on_open = nil,
 
         -- Function called when a window is closed
-        on_close = nil,
+        -- on_close = nil,
 
         -- Render function for notifications. See notify-render()
         render = "default",
@@ -147,6 +147,8 @@ local function notify_config()
 
         -- Minimum width for notification windows
         minimum_width = 50,
+        -- Maximum width for notification windows
+        max_width = 100,
 
         -- Icons for the different levels
         icons = {
@@ -156,6 +158,19 @@ local function notify_config()
             DEBUG = "",
             TRACE = "✎",
         },
+    })
+end
+
+-- Setup nvim-tree
+local function nvimtree_config()
+    require "nvim-tree".setup({
+        remove_keymaps = { "<C-e>", "d" },
+        view = {
+            mappings = {
+                list =
+                { key = "<C-e>", action = "" }
+            },
+        }
     })
 end
 
@@ -211,7 +226,13 @@ end
 
 local function telescope_config()
     local trouble = require("telescope")
-    trouble.setup { defaults = { file_ignore_patterns = { "node_modules" } } }
+    trouble.setup {
+        defaults =
+        {
+            file_ignore_patterns = { "node_modules" },
+            path_display = { "smart" }
+        }
+    }
 end
 
 local function tresitter_config()
@@ -242,9 +263,9 @@ local function tresitter_config()
     vim.cmd("autocmd Filetype " .. ft_str .. " setlocal foldmethod=expr foldexpr=nvim_treesitter#foldexpr()")
 end
 
-local function treesitterContextConfig()
-    -- require'treesitter-context'.setup{}
-end
+-- local function treesitterContextConfig()
+--     --require 'treesitter-context'.setup {}
+-- end
 
 local function trouble_config()
     local trouble = require("trouble")
@@ -257,8 +278,9 @@ function pluginsConfig.config()
     notify_config()
     nvim_cmp()
     nvim_comment()
+    nvimtree_config()
     telescope_config()
-    tresitter_config()
+    --tresitter_config()
     trouble_config()
     -- winbar_config()
 end

@@ -31,12 +31,18 @@ vim.api.nvim_set_keymap('n', '<leader>fh', ':lua require("telescope.builtin").he
 
 -- -- NERDTree
 -- toggle NERDTree show/hide using <C-n> and <leader>n
-vim.api.nvim_set_keymap("n", "<C-e>", ":NERDTreeToggle<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<C-e>", ":NERDTreeToggle<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<leader>nr", ":NERDTreeFind<CR>", { noremap = true })
+--
+-- -- NvimTree
+vim.api.nvim_set_keymap("n", "<C-e>", ":NvimTreeToggle<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>nr", "::NvimTreeFindFileToggle<CR>", { noremap = true })
+
+--
+-- -- Netrw
 -- vim.api.nvim_set_keymap("n", "<C-e>", ":20Lexplore<CR>", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "<leader><C-e>", ":20Lexplore expand('%:h')<CR>", { noremap = true })
 
--- reveal open buffer in NERDTree
-vim.api.nvim_set_keymap("n", "<leader>nr", ":NERDTreeFind<CR>", { noremap = true })
 
 -- Fix opening url with gx
 --vim.g.netrw_browsex_viewer = "setsid xdg-open"
@@ -59,7 +65,7 @@ vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent =
 
 -- -- autocmd
 vim.api.nvim_command([[
-   autocmd BufWritePre *.* lua vim.lsp.buf.formatting_sync(nil, 100)
+   autocmd BufWritePre *.* lua vim.lsp.buf.format(nil, 100)
 ]])
 
 -- Auto closing tag
@@ -186,10 +192,13 @@ vim.api.nvim_set_keymap("n", "<leader>dab", ":%bd|e#<cr>", { noremap = true })
 
 -- DEBUGGER
 vim.api.nvim_set_keymap("n", "<leader>db", ":lua require'dap'.toggle_breakpoint()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>dc",
+    ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>dso", ":lua require'dap'.step_out()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>dsi", ":lua require'dap'.step_into()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>dn", ":lua require'dap'.step_over()<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<leader>dc", ":lua require'dap'.continue()<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<leader>dc", ":lua require'dap'.continue()<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<F1>", ":lua require'dap'.continue()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>d$", ":lua require'dap'.run_last()<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>dr", ":lua require'dap'.repl.open({}, vsplit)<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<leader>di", ":lua require'dap.ui.widgets'.hover()<CR>", { noremap = true })
@@ -286,6 +295,7 @@ local function rsyncLocal(buffer) read_env_file()
         print("No VS_SYNC_PATH set in .env file")
         return
     end
+    -- HOSTID is the id of .ssh/config host or user@host
     local ssh_hostid = os.getenv("VS_SYNC_SSH_HOSTID")
     if path == nil then
         print("No VS_SYNC_SSH_KEY set in .env file")

@@ -149,6 +149,10 @@ local function python()
     }
 end
 
+local function sqls()
+    --require 'lspconfig'.sqls.setup {}
+end
+
 local function tailwindcss()
     require 'lspconfig'.tailwindcss.setup {}
 end
@@ -171,6 +175,7 @@ function Config()
     json()
     php()
     python()
+    sqls()
     tailwindcss()
     tsserver()
 

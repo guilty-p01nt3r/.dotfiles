@@ -225,7 +225,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Wallpaper
-exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/BatteryWallpaper.png ~/Pictures/ThinkPlanExecute-Soft.png 
+#exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/BatteryWallpaper.png ~/Pictures/ThinkPlanExecute-Soft.png 
+#exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/SpaceMonster.jpg ~/Pictures/getCapeWearCapeFly.jpg
+#exec_always --no-startup-id feh --randomize --bg-fill ~/Pictures/brockHofer/WallpaperM2/* --bg-fill ~/Pictures/brockHofer/WallpaperM2/*
+exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/SpaceMonster.jpg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*) 
 
 # Notification Manager 
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
@@ -237,7 +240,7 @@ bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
 
 # Session Manager (gui)
 #exec --no-startup-id /usr/bin/lxpolkit &
-#exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 
 
 # Disable notification shortcut
@@ -278,7 +281,7 @@ client.urgent           $red $red $white $blue $blue
 
 exec_always --no-startup-id "i3altlayout"
 #exec --no-startup-id picom --experimental-backends --backend glx --xrender-sync-fence
-exec --no-startup-id picom
+#exec --no-startup-id picom
 
 exec_always --no-startup-id "sleep 1; ~/.config/i3/polybar.sh &"
 #bar {
