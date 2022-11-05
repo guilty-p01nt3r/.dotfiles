@@ -5,6 +5,9 @@ require('packer').startup(
         -- Packer can manage itself
         use 'wbthomason/packer.nvim'
 
+        -- GIT
+        use 'tpope/vim-fugitive'
+
         -- Fuzzy finder
         use 'junegunn/fzf.vim'
         use {

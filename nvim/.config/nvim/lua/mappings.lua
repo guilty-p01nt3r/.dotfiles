@@ -49,6 +49,13 @@ vim.api.nvim_set_keymap("n", "<leader>nr", "::NvimTreeFindFileToggle<CR>", { nor
 vim.api.nvim_set_keymap('n', 'gx', ':execute "!xdg-open " . shellescape("<cWORD>")<CR>',
     { noremap = true, silent = true })
 
+-- Yanking
+-- Delete the selection when yanking without losing the paste register
+vim.api.nvim_set_keymap('n', '<leader>p', '"_dP', { noremap = true })
+-- Yank into the system clipboard
+vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true })
+
 -- LSP Navigation
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", { noremap = true, silent = true })

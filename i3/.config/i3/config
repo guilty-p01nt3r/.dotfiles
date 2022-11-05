@@ -40,6 +40,9 @@ exec --no-startup-id nvidia-settings --load-config-only
 #exec --nostartup-id flameshot &;
 bindsym Print exec flameshot gui;
 
+# KdeConnect (Mobile Phone Integration)
+exec --no-startup-id kdeconnect-indicator &
+
 # change volume or toggle mute
 ## Using i3blocks
 #bindsym $mod+Shift+x exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
@@ -389,6 +392,8 @@ for_window [class="^discord$"] fullscreen
 # Teams
 assign [class="^teams$"] $ws10
 for_window [class="^teams$"] fullscreen
+for_window [title="Microsoft Teams Notification"] floating enable
+no_focus [title="Microsoft Teams Notification"]
 
 # Load layouts
 exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
