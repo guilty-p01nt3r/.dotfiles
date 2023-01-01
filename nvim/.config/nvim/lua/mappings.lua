@@ -51,7 +51,7 @@ vim.api.nvim_set_keymap('n', 'gx', ':execute "!xdg-open " . shellescape("<cWORD>
 
 -- Yanking
 -- Delete the selection when yanking without losing the paste register
-vim.api.nvim_set_keymap('n', '<leader>p', '"_dP', { noremap = true })
+vim.api.nvim_set_keymap('v', '<leader>p', '"_dP', { noremap = true })
 -- Yank into the system clipboard
 vim.api.nvim_set_keymap('n', '<leader>y', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true })
@@ -72,7 +72,7 @@ vim.api.nvim_set_keymap("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent =
 
 -- -- autocmd
 vim.api.nvim_command([[
-   autocmd BufWritePre *.* lua vim.lsp.buf.format(nil, 100)
+   autocmd BufWritePre *.* lua vim.lsp.buf.format(nil, 2000)
 ]])
 
 -- Auto closing tag
