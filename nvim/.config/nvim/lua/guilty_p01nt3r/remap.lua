@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 -- Yanking
 vim.keymap.set('v', '<leader>p', '"_dP')
 vim.keymap.set('n', '<leader>y', '"+y')

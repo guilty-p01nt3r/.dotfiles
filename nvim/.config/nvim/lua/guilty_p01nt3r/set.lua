@@ -26,3 +26,5 @@ vim.opt.colorcolumn = "80"
 -- set undodir 
 vim.opt.undodir = vim.fn.stdpath("config") .. "/undodir"
 
+vim.g.mapleader = " "
+

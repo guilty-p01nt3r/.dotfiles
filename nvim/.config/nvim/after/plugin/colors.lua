@@ -17,6 +17,7 @@ function ColorMyPencils(color)
     vim.api.nvim_set_hl(0, "DiagnosticSignHint", { fg = color.base0C, bg = color.base00 })
     vim.api.nvim_set_hl(0, "DiagnosticSignInfo", { fg = color.base05, bg = color.base00 })
     vim.api.nvim_set_hl(0, "DiagnosticSignWarn", { fg = color.base0A, bg = color.base00 })
+    vim.api.nvim_set_hl(0, "SignColumn", { fg = color.base0A, bg = color.base00 })
 end
 
 require("gruvbox").setup({
@@ -38,3 +39,4 @@ require("gruvbox").setup({
 })
 
 ColorMyPencils()
+print("Colors loaded")
