@@ -1,60 +1,54 @@
-# It will not be overwritten, so edit it as you like.
-#
-# Should you change your keyboard layout some time, delete
-# this file and re-run i3-config-wizard(1).
-#
+# Sway env_variables for wlroots support 
+exec --no-startup-id systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY  XDG_CURRENT_DESKTOP
+exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+exec --no-startup-id ~/.dotfiles/scripts/sway/repairportal
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
-# i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+# gnome keyring
+#exec dbus-update-activation-environment --all
+exec gnome-keyring-daemon --start --components=secrets
+
 # Mod1 = Alt | Mod4 = WinKey
 set $mod Mod1
 
-exec --no-startup-id $HOME/.config/startup/monitor_settings.sh
-exec --no-startup-id xset +fp /home/vince/.local/share/fonts && xset fp rehash
+# Lock Screen and DPMS
+set $lock 'swaylock -f -c 212121'
+set $bl_time 600
 
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:UbuntuMono NF 11
+### Idle configuration
+exec_always pgrep swayidle ||  swayidle -w \
+    timeout $bl_time 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep $lock
 
-# Load NVIDIA settings
-exec --no-startup-id nvidia-settings --load-config-only
+# Fonts
+font pango:Ubuntu Mono Nerd Font 11
 
+# Network Manager Applet
+exec --no-startup-id nm-applet --indicator
 
-# This font is widely installed, provides lots of unicode glyphs, right-to-left
-# text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
-
-# The combination of xss-lock, nm-applet and pactl is a popular choice, so
-# they are included here as an example. Modify as you see fit.
-
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-
-# NetworkManager is the most popular way to manage wireless networks on Linux,
-# and nm-applet is a desktop environment-independent system tray GUI for it.
-# exec --no-startup-id nm-applet
-
-# Screenshot software
+# Screenshot software 
 #exec --nostartup-id flameshot &;
-bindsym Print exec flameshot gui;
+#bindsym Print exec flameshot gui --raw | wl-copy;
+bindsym Print exec /usr/share/sway/scripts/grimshot copy area;
+bindsym Shift+Print exec /usr/share/sway/scripts/grimshot save area;
+bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 
 # KdeConnect (Mobile Phone Integration)
 exec --no-startup-id kdeconnect-indicator &
 
-# change volume or toggle mute
-## Using i3blocks
-#bindsym $mod+Shift+x exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+10 i3blocks 
-#bindsym $mod+Shift+z exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+10 i3blocks
-#bindsym $mod+Shift+b exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+10 i3blocks
-# Mic toggle
-#bindsym $mod+Shift+v exec amixer -q -D pulse sset Capture toggle && pkill -RTMIN+11 i3blocks
-### Using polybar (pamixer)
+# Bar 
+bar {
+    swaybar_command waybar
+}
+
+# change volume or toggle mute | TODO: use waybar
+### Using pamixer 
 bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-increase
 bindsym $mod+Shift+z exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-decrease
 bindsym $mod+Shift+b exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-tmute
-# Mic toggle
+## Mic toggle
 bindsym $mod+Shift+v exec --no-startup-id ~/.config/i3/audioManager.sh source-default-tmute
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -67,16 +61,11 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons -config ~/.config/rofi/config
+ 
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons -config ~/.config/rofi/config 
+bindsym $mod+Shift+d exec --no-startup-id rofi -show window -show-icons -config ~/.config/rofi/config 
 
-bindsym $mod+Shift+d exec --no-startup-id rofi -show window -show-icons -config ~/.config/rofi/config
-
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
+## Movement ## 
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -139,20 +128,14 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-#set $ws1 "1:VIM"
-#set $ws2 "2:BROWSER"
-#set $ws3 "3:TERM:A"
-#set $ws4 "4:MISC:A"
-#set $ws5 "5:FUN"
-#set $ws6 "6:MISC:B"
-#set $ws7 "7:TERM:B"
-#set $ws8 "8:B_LOCALHOST"
-#set $ws9 "9:BROWSER"
-#set $ws10 "10:SOCIAL"
 
 # Define names for monitors
-set $mon1 DP-4
-set $mon2 HDMI-0
+set $mon1 DP-1
+set $mon2 DP-3
+
+# Monitors config 
+output * adaptive_sync off
+output $mon1 mode 1920x1080@144.000Hz position 0,0
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -193,12 +176,11 @@ workspace $ws7 output $mon2
 workspace $ws8 output $mon2
 workspace $ws9 output $mon2
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+# Reset config
+bindsym $mod+Shift+r exec "swaymsg reload"
+
+# exit i3 (logs you out of your X session) TODO: sway way
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -228,159 +210,24 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Wallpaper
-#exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/BatteryWallpaper.png ~/Pictures/ThinkPlanExecute-Soft.png 
-#exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/SpaceMonster.jpg ~/Pictures/getCapeWearCapeFly.jpg
-#exec_always --no-startup-id feh --randomize --bg-fill ~/Pictures/brockHofer/WallpaperM2/* --bg-fill ~/Pictures/brockHofer/WallpaperM2/*
-exec_always --no-startup-id feh --bg-fill --bg-fill ~/Pictures/SpaceMonster.jpg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*) 
-
-# Notification Manager 
-exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
-## dunst shortcut
-bindsym Ctrl+space exec --no-startup-id dunstctl close
-bindsym Ctrl+Shift+space exec --no-startup-id dunstctl close-all
-bindsym Ctrl+Shift+period exec --no-startup-id dunstctl context
-bindsym Ctrl+grave exec --no-startup-id dunstctl history-pop
+output $mon1 bg ~/Pictures/SpaceMonster.jpg fill
+output $mon2  bg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*)  fill
 
 # Session Manager (gui)
-#exec --no-startup-id /usr/bin/lxpolkit &
-exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-
-
-# Disable notification shortcut
-#bindsym Control+grave nop
-
+exec --no-startup-id /usr/bin/lxpolkit &
 
 # Language Keyboard Layout Toggle
+# TODO: set in wayland way
 bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh
-
-#######
-#THEME#
-#######
-#
-# Defines a variable named $black by querying for the "color0" resource,
-# using a fallback of "#000000" if it cannot be found
-set_from_resource $bg           background  #282828
-set_from_resource $fg           foreground  #ebdbb2
-set_from_resource $red          color1      #cc241d
-set_from_resource $darkyellow   color3      #928374
-set_from_resource $darkgreen    color2      #98971a
-set_from_resource $blue         color4      #458588
-set_from_resource $purple       color5      #b16286
-set_from_resource $cyan         color6      #689d6a
-set_from_resource $lightgrey    color7      #a89984
-set_from_resource $darkgray     color8      #928374
-set_from_resource $green        color10     #98971a
-set_from_resource $yellow       color11     #d79921
-set_from_resource $white        color15     #ebdbb2
-set_from_resource $black        color0      #000000
-
-
-# class                 border  bground text    indicator child_border
-client.focused          $blue $blue $white $blue $blue
-client.focused_inactive $blue $darkgray $white $darkgray $darkgray
-client.unfocused        $darkgray $darkgray $white $darkgray $darkgray
-client.urgent           $red $red $white $blue $blue
-#client.background       #F8F8F2
-
-exec_always --no-startup-id "i3altlayout"
-#exec --no-startup-id picom --experimental-backends --backend glx --xrender-sync-fence
-#exec --no-startup-id picom
-
-exec_always --no-startup-id "sleep 1; ~/.config/i3/polybar.sh &"
-#bar {
-#  position top
-#  colors {
-#    background #3c3836
-#    statusline #ebdbb2
-#    separator  #666666
-#
-#    # class            border   backgr  text
-#    focused_workspace  #458588 #458588 #ebdbb2
-#    active_workspace   #83a598 #83a598 #ebdbb2
-#    inactive_workspace #504945 #504945 #ebdbb2
-#    urgent_workspace   #cc241d #cc241d #504945
-#  }
-#
-#  status_command i3blocks
-#}
-
-# bindsym $mod+d exec "dmenu_run -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn 'monospace-10' -p 'dmenu%'"
-
 
 # default_border pixel 1
 default_floating_border pixel 1
 for_window [class="^.*"] border pixel 2
-for_window [class="^dunst*"] border pixel 5
 
-
-# gaps
-# Change window border size and color
-#for_window [class="^.*"] border pixel 2
-#
-#gaps inner 4
-#gaps outer 4
-#
-#bindsym $mod+Shift+g gaps inner all set 6; gaps outer all set 6
-#bindsym $mod+Shift+n gaps inner all set 0; gaps outer all set 0
-#
-## Only enable gaps on a workspace when there is at least one container
-#smart_gaps on
-#
-## Activate smart borders (always)
-##smart_borders on
-#
-## Activate smart borders (only when there are effectively no gaps)
-##smart_borders no_gaps
-#
-## Hide edge borders only if there is one window with no gaps
-##hide_edge_borders smart_no_gaps
-#
-## What follows here is optional and defines a mode that allows you to resize the gaps on the fly.
-## Press $mod1+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps.
-## Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace).
-## If you also press Shift with these keys, the change will be global for all workspaces.
-#set $mode_gaps Gaps: (o) outer, (i) inner
-#set $mode_gaps_outer Outer Gaps: +|-|0 (local), Shift + +|-|0 (global)
-#set $mode_gaps_inner Inner Gaps: +|-|0 (local), Shift + +|-|0 (global)
-#bindsym $mod1+Shift+g mode "$mode_gaps"
-#
-#mode "$mode_gaps" {
-#        bindsym o      mode "$mode_gaps_outer"
-#        bindsym i      mode "$mode_gaps_inner"
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-#
-#mode "$mode_gaps_inner" {
-#        bindsym plus  gaps inner current plus 5
-#        bindsym minus gaps inner current minus 5
-#        bindsym 0     gaps inner current set 0
-#
-#        bindsym Shift+plus  gaps inner all plus 5
-#        bindsym Shift+minus gaps inner all minus 5
-#        bindsym Shift+0     gaps inner all set 0
-#
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-#
-#mode "$mode_gaps_outer" {
-#        bindsym plus  gaps outer current plus 5
-#        bindsym minus gaps outer current minus 5
-#        bindsym 0     gaps outer current set 0
-#
-#        bindsym Shift+plus  gaps outer all plus 5
-#        bindsym Shift+minus gaps outer all minus 5
-#        bindsym Shift+0     gaps outer all set 0
-#
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-#
-## Blocks configs
-# Bugfix for yad (time and calendar)
-for_window [class="Yad"] floating enable
-
+# Notification
+exec --no-startup-id mako
+bindsym Ctrl+space exec makoctl dismiss
+bindsym Ctrl+Shift+space exec makoctl dismiss -a
 
 ## application rules
 # Steam 
@@ -395,11 +242,32 @@ for_window [class="^teams$"] fullscreen
 for_window [title="Microsoft Teams Notification"] floating enable
 no_focus [title="Microsoft Teams Notification"]
 
+
+# Load Profile Sync Daemon (psd) before starting firefox
+exec --no-startup-id systemctl --user start psd.service
+
 # Load layouts
 exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
 exec --no-startup-id "kitty"
-exec --no-startup-id "sleep 2; i3-msg 'workspace 2; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
-exec --no-startup-id "sleep 2; firefox-developer-edition"
-#exec --no-startup-id "sleep 2; i3-msg 'workspace 2:BROWSER; append_layout ~/.config/i3/layout_tree/workspaces-2.json'"
-#exec --no-startup-id "brave"
+#exec --no-startup-id "sleep 2; i3-msg 'workspace 2; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
+#exec --no-startup-id "sleep 2; firefox-developer-edition"
 
+
+# Load layouts
+input type:keyboard {
+        xkb_layout us,it
+        xkb_options grp:win_space_toggle
+}
+
+# Theme 
+set $gnome-schema org.gnome.desktop.interface
+#gaps inner all set 10
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Klaus'
+    gsettings set $gnome-schema icon-theme 'Vimix-dark'
+    gsettings set $gnome-schema cursor-theme "Vimix-dark"
+    #gsettings set $gnome-schema font-name 'Your font name'
+}
+
+include /etc/sway/config.d/*

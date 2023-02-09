@@ -56,8 +56,10 @@
     alternate-urgent-foreground: @urgent-foreground;
     selected-urgent-background:  @gruvbox-dark-red-light;
     selected-urgent-foreground:  @urgent-foreground;
+
+    font: "UbuntuMono NF 12";
 }
 
 @import "gruvbox-common.rasi"
 
-rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi
+//rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi

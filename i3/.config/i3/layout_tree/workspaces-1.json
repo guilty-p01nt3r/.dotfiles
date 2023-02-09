@@ -16,7 +16,7 @@
         {
             "class": "^kitty$",
             "instance": "^kitty$",
-            "machine": "^archlx$"
+            "machine": "^vince-archlx$"
         }
     ],
     "type": "con"

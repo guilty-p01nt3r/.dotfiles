@@ -15,6 +15,10 @@ export LANG="en_US.UTF-8"
 #export GOROOT=$HOME/.lang/go
 export GOPATH=$HOME/.lang/go
 
+# Rust
+#fish_add_path $HOME/.cargo/bin
+set PATH $PATH:$HOME/.cargo/bin
+
 ## Perl
 #fish_add_path /home/vince/.perl5/bin
 #export PERL_MM_OPT="INSTALL_BASE=/home/vince/.perl5"
@@ -31,7 +35,7 @@ alias calc="python3 -i -c 'import math' "
 alias vim="nvim"
 alias vi="nvim"
 alias v="nvim"
-alias diff="colordiff"
+#alias diff="colordiff"
 alias less="less -R"
 alias gitl="git log --graph --pretty=oneline --all --abbrev-commit"
 #alias luamake=/home/vince/.config/nvim/lua-language-server/3rd/luamake/luamake
