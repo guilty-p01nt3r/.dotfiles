@@ -5,11 +5,12 @@ function ColorMyPencils(color)
     -- Transparent Background
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+
     -- Gitsigns
-    vim.api.nvim_set_hl(0, "GitGutterAdd", { fg = color.base0B, bg = color.base00 })
-    vim.api.nvim_set_hl(0, "GitGutterChange", { fg = color.base0D, bg = color.base00 })
-    vim.api.nvim_set_hl(0, "GitGutterDelete", { fg = color.base08, bg = color.base00 })
-    vim.api.nvim_set_hl(0, "GitGutterChangeDelete", { fg = color.base0E, bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = color.base0B, bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = color.base0D, bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = color.base08, bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = color.base0E, bg = color.base00 })
 
     -- LSP
     vim.api.nvim_set_hl(0, "DiagnosticError", { fg = color.base08, bg = color.base00 })
@@ -39,4 +40,3 @@ require("gruvbox").setup({
 })
 
 ColorMyPencils()
-print("Colors loaded")
