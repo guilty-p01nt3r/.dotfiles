@@ -1,3 +1,8 @@
+local function get_color(group, attr)
+    local fn = vim.fn
+    return fn.synIDattr(fn.synIDtrans(fn.hlID(group)), attr)
+end
+
 function ColorMyPencils(color)
     color = color or "gruvbox"
     vim.cmd.colorscheme(color)
@@ -7,10 +12,10 @@ function ColorMyPencils(color)
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
     -- Gitsigns
-    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = color.base0B, bg = color.base00 })
-    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = color.base0D, bg = color.base00 })
-    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = color.base08, bg = color.base00 })
-    vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = color.base0E, bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = get_color("GitSignsAdd", "fg"), bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsChange", { fg = get_color("GitSignsChange", "fg"), bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = get_color("GitSignsDelete", "fg"), bg = color.base00 })
+    vim.api.nvim_set_hl(0, "GitSignsChangeDelete", { fg = get_color("GitSignsChangeDelete", "fg"), bg = color.base00 })
 
     -- LSP
     vim.api.nvim_set_hl(0, "DiagnosticError", { fg = color.base08, bg = color.base00 })
