@@ -7,8 +7,10 @@ require("nvim-tree").setup({
             list =
             { key = "<C-e>", action = "" }
         },
-    }
+    },
 })
 
 vim.keymap.set("n", "<C-e>", ":NvimTreeToggle<CR>")
 vim.keymap.set("n", "<leader>nr", "::NvimTreeFindFileToggle<CR>")
+vim.opt.foldmethod="expr"
+

@@ -79,12 +79,12 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}% ",
         "tooltip": false,
         "interval": 5
     },
     "memory": {
-        "format": "{used}GB / {total} GB - {percentage}% ",
+        "format": "{used}GB / {total} GB - {percentage}% ",
         "interval": 5
     },
     "temperature": {

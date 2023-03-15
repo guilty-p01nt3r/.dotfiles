@@ -11,6 +11,12 @@ function ColorMyPencils(color)
     vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
     vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
+    ---- Lualine diagnostics
+    vim.api.nvim_set_hl(0, "LualineDiagnosticsError", { fg = "#fbf1c7", bg = "#fb4934" })
+    vim.api.nvim_set_hl(0, "LualineDiagnosticsWarn", { fg = "#282828" , bg = "#fabd2f" })
+    vim.api.nvim_set_hl(0, "LualineDiagnosticsInfo", { fg = "#282828" , bg = "#8ec07c" })
+    vim.api.nvim_set_hl(0, "LualineDiagnosticsHint", { fg = "#282828" , bg = "#fabd2f" })
+
     -- Gitsigns
     vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = get_color("GitSignsAdd", "fg"), bg = color.base00 })
     vim.api.nvim_set_hl(0, "GitSignsChange", { fg = get_color("GitSignsChange", "fg"), bg = color.base00 })
