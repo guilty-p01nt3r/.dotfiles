@@ -1,7 +1,8 @@
 -- Yanking
-vim.keymap.set('v', '<leader>p', '"_dP')
-vim.keymap.set('n', '<leader>y', '"+y')
-vim.keymap.set('v', '<leader>y', '"+y')
+-- enaled osc52 in after
+--vim.keymap.set('v', '<leader>p', '"_dP')
+--vim.keymap.set('n', '<leader>y', '"+y')
+--vim.keymap.set('v', '<leader>y', '"+y')
 
 -- Formatting 
 vim.keymap.set("n", "<leader>=", "<cmd>lua vim.lsp.buf.format()<CR>")

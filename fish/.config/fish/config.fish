@@ -44,7 +44,10 @@ alias cat="bat"
 alias ls="exa"
 alias l="exa -lh"
 alias la="exa -lah"
-
+alias dcd="docker-compose down"
+alias dcu="docker-compose up -d"
+alias dcub="docker-compose up -d --build"
+alias dcl="docker-compose logs -ft"
 
 # Fish Configs
 fish_vi_key_bindings insert

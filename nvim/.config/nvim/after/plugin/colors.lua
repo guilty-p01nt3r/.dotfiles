@@ -13,11 +13,11 @@ function ColorMyPencils(color)
 
     ---- Lualine diagnostics
     vim.api.nvim_set_hl(0, "LualineDiagnosticsError", { fg = "#fbf1c7", bg = "#fb4934" })
-    vim.api.nvim_set_hl(0, "LualineDiagnosticsWarn", { fg = "#282828" , bg = "#fabd2f" })
-    vim.api.nvim_set_hl(0, "LualineDiagnosticsInfo", { fg = "#282828" , bg = "#8ec07c" })
-    vim.api.nvim_set_hl(0, "LualineDiagnosticsHint", { fg = "#282828" , bg = "#fabd2f" })
+    vim.api.nvim_set_hl(0, "LualineDiagnosticsWarn", { fg = "#282828", bg = "#fabd2f" })
+    vim.api.nvim_set_hl(0, "LualineDiagnosticsInfo", { fg = "#282828", bg = "#8ec07c" })
+    vim.api.nvim_set_hl(0, "LualineDiagnosticsHint", { fg = "#282828", bg = "#fabd2f" })
 
-    -- Gitsigns
+    ---- Gitsigns
     vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = get_color("GitSignsAdd", "fg"), bg = color.base00 })
     vim.api.nvim_set_hl(0, "GitSignsChange", { fg = get_color("GitSignsChange", "fg"), bg = color.base00 })
     vim.api.nvim_set_hl(0, "GitSignsDelete", { fg = get_color("GitSignsDelete", "fg"), bg = color.base00 })
@@ -36,13 +36,17 @@ require("gruvbox").setup({
     undercurl = true,
     underline = true,
     bold = true,
-    italic = true,
+    italic = { -- FiraCode hasn't italic
+        strings = false,
+        operators = false,
+        comments = false,
+    },
     strikethrough = true,
     invert_selection = false,
     invert_signs = false,
     invert_tabline = false,
     invert_intend_guides = false,
-    inverse = true, -- invert background for search, diffs, statuslines and errors
+    inverse = true,    -- invert background for search, diffs, statuslines and errors
     contrast = "hard", -- can be "hard", "soft" or empty string
     palette_overrides = {},
     overrides = {},
@@ -50,4 +54,4 @@ require("gruvbox").setup({
     transparent_mode = false,
 })
 
-ColorMyPencils()
+ColorMyPencils("gruvbox")

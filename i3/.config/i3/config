@@ -12,16 +12,6 @@ exec gnome-keyring-daemon --start --components=secrets
 # Mod1 = Alt | Mod4 = WinKey
 set $mod Mod1
 
-# Lock Screen and DPMS
-set $lock 'swaylock -f -c 212121'
-set $bl_time 600
-
-### Idle configuration
-exec_always pgrep swayidle ||  swayidle -w \
-    timeout $bl_time 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep $lock
-
 # Fonts
 font pango:Ubuntu Mono Nerd Font 11
 
@@ -128,14 +118,45 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+set $vws1 "v1"
 
 # Define names for monitors
 set $mon1 DP-1
-set $mon2 DP-3
+set $mon2 HDMI-A-1
+set $mon3 DP-3
+set $vmon1 HEADLESS-1
 
 # Monitors config 
 output * adaptive_sync off
-output $mon1 mode 1920x1080@144.000Hz position 0,0
+output $mon1 mode 1920x1080@99.930Hz position 0,0
+output $mon2 mode 1920x1080@60.000Hz position 1920,0
+output $mon3 mode 1920x1080@60Hz position 0,-1080
+#output $mon1 modeline 285.25  1920 1968 2000 2080  1080 1083 1088 1144 +hsync -vsync
+#output $mon2 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
+#output $mon3 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
+
+exec swaymsg "create_output $vmon1 resolution 1920x1080"
+
+# Lock Screen and DPMS
+set $lock 'swaylock -f -c 212121'
+set $bl_time 600
+
+### Idle configuration
+exec_always pgrep swayidle ||  swayidle -w \
+    timeout $bl_time "swaymsg output $mon1 dpms off; swaymsg output $mon2 dpms off; swaymsg output $mon3 dpms off " \
+    resume "swaymsg output $mon1 dpms on ; swaymsg output $mon2 dpms on ; swaymsg output $mon3 dpms on " \
+    before-sleep $lock
+
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -149,6 +170,17 @@ bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
+bindsym $mod+F1 workspace $ws11
+bindsym $mod+F2 workspace $ws12
+bindsym $mod+F3 workspace $ws13
+bindsym $mod+F4 workspace $ws14
+bindsym $mod+F5 workspace $ws15
+bindsym $mod+F6 workspace $ws16
+bindsym $mod+F7 workspace $ws17
+bindsym $mod+F8 workspace $ws18
+bindsym $mod+F9 workspace $ws19
+bindsym $mod+F10 workspace $ws20
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -160,6 +192,16 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+F1 move container to workspace $ws11
+bindsym $mod+Shift+F2 move container to workspace $ws12
+bindsym $mod+Shift+F3 move container to workspace $ws13
+bindsym $mod+Shift+F4 move container to workspace $ws14
+bindsym $mod+Shift+F5 move container to workspace $ws15
+bindsym $mod+Shift+F6 move container to workspace $ws16
+bindsym $mod+Shift+F7 move container to workspace $ws17
+bindsym $mod+Shift+F8 move container to workspace $ws18
+bindsym $mod+Shift+F9 move container to workspace $ws19
+bindsym $mod+Shift+F10 move container to workspace $ws20
 
 # move workspace between monitor
 bindsym $mod+Ctrl+1 move workspace to output $mon1
@@ -170,11 +212,22 @@ workspace $ws2 output $mon1
 workspace $ws3 output $mon1
 workspace $ws4 output $mon1
 workspace $ws5 output $mon1
-workspace $ws10 output $mon2
 workspace $ws6 output $mon2
 workspace $ws7 output $mon2
 workspace $ws8 output $mon2
 workspace $ws9 output $mon2
+workspace $ws10 output $mon2
+workspace $ws11 output $mon1
+workspace $ws12 output $mon1
+workspace $ws13 output $mon1
+workspace $ws14 output $mon1
+workspace $ws15 output $mon1
+workspace $ws16 output $mon1
+workspace $ws17 output $mon1
+workspace $ws18 output $mon1
+workspace $ws19 output $mon1
+workspace $ws20 output $mon3
+workspace $vws1 output $vmon1
 
 # Reset config
 bindsym $mod+Shift+r exec "swaymsg reload"
@@ -212,13 +265,10 @@ bindsym $mod+r mode "resize"
 # Wallpaper
 output $mon1 bg ~/Pictures/SpaceMonster.jpg fill
 output $mon2  bg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*)  fill
+output $mon3  bg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*)  fill
 
 # Session Manager (gui)
 exec --no-startup-id /usr/bin/lxpolkit &
-
-# Language Keyboard Layout Toggle
-# TODO: set in wayland way
-bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh
 
 # default_border pixel 1
 default_floating_border pixel 1
@@ -249,11 +299,15 @@ exec --no-startup-id systemctl --user start psd.service
 # Load layouts
 exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
 exec --no-startup-id "kitty"
-#exec --no-startup-id "sleep 2; i3-msg 'workspace 2; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
+#exec --no-startup-id "sleep 0.2; i3-msg 'workspace 20; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
 #exec --no-startup-id "sleep 2; firefox-developer-edition"
 
 
-# Load layouts
+# Language Keyboard Layout Toggle
+# TODO: set in wayland way
+bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh
+
+# Load layouts in the sway way
 input type:keyboard {
         xkb_layout us,it
         xkb_options grp:win_space_toggle
@@ -269,5 +323,6 @@ exec_always {
     gsettings set $gnome-schema cursor-theme "Vimix-dark"
     #gsettings set $gnome-schema font-name 'Your font name'
 }
+
 
 include /etc/sway/config.d/*

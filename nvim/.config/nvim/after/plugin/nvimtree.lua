@@ -1,6 +1,7 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 require("nvim-tree").setup({
+    on_attach = on_attach,
     remove_keymaps = { "<C-e>", "d" },
     view = {
         mappings = {
