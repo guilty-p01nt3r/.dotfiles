@@ -13,6 +13,7 @@ vim.opt.softtabstop = 4
 
 vim.opt.hlsearch = false
 vim.opt.incsearch = true
+vim.opt.completeopt = "menuone,noselect"
 
 vim.opt.termguicolors = true
 

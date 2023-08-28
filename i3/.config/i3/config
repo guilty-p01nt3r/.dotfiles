@@ -132,8 +132,8 @@ set $vws1 "v1"
 
 # Define names for monitors
 set $mon1 DP-1
-set $mon2 HDMI-A-1
-set $mon3 DP-3
+set $mon2 DP-3
+set $mon3 HDMI-A-1
 set $vmon1 HEADLESS-1
 
 # Monitors config 
@@ -141,6 +141,7 @@ output * adaptive_sync off
 output $mon1 mode 1920x1080@99.930Hz position 0,0
 output $mon2 mode 1920x1080@60.000Hz position 1920,0
 output $mon3 mode 1920x1080@60Hz position 0,-1080
+
 #output $mon1 modeline 285.25  1920 1968 2000 2080  1080 1083 1088 1144 +hsync -vsync
 #output $mon2 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 #output $mon3 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync

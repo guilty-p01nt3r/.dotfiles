@@ -19,6 +19,9 @@ lsp.set_preferences({
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
+    ['<Tab>'] = vim.NIL,
+    ['<S-Tab>'] = vim.NIL,
+    ['<CR>'] = vim.NIL,
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-y>'] = cmp.mapping.confirm(cmp_select),
@@ -45,6 +48,10 @@ end
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
     formatting = formatting,
+    preselect = 'none',
+    completion = {
+        completeopt = 'menu,menuone,noinsert,noselect'
+    },
 })
 
 -- Should move this to a separate file
@@ -53,6 +60,9 @@ lsp.configure('intelephense', {
     end,
     settings = {
         intelephense = {
+            init_options = {
+                globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+            },
             stubs = {
                 "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date",
                 "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext",

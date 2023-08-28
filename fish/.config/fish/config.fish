@@ -7,6 +7,8 @@ end
 set -x PATH $PATH /sbin/
 export PAGER="less -R"
 export LANG="en_US.UTF-8"
+export UID=(id -u)
+export GID=(id -g)
 
 #fish_add_path /home/vince/.local/share/gem/ruby/3.0.0/bin
 #eval (keychain --eval --quiet --confhost)
@@ -17,7 +19,7 @@ export GOPATH=$HOME/.lang/go
 
 # Rust
 #fish_add_path $HOME/.cargo/bin
-set PATH $PATH:$HOME/.cargo/bin
+set PATH $PATH:$HOME/.cargo/bin:$GOPATH/bin
 
 ## Perl
 #fish_add_path /home/vince/.perl5/bin
@@ -48,6 +50,7 @@ alias dcd="docker-compose down"
 alias dcu="docker-compose up -d"
 alias dcub="docker-compose up -d --build"
 alias dcl="docker-compose logs -ft"
+alias dls="docker ps -a"
 
 # Fish Configs
 fish_vi_key_bindings insert
