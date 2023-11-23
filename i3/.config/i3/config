@@ -1,8 +1,8 @@
 # Sway env_variables for wlroots support 
-exec --no-startup-id systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY  XDG_CURRENT_DESKTOP
-exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-exec --no-startup-id ~/.dotfiles/scripts/sway/repairportal
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+#exec --no-startup-id systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY  XDG_CURRENT_DESKTOP
+#exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+#exec --no-startup-id ~/.dotfiles/scripts/sway/repairportal
+#exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
 
 # gnome keyring
@@ -11,6 +11,7 @@ exec gnome-keyring-daemon --start --components=secrets
 
 # Mod1 = Alt | Mod4 = WinKey
 set $mod Mod1
+#set $mod 65513
 
 # Fonts
 font pango:Ubuntu Mono Nerd Font 11
@@ -27,6 +28,9 @@ bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 
 # KdeConnect (Mobile Phone Integration)
 exec --no-startup-id kdeconnect-indicator &
+
+# Easy Effects
+exec --no-startup-id com.github.wwmm.easyeffects --gapplication-service
 
 # Bar 
 bar {
@@ -46,6 +50,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec kitty
+
+#start calculator(Python)
+bindsym $mod+c exec --no-startup-id kitty --class="calc" -e python3 -i -c 'import math'
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -134,11 +141,14 @@ set $vws1 "v1"
 set $mon1 DP-1
 set $mon2 DP-3
 set $mon3 HDMI-A-1
-set $vmon1 HEADLESS-1
+set $vmon1 HDMI-A-1
+#set $vmon1 HEADLESS-1
 
 # Monitors config 
 output * adaptive_sync off
-output $mon1 mode 1920x1080@99.930Hz position 0,0
+#output $mon1 adaptive_sync on
+
+output $mon1 mode 1920x1080@99.930Hz position 0,0 
 output $mon2 mode 1920x1080@60.000Hz position 1920,0
 output $mon3 mode 1920x1080@60Hz position 0,-1080
 
@@ -146,7 +156,7 @@ output $mon3 mode 1920x1080@60Hz position 0,-1080
 #output $mon2 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 #output $mon3 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 
-exec swaymsg "create_output $vmon1 resolution 1920x1080"
+#exec swaymsg "create_output $vmon1 resolution 1920x1080"
 
 # Lock Screen and DPMS
 set $lock 'swaylock -f -c 212121'
@@ -154,8 +164,8 @@ set $bl_time 600
 
 ### Idle configuration
 exec_always pgrep swayidle ||  swayidle -w \
-    timeout $bl_time "swaymsg output $mon1 dpms off; swaymsg output $mon2 dpms off; swaymsg output $mon3 dpms off " \
-    resume "swaymsg output $mon1 dpms on ; swaymsg output $mon2 dpms on ; swaymsg output $mon3 dpms on " \
+    timeout $bl_time "swaymsg output $mon1 dpms off; swaymsg output $mon2 dpms off;"  \
+    resume "swaymsg output $mon1 dpms on ; swaymsg output $mon2 dpms on ; " \
     before-sleep $lock
 
 
@@ -281,15 +291,45 @@ bindsym Ctrl+space exec makoctl dismiss
 bindsym Ctrl+Shift+space exec makoctl dismiss -a
 
 ## application rules
+assign [app_id="v1"] workspace v1
+
+
 # Steam 
-assign [class="^steam$"] $ws5
-for_window [class="^steam$"] floating enable
+#assign [class="^steam$"] $ws5
+#for_window [class="^steam$"] floating enable
 # Discord
 assign [class="^discord$"] $ws10
 for_window [class="^discord$"] fullscreen
 # Teams
 assign [class="^teams$"] $ws10
+
 for_window [class="^teams$"] fullscreen
+
+for_window [app_id="gamescope"] {
+    focus
+    move to output $vmon1
+
+}
+for_window [app_id="duckstation-qt"] {
+    focus
+    move to output $vmon1
+
+}
+for_window [app_id="yuzu"] {
+    focus
+    move to output $vmon1
+
+}
+for_window [title="Game Installed on HDD"] {
+   focus
+}
+
+for_window [app_id="calc"] {
+    focus
+    floating enable
+    resize set 800 600
+}
+
 for_window [title="Microsoft Teams Notification"] floating enable
 no_focus [title="Microsoft Teams Notification"]
 
@@ -327,3 +367,8 @@ exec_always {
 
 
 include /etc/sway/config.d/*
+include $HOME/.config/sway/config.d/*
+
+
+exec wayvnc -f 1 -o HDMI-A-1 94.94.94.2 5900
+exec wayvnc -f 30 -o DP-1 94.94.94.2 5901

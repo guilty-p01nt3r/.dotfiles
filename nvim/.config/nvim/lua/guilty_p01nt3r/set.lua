@@ -9,6 +9,9 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
+-- enable filetype plugin 
+vim.opt.filetype = "on"
+
 --vim.opt.wrap = false
 
 vim.opt.hlsearch = false
@@ -31,4 +34,9 @@ vim.opt.undodir = vim.fn.stdpath("config") .. "/undodir"
 
 vim.g.mapleader = " "
 
-
+-- additional filetypes
+vim.filetype.add({
+    extension = {
+        templ = "templ",
+    },
+})

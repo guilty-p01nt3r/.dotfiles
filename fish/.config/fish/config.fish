@@ -51,6 +51,7 @@ alias dcu="docker-compose up -d"
 alias dcub="docker-compose up -d --build"
 alias dcl="docker-compose logs -ft"
 alias dls="docker ps -a"
+alias ssh="TERM=xterm-256color /usr/bin/ssh"
 
 # Fish Configs
 fish_vi_key_bindings insert

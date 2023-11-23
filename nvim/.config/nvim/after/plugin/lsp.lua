@@ -1,12 +1,6 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
-lsp.ensure_installed({
-    'tsserver',
-    'eslint',
-    'rust_analyzer',
-})
-
 lsp.set_preferences({
     sign_icons = {
         error = '😡',
@@ -92,6 +86,13 @@ lsp.configure('yamlls', {
     }
 })
 
+require('lspconfig').htmx.setup({
+    on_attach = function(client, bufnr)
+    end,
+    cmd = { "htmx-lsp" },
+    filetypes = { "html", "templ", "php" },
+    single_file_support = true,
+})
 
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
@@ -108,4 +109,9 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-lsp.setup()
+require("mason").setup()
+require("mason-lspconfig").setup({
+    handlers = {
+        lsp.setup,
+    },
+})
