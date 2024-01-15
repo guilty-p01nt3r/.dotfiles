@@ -26,6 +26,10 @@ bindsym Print exec /usr/share/sway/scripts/grimshot copy area;
 bindsym Shift+Print exec /usr/share/sway/scripts/grimshot save area;
 bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 
+# Color picker
+bindsym Ctrl+Shift+Print exec hyprpicker -a 
+
+
 # KdeConnect (Mobile Phone Integration)
 exec --no-startup-id kdeconnect-indicator &
 
@@ -150,7 +154,11 @@ output * adaptive_sync off
 
 output $mon1 mode 1920x1080@99.930Hz position 0,0 
 output $mon2 mode 1920x1080@60.000Hz position 1920,0
-output $mon3 mode 1920x1080@60Hz position 0,-1080
+output $mon3 {
+  mode 1920x1080@60Hz 
+  position 0,-1080
+  render_bit_depth 8
+}
 
 #output $mon1 modeline 285.25  1920 1968 2000 2080  1080 1083 1088 1144 +hsync -vsync
 #output $mon2 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
@@ -275,8 +283,8 @@ bindsym $mod+r mode "resize"
 
 # Wallpaper
 output $mon1 bg ~/Pictures/SpaceMonster.jpg fill
-output $mon2  bg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*)  fill
-output $mon3  bg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*)  fill
+output $mon2 bg $(shuf -n 1 -e ~/Pictures/brockHofer/WallpaperM2/*)  fill
+output $mon3 bg #000000 solid_color
 
 # Session Manager (gui)
 exec --no-startup-id /usr/bin/lxpolkit &
@@ -308,8 +316,29 @@ for_window [class="^teams$"] fullscreen
 for_window [app_id="gamescope"] {
     focus
     move to output $vmon1
-
 }
+for_window [app_id="lutris"] {
+    focus
+    move to output $vmon1
+}
+for_window [app_id="heroic"] {
+    focus
+    move to output $vmon1
+}
+for_window [class="heroic"] {
+    focus
+    move to output $vmon1
+}
+#for_window [class="AppRun.wrapped"] {
+#    focus
+#    move to output $vmon1
+#}
+#for_window [app_id="rpcs3"] {
+#    focus
+#    move to output $vmon1
+#    fullscreen
+#
+#}
 for_window [app_id="duckstation-qt"] {
     focus
     move to output $vmon1
@@ -365,10 +394,10 @@ exec_always {
     #gsettings set $gnome-schema font-name 'Your font name'
 }
 
+exec --no-startup-id ~/.config/i3/setTemp.sh
 
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
 
-
-exec wayvnc -f 1 -o HDMI-A-1 94.94.94.2 5900
-exec wayvnc -f 30 -o DP-1 94.94.94.2 5901
+exec wayvnc -S /tmp/dp_vnc -f 30 -o DP-1 94.94.94.2 5900
+exec wayvnc -S /tmp_hdmi_vnc_f1 -f 1 -o HDMI-A-1 94.94.94.2 5901

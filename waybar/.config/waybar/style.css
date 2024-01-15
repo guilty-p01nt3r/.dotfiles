@@ -148,8 +148,8 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    background-color: #2d2dff;
+    color: #ffffff;
 }
 
 #memory {
@@ -157,7 +157,7 @@ label:focus {
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: #6b6b6b;
 }
 
 #backlight {
@@ -205,12 +205,22 @@ label:focus {
     background-color: #ffa000;
 }
 
-#temperature {
-    background-color: #f0932b;
+#cpu,
+#temperature.cpu {
+    background-color: #08579a;
+    color: #ffffff;
+}
+
+#custom-amdgpu,
+#custom-amdgpu-fan,
+#temperature.gpu-tempjunc,
+#temperature.gpu-tempmem,
+#temperature.gpu-tempedge {
+    background-color: #11601c;
 }
 
 #temperature.critical {
-    background-color: #eb4d4b;
+    background-color: #ff0000;
 }
 
 #tray {

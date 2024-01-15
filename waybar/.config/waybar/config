@@ -1,7 +1,8 @@
 {
+    "output": ["DP-1", "DP-3"],
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "disk", "temperature", "cpu", "custom/amdgpu" , "memory", "network", "pulseaudio", "keyboard-state", "sway/language", "clock", "tray"],
+    "modules-right": ["idle_inhibitor", "disk", "cpu", "temperature#cpu", "custom/amdgpu" , "temperature#gpu-tempedge", "temperature#gpu-tempjunc", "temperature#gpu-tempmem", "custom/amdgpu-fan", "memory", "network", "pulseaudio", "keyboard-state", "sway/language", "clock", "tray"],
     // Modules configuration
     "sway/workspaces": {
         "disable-scroll": true,
@@ -87,7 +88,7 @@
         "format": "{used}GB / {total} GB - {percentage}% ",
         "interval": 5
     },
-    "temperature": {
+    "temperature#cpu": {
         "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
@@ -143,10 +144,37 @@
     },
     "custom/amdgpu":{
           "exec": "cat /sys/class/hwmon/hwmon0/device/gpu_busy_percent",
-          "format": "   {}% 謁  ",
+          "format": "   {}% 謁",
           "return-type": "",
           "interval": 5
     },
+     "temperature#gpu-tempedge": {
+         "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+         "critical-threshold": 100,
+         "format-critical": "{temperatureC}°C ",
+         "format-icons": ["", "", ""],
+         "format": "{temperatureC}°C "
+     },
+     "temperature#gpu-tempjunc": {
+         "hwmon-path": "/sys/class/hwmon/hwmon0/temp2_input",
+         "critical-threshold": 110,
+         "format-critical": "{temperatureC}°C ",
+         "format-icons": ["", "", ""],
+         "format": "{temperatureC}°C "
+     },
+     "temperature#gpu-tempmem": {
+         "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input",
+         "critical-threshold": 108,
+         "format-critical": "{temperatureC}°C ",
+         "format-icons": ["", "", ""],
+         "format": "{temperatureC}°C "
+     },
+     "custom/amdgpu-fan":{
+       "exec": "cat /sys/class/hwmon/hwmon0/fan1_input",
+       "format": " {} 󰈐 ",
+       "return-type": "",
+       "interval": 5
+     },
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
