@@ -394,8 +394,6 @@ exec_always {
     #gsettings set $gnome-schema font-name 'Your font name'
 }
 
-exec --no-startup-id ~/.config/i3/setTemp.sh
-
 include /etc/sway/config.d/*
 include $HOME/.config/sway/config.d/*
 
