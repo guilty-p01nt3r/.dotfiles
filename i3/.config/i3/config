@@ -62,9 +62,18 @@ bindsym $mod+c exec --no-startup-id kitty --class="calc" -e python3 -i -c 'impor
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
- 
-bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons -config ~/.config/rofi/config 
-bindsym $mod+Shift+d exec --no-startup-id rofi -show window -show-icons -config ~/.config/rofi/config 
+#rofi 
+#bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons -config ~/.config/rofi/config 
+#bindsym $mod+Shift+d exec --no-startup-id rofi -show window -show-icons -config ~/.config/rofi/config 
+
+#wofi
+#bindsym $mod+d exec --no-startup-id wofi --show drun --allow-images 
+#bindsym $mod+Shift+d exec --no-startup-id wofi --show window  --allow-images 
+
+#tofi
+# Launch directly
+set $drun tofi-drun --drun-launch=true --font "~/.local/share/fonts/Fira Code Regular Nerd Font Complete Mono.ttf"
+bindsym $mod+d exec $drun
 
 ## Movement ## 
 # change focus
@@ -152,15 +161,25 @@ set $vmon1 HDMI-A-1
 output * adaptive_sync off
 #output $mon1 adaptive_sync on
 
-output $mon1 mode 1920x1080@99.930Hz position 0,0 
-output $mon2 mode 1920x1080@60.000Hz position 1920,0
+#output $mon1 mode 1920x1080@144Hz position 0,0  render_bit_depth 10
+output $mon1 {
+    mode 1920x1080@135Hz
+    #mode 1920x1080@99.930Hz 
+    position 0,0 
+    render_bit_depth 10
+}
+output $mon2 {
+    mode 1920x1080@60.000Hz 
+    position 1920,0
+    render_bit_depth 8
+}
 output $mon3 {
   mode 1920x1080@60Hz 
   position 0,-1080
   render_bit_depth 8
 }
 
-#output $mon1 modeline 285.25  1920 1968 2000 2080  1080 1083 1088 1144 +hsync -vsync
+output $mon1 modeline 312.768 1920 1928 1960 2000 1080 1143 1151 1157 +HSync -VSync
 #output $mon2 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 #output $mon3 modeline 138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 
@@ -313,10 +332,6 @@ assign [class="^teams$"] $ws10
 
 for_window [class="^teams$"] fullscreen
 
-for_window [app_id="gamescope"] {
-    focus
-    move to output $vmon1
-}
 for_window [app_id="lutris"] {
     focus
     move to output $vmon1
@@ -324,6 +339,11 @@ for_window [app_id="lutris"] {
 for_window [app_id="heroic"] {
     focus
     move to output $vmon1
+}
+for_window [app_id="gamescope"] {
+    focus
+    move to output $vmon1
+    fullscreen enable
 }
 for_window [class="heroic"] {
     focus
