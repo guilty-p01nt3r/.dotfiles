@@ -48,7 +48,17 @@ lsp.setup_nvim_cmp({
     },
 })
 
--- Should move this to a separate file
+-- This doesn't work (yet)
+lsp.configure('ltex', {
+    ltex = {
+        on_attach = function(client, bufnr)
+        end,
+        settings = {
+            language = "it",
+        }
+    }
+})
+
 lsp.configure('intelephense', {
     on_attach = function(client, bufnr)
     end,
@@ -78,24 +88,10 @@ lsp.configure('intelephense', {
     },
 })
 
-lsp.configure('yamlls', {
-    settings = {
-        yaml = {
-            keyOrdering = false
-        }
-    }
-})
-
-require('lspconfig').htmx.setup({
-    on_attach = function(client, bufnr)
-    end,
-    cmd = { "htmx-lsp" },
-    filetypes = { "html", "templ", "php" },
-    single_file_support = true,
-})
 
 lsp.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
+    local telescope = require('telescope.builtin')
 
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -107,11 +103,45 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+
+    vim.keymap.set("n", "<leader>vrm", function() telescope.lsp_document_symbols({symbols="method"}) end, opts);
+    vim.keymap.set("n", "<leader>vrf", function() telescope.lsp_document_symbols({symbols="function"}) end, opts);
+    vim.keymap.set("n", "<leader>vrp", function() telescope.lsp_document_symbols({symbols="property"}) end, opts);
 end)
 
 require("mason").setup()
 require("mason-lspconfig").setup({
     handlers = {
         lsp.setup,
+
+        gopls = function()
+            require('lspconfig').gopls.setup({
+                on_attach = function(client, bufnr)
+                    print("GoLsp attached")
+                end,
+                filetypes = { "go", "gomod", "gowork", "html" },
+                single_file_support = true,
+                settings = {
+                    templateExtensions = { "html" },
+                    gopls = {
+                        analyses = {
+                            unusedparams = true,
+                            shadow = true,
+                        },
+                        staticcheck = true,
+                    }
+                },
+            })
+        end,
+
+        htmx = function()
+            require('lspconfig').htmx.setup({
+                on_attach = function(client, bufnr)
+                end,
+                cmd = { "htmx-lsp" },
+                filetypes = { "html", "templ", "php" },
+                single_file_support = true,
+            })
+        end,
     },
 })
