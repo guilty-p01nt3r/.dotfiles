@@ -53,6 +53,9 @@ alias dcl="docker-compose logs -ft"
 alias dls="docker ps -a"
 alias ssh="TERM=xterm-256color /usr/bin/ssh"
 
+# I do not want to shoot myself in the foot
+alias rm="trash -i"
+
 # Fish Configs
 fish_vi_key_bindings insert
 set fish_cursor_default block
