@@ -117,10 +117,9 @@ require("mason-lspconfig").setup({
         gopls = function()
             require('lspconfig').gopls.setup({
                 on_attach = function(client, bufnr)
-                    print("GoLsp attached")
                 end,
                 filetypes = { "go", "gomod", "gowork", "html" },
-                single_file_support = true,
+                single_file_support = false,
                 settings = {
                     templateExtensions = { "html" },
                     gopls = {

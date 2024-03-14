@@ -22,7 +22,7 @@ exec --no-startup-id nm-applet --indicator
 # Screenshot software 
 #exec --nostartup-id flameshot &;
 #bindsym Print exec flameshot gui --raw | wl-copy;
-bindsym Print exec /usr/share/sway/scripts/grimshot copy area;
+bindsym Print exec /usr/bin/grimshot copy area;
 bindsym Shift+Print exec /usr/share/sway/scripts/grimshot save area;
 bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 
@@ -166,7 +166,7 @@ output $mon1 {
     mode 1920x1080@135Hz
     #mode 1920x1080@99.930Hz 
     position 0,0 
-    render_bit_depth 10
+    render_bit_depth 8
 }
 output $mon2 {
     mode 1920x1080@60.000Hz 
@@ -320,6 +320,7 @@ bindsym Ctrl+Shift+space exec makoctl dismiss -a
 ## application rules
 assign [app_id="v1"] workspace v1
 
+for_window [shell=".*"] title_format "%title :: %shell"
 
 # Steam 
 #assign [class="^steam$"] $ws5
