@@ -77,7 +77,8 @@ lsp.configure('intelephense', {
                 "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm",
                 "tidy",
                 "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib",
-                "wordpress", "phpunit",
+                -- "wordpress",
+                "phpunit",
             },
             environment = {
                 includePaths = {
@@ -89,7 +90,7 @@ lsp.configure('intelephense', {
 })
 
 
-lsp.on_attach(function(client, bufnr)
+local on_lsp_attach = function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
     local telescope = require('telescope.builtin')
 
@@ -104,10 +105,12 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 
-    vim.keymap.set("n", "<leader>vrm", function() telescope.lsp_document_symbols({symbols="method"}) end, opts);
-    vim.keymap.set("n", "<leader>vrf", function() telescope.lsp_document_symbols({symbols="function"}) end, opts);
-    vim.keymap.set("n", "<leader>vrp", function() telescope.lsp_document_symbols({symbols="property"}) end, opts);
-end)
+    vim.keymap.set("n", "<leader>vrm", function() telescope.lsp_document_symbols({ symbols = "method" }) end, opts);
+    vim.keymap.set("n", "<leader>vrf", function() telescope.lsp_document_symbols({ symbols = "function" }) end, opts);
+    vim.keymap.set("n", "<leader>vrp", function() telescope.lsp_document_symbols({ symbols = "property" }) end, opts);
+end
+
+lsp.on_attach(on_lsp_attach)
 
 require("mason").setup()
 require("mason-lspconfig").setup({
@@ -116,8 +119,7 @@ require("mason-lspconfig").setup({
 
         gopls = function()
             require('lspconfig').gopls.setup({
-                on_attach = function(client, bufnr)
-                end,
+                on_attach = on_lsp_attach,
                 filetypes = { "go", "gomod", "gowork", "html" },
                 single_file_support = false,
                 settings = {
@@ -135,11 +137,21 @@ require("mason-lspconfig").setup({
 
         htmx = function()
             require('lspconfig').htmx.setup({
-                on_attach = function(client, bufnr)
-                end,
+                on_attach = on_lsp_attach,
                 cmd = { "htmx-lsp" },
                 filetypes = { "html", "templ", "php" },
                 single_file_support = true,
+            })
+        end,
+
+        volar = function()
+            require('lspconfig').volar.setup({
+                filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+                init_options = {
+                    vue = {
+                        hybridMode = false,
+                    },
+                },
             })
         end,
     },

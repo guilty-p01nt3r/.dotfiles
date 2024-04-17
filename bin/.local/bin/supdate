@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+# Full system update
+yay -Syuu
+
+# Update flatpak
+flatpak update
+
+# Update Sunshine
+~/.config/sunshine/update.sh
+
+# Update ProtonGE
+~/.config/protonge/update.sh
