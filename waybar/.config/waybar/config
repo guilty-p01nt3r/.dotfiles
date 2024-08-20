@@ -125,7 +125,7 @@
     "network": {
         "format": "{bandwidthDownBytes}  / {bandwidthUpBytes} 祝",
         "interval": 5,
-        "interface": "enp34s0"
+        "interface": "enp37s0"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

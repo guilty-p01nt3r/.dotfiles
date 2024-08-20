@@ -12,3 +12,5 @@ flatpak update
 
 # Update ProtonGE
 ~/.config/protonge/update.sh
+
+sudo setcap 'CAP_SYS_NICE=eip' $(which gamescope)

@@ -1,0 +1,19 @@
+#!/bin/bash
+
+path=$(pwd)
+
+
+# get -p n  as the port number
+# get -d n  as the directory
+port=80
+path=$(pwd)
+while getopts p: flag
+do
+    case "${flag}" in
+        p) port=${OPTARG};;
+        d) path=${OPTARG};;
+    esac
+done
+
+docker run --rm -it -p $port:80 -v $path:/usr/share/nginx/html vincesimeone/nginx_with_autoindex
+

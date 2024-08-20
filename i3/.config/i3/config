@@ -23,7 +23,7 @@ exec --no-startup-id nm-applet --indicator
 #exec --nostartup-id flameshot &;
 #bindsym Print exec flameshot gui --raw | wl-copy;
 bindsym Print exec /usr/bin/grimshot copy area;
-bindsym Shift+Print exec /usr/share/sway/scripts/grimshot save area;
+bindsym Shift+Print exec /usr/bin/grimshot save area;
 bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
 
 # Color picker
@@ -176,8 +176,8 @@ output $mon2 {
 }
 
 output $mon3 {
-  mode 1920x1080@60Hz 
-  position 0,-1080
+  mode 1920x1080@30Hz 
+  position 0,+1080
   render_bit_depth 8
 }
 
@@ -187,7 +187,7 @@ output $mon1 modeline 312.768 1920 1928 1960 2000 1080 1143 1151 1157 +HSync -VS
 
 # 1920x1080 @ 60.00 Hz (GTF) hsync: 67.08 kHz; pclk: 172.80 MHz
 output $mon2 modeline 173 1920 2048 2248 2576 1080 1083 1088 1120 -HSync +VSync
-output $mon3 modeline 173 1920 2048 2248 2576 1080 1083 1088 1120 -HSync +VSync
+#output $mon3 modeline 173 1920 2048 2248 2576 1080 1083 1088 1120 -HSync +VSync
 
 
 #output $mon1 modeline 312.768 1920 1928 1960 2000 1080 1143 1151 1157 +HSync -VSync
@@ -323,6 +323,8 @@ exec --no-startup-id /usr/bin/lxpolkit &
 default_floating_border pixel 1
 for_window [class="^.*"] border pixel 2
 
+smart_borders on
+
 # Notification
 exec --no-startup-id mako
 bindsym Ctrl+space exec makoctl dismiss
@@ -334,8 +336,32 @@ assign [app_id="v1"] workspace v1
 for_window [shell=".*"] title_format "%title :: %shell"
 
 # Steam 
-#assign [class="^steam$"] $ws5
 #for_window [class="^steam$"] floating enable
+for_window [title="^Steam Big Picture Mode$"] { 
+    focus
+    move to output $vmon1
+    fullscreen enable
+}
+for_window [title="^Steam$"] { 
+    focus
+    move to output $vmon1
+    fullscreen enable
+}
+for_window [class="^steam$"] { 
+    move to output $vmon1
+}
+
+for_window [class="gamescope"] {
+    focus
+    move to output $vmon1
+    fullscreen enable
+}
+for_window [app_id="gamescope"] {
+    focus
+    move to output $vmon1
+    fullscreen enable
+}
+
 # Discord
 assign [class="^discord$"] $ws10
 for_window [class="^discord$"] fullscreen
@@ -351,11 +377,6 @@ for_window [app_id="lutris"] {
 for_window [app_id="heroic"] {
     focus
     move to output $vmon1
-}
-for_window [app_id="gamescope"] {
-    focus
-    move to output $vmon1
-    fullscreen enable
 }
 for_window [class="heroic"] {
     focus
@@ -427,7 +448,7 @@ exec_always {
 }
 
 include /etc/sway/config.d/*
-include $HOME/.config/sway/config.d/*
+exec $HOME/.config/i3/sway_scripts/90-systemd-user.sh
 
 exec wayvnc -S /tmp/dp_vnc -f 30 -o DP-1 94.94.94.2 5900
 exec wayvnc -S /tmp_hdmi_vnc_f1 -f 1 -o HDMI-A-1 94.94.94.2 5901

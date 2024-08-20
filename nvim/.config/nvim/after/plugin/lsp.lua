@@ -117,13 +117,32 @@ require("mason-lspconfig").setup({
     handlers = {
         lsp.setup,
 
+        tsserver = function()
+            require('lspconfig').tsserver.setup({
+                settings = {
+                    implicitProjectConfiguration = {
+                        checkJs = true
+                    },
+                },
+            })
+        end,
+
+        html = function()
+            require('lspconfig').html.setup({
+                on_attach = on_lsp_attach,
+                cmd = { "vscode-html-language-server", "--stdio" },
+                filetypes = { "html", "templ", "php", "tmpl", "template" },
+                single_file_support = true,
+            })
+        end,
+
         gopls = function()
             require('lspconfig').gopls.setup({
                 on_attach = on_lsp_attach,
-                filetypes = { "go", "gomod", "gowork", "html" },
-                single_file_support = false,
+                filetypes = { "go", "gomod", "gowork", "tmpl", "template" },
+                single_file_support = true,
                 settings = {
-                    templateExtensions = { "html" },
+                    templateExtensions = { "tmpl", "template" },
                     gopls = {
                         analyses = {
                             unusedparams = true,
@@ -135,11 +154,41 @@ require("mason-lspconfig").setup({
             })
         end,
 
+        intelephense = function()
+            require('lspconfig').intelephense.setup({
+                on_attach = on_lsp_attach,
+                settings = {
+                    intelephense = {
+                        init_options = {
+                            globalStoragePath = os.getenv('HOME') .. '/.local/share/intelephense'
+                        },
+                        stubs = {
+                            "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core", "ctype", "curl", "date",
+                            "dba", "dom", "enchant", "exif", "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext",
+                            "gmp", "hash", "iconv", "imap", "intl", "json", "ldap", "libxml", "mbstring", "meta", "mysqli",
+                            "oci8", "odbc", "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql", "pdo_pgsql", "pdo_sqlite",
+                            "pgsql",
+                            "Phar", "posix", "pspell", "readline", "Reflection", "session", "shmop", "SimpleXML", "snmp", "soap",
+                            "sockets", "sodium", "SPL", "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem", "sysvshm",
+                            "tidy",
+                            "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib",
+                            -- "wordpress",
+                            "phpunit",
+                        },
+                        environment = {
+                            includePaths = {
+                                "/vendor/phar_libs"
+                            }
+                        }
+                    },
+                },
+            })
+        end,
         htmx = function()
             require('lspconfig').htmx.setup({
                 on_attach = on_lsp_attach,
                 cmd = { "htmx-lsp" },
-                filetypes = { "html", "templ", "php" },
+                filetypes = { "html", "templ", "php", "tmpl", "template" },
                 single_file_support = true,
             })
         end,

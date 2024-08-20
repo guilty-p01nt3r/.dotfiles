@@ -34,23 +34,53 @@ env_file = io.open(vim.fn.getcwd() .. "/.env", "r")
 if env_file then
     for line in env_file:lines() do
         local key, value = line:match("([^=]+)=(.*)")
-        if(key) then
+        if (key) then
             env[key] = value
         end
     end
     env_file:close()
 end
 
--- Sync the file with the remote server
 vim.keymap.set("n", "<leader>rs", function()
-    if (env["RSYNC_CMD"]) then
-        local content = vim.fn.system(env["RSYNC_CMD"])
-        NavigationFloatingWin("RSYNC", content)
-    else
+    local rsync_cmd = env["RSYNC_CMD"] or nil;
+
+    if (not rsync_cmd) then
         print("RSYNC_CMD not defined in .env file")
+        return
     end
+
+    print("Running rsync command: " .. rsync_cmd)
+    vim.schedule(function()
+        local content = vim.fn.system(env["RSYNC_CMD"])
+        --print(content)
+        NavigationFloatingWin("RSYNC", content)
+    end)
 end)
 
+function tprint(tbl, indent)
+    if not indent then indent = 0 end
+    local toprint = string.rep(" ", indent) .. "{\r\n"
+    indent = indent + 2
+    for k, v in pairs(tbl) do
+        toprint = toprint .. string.rep(" ", indent)
+        if (type(k) == "number") then
+            toprint = toprint .. "[" .. k .. "] = "
+        elseif (type(k) == "string") then
+            toprint = toprint .. k .. "= "
+        end
+        if (type(v) == "number") then
+            toprint = toprint .. v .. ",\r\n"
+        elseif (type(v) == "string") then
+            toprint = toprint .. "\"" .. v .. "\",\r\n"
+        elseif (type(v) == "table") then
+            toprint = toprint .. tprint(v, indent + 2) .. ",\r\n"
+        else
+            toprint = toprint .. "\"" .. tostring(v) .. "\",\r\n"
+        end
+    end
+    toprint = toprint .. string.rep(" ", indent - 2) .. "}"
+    return toprint
+end
 
 function NavigationFloatingWin(title, content)
     -- get the editor's max width and height
@@ -103,4 +133,3 @@ function NavigationFloatingWin(title, content)
         end
     end
 end
-

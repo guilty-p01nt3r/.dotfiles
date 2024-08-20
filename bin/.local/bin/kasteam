@@ -1,0 +1,14 @@
+#!/bin/bash
+
+
+#pkill -9 -f '.*\.exe$'
+
+#pid=$(pgrep '.*steam.*' | grep -v '.*kasteam.*' )
+pid=$(ps -ef | grep '.*[s]team.*' | grep -v '.*kasteam.*' | awk '{print $2}')
+
+if [ -z "$pid" ]; then
+    echo "No process found"
+else
+    kill -9 $pid
+fi
+

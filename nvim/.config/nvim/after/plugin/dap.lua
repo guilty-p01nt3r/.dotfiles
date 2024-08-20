@@ -4,23 +4,23 @@ dapui.setup({
         elements = { {
             id = "scopes",
             size = 0.25
-          }, {
+        }, {
             id = "breakpoints",
             size = 0.25
-          }, {
+        }, {
             id = "stacks",
             size = 0.25
-          }, {
+        }, {
             id = "watches",
             size = 0.25
-          } },
+        } },
         position = "left",
         size = 40
-      }, {
-        elements = { },
+    }, {
+        elements = {},
         position = "bottom",
         size = 10
-      } },
+    } },
 })
 ----------------
 --- MAPPINGS ---
@@ -80,7 +80,7 @@ dap.configurations.go = {
     },
     {
         type = "delve",
-        name = "Debug test",  -- configuration for debugging test files
+        name = "Debug test", -- configuration for debugging test files
         request = "launch",
         mode = "test",
         program = "${file}"
@@ -101,10 +101,19 @@ dap.configurations.go = {
 local function isEmpty(s)
     return s == nil or s == ''
 end
-local local_root = require 'lspconfig'.util.root_pattern(".git")
+
+local default_local_root_path = ".git"
+local default_server_root = '/var/www/html/'
+
+local local_root_path = os.getenv("LOCAL_SOURCE_PATH")
 local server_root = os.getenv("SERVER_SOURCE_ROOT")
 
-server_root = ((not isEmpty(server_root)) and server_root) or '/var/www/html/'
+local_root_path = ((not isEmpty(local_root_path)) and local_root_path)
+    or default_local_root_path
+server_root = ((not isEmpty(server_root)) and server_root)
+    or default_server_root
+
+local local_root = require 'lspconfig'.util.root_pattern(local_root_path)
 
 dap.adapters.php = {
     type = 'executable',
@@ -119,6 +128,7 @@ dap.configurations.php = {
         name = 'Listen for Xdebug (neovim DAP)',
         port = 9001,
         localSourceRoot = local_root(vim.fn.getcwd()),
+        --localSourceRoot = "/home/vince/work/Clemente/AInstein/src/",
         serverSourceRoot = server_root,
         -- serverSourceRoot = '/var/www/site/',
         -- localSourceRoot = '/home/vince/work/KeyAssociati/giudici_store/code/',
@@ -140,13 +150,13 @@ dap.adapters.python = {
 dap.configurations.python = {
     {
         -- The first three options are required by nvim-dap
-        type = 'python',  -- the type here established the link to the adapter definition: `dap.adapters.python`
+        type = 'python', -- the type here established the link to the adapter definition: `dap.adapters.python`
         request = 'launch',
         name = "Launch file",
 
         -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
 
-        program = "${file}",  -- This configuration will launch the current file if used.
+        program = "${file}", -- This configuration will launch the current file if used.
         pythonPath = function()
             -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
             -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
