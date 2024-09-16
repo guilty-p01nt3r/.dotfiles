@@ -1,3 +1,4 @@
+require('java').setup()
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
@@ -46,6 +47,13 @@ lsp.setup_nvim_cmp({
     completion = {
         completeopt = 'menu,menuone,noinsert,noselect'
     },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'path' },
+        { name = 'buffer', keyword_length = 5 },
+        { name = "luasnip" },
+        { name = "emoji" },
+    }
 })
 
 -- This doesn't work (yet)
@@ -79,6 +87,7 @@ lsp.configure('intelephense', {
                 "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib",
                 -- "wordpress",
                 "phpunit",
+                "random",
             },
             environment = {
                 includePaths = {
@@ -97,7 +106,10 @@ local on_lsp_attach = function(client, bufnr)
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+    --vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
+    -- Show diagnostic messages in a floating window
+    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float({ scope = "line" }) end, opts)
+
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
@@ -117,15 +129,15 @@ require("mason-lspconfig").setup({
     handlers = {
         lsp.setup,
 
-        tsserver = function()
-            require('lspconfig').tsserver.setup({
-                settings = {
-                    implicitProjectConfiguration = {
-                        checkJs = true
-                    },
-                },
-            })
-        end,
+        -- tsserver = function()
+        --     require('lspconfig').tsserver.setup({
+        --         settings = {
+        --             implicitProjectConfiguration = {
+        --                 checkJs = true
+        --             },
+        --         },
+        --     })
+        -- end,
 
         html = function()
             require('lspconfig').html.setup({
@@ -174,6 +186,7 @@ require("mason-lspconfig").setup({
                             "tokenizer", "xml", "xmlreader", "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib",
                             -- "wordpress",
                             "phpunit",
+                            "random",
                         },
                         environment = {
                             includePaths = {
@@ -203,5 +216,9 @@ require("mason-lspconfig").setup({
                 },
             })
         end,
+
+        jdtls = function()
+            require('lspconfig').jdtls.setup({})
+        end
     },
 })

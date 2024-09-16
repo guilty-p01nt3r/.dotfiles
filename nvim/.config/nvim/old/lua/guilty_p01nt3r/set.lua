@@ -40,3 +40,5 @@ vim.filetype.add({
         templ = "templ",
     },
 })
+
+ vim.lsp.set_log_level("off")

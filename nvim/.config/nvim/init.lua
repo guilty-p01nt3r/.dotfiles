@@ -1,3 +1,1 @@
-require("guilty_p01nt3r")
-
-
+require("guilty-p01nt3r.core")
