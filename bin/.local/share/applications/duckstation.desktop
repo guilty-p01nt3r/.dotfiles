@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Duckstation
+Exec=/home/vince/.local/bin/DuckStation-x64.AppImage
+Icon=duckstation
+Type=Application
+Categories=Games;Emulation
+

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=IPTV ITALIA TV
+Exec=env WINEPREFIX="/home/vince/.wine" wine C:\\\\users\\\\vince\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\IPTV\\ ITALIA\\ TV.lnk
+Type=Application
+StartupNotify=true
+Comment=IPTV ITALIA TV is a Live IPTV player for end-users that provides the facility to watch Live TV, VOD, Series.
+Path=/home/vince/.wine/dosdevices/c:/users/vince/AppData/Local/Programs/IPTVITALIATV
+Icon=00F9_IPTV ITALIA TV.0
+StartupWMClass=iptv italia tv.exe

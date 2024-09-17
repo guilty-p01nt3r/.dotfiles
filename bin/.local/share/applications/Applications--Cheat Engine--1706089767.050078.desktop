@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Cheat Engine
+Exec=flatpak run --command=bottles-cli com.usebottles.bottles run -p 'Cheat Engine' -b 'Applications' -- %u
+Type=Application
+Terminal=false
+Categories=Application;
+Icon=/home/vince/.var/app/com.usebottles.bottles/data/bottles/bottles/Applications/icons/Cheat Engine.png
+Comment=Launch Cheat Engine using Bottles.
+StartupWMClass=Cheat Engine
+Actions=Configure;
+[Desktop Action Configure]
+Name=Configure in Bottles
+Exec=flatpak run com.usebottles.bottles -b 'Applications'

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Play Dragon Ball FighterZ
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/dragon-ball-fighterz" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Dragon\\ Ball\\ FighterZ\\\\Play\\ Dragon\\ Ball\\ FighterZ.lnk
+Type=Application
+StartupNotify=true
+Comment=Dragon Ball FighterZ
+Path=/mnt/1TB_Disk/Games/dragon-ball-fighterz/dosdevices/c:/Dragon Ball FighterZ/RED/Binaries/Win64
+Icon=81DD_RED-Win64-Shipping.0
+StartupWMClass=red-win64-shipping.exe

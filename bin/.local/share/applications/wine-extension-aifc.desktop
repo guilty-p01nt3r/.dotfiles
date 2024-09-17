@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Windows Media Player
+MimeType=audio/x-aifc;
+Exec=env WINEPREFIX="/mnt/1TB_Disk/SteamLibrary/SteamLibrary/steamapps/compatdata/1818750/pfx" wine start /ProgIDOpen AIFFFile %f
+NoDisplay=true
+StartupNotify=true
+Icon=4025_wmplayer.0

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Play The Evil Within
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/the-evil-within" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\The\\ Evil\\ Within\\\\Play\\ The\\ Evil\\ Within.lnk
+Type=Application
+StartupNotify=true
+Comment=The Evil Within
+Path=/mnt/1TB_Disk/Games/the-evil-within/dosdevices/c:/The Evil Within/bin
+Icon=552F_EvilWithin.0
+StartupWMClass=evilwithin.exe

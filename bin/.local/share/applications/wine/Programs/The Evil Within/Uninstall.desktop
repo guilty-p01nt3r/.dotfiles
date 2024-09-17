@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Uninstall
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/the-evil-within" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\The\\ Evil\\ Within\\\\Uninstall.lnk
+Type=Application
+StartupNotify=true
+Comment=Uninstall The Evil Within
+Path=/mnt/1TB_Disk/Games/the-evil-within/dosdevices/c:/The Evil Within/Uninstall/
+Icon=E2A3_unins000.0
+StartupWMClass=unins000.exe

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Uninstall
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/dragon-ball-z-kakarot" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Dragon\\ Ball\\ Z\\ Kakarot\\\\Uninstall.lnk
+Type=Application
+StartupNotify=true
+Comment=Uninstall Dragon Ball Z Kakarot
+Path=/mnt/1TB_Disk/Games/dragon-ball-z-kakarot/dosdevices/c:/Program Files (x86)/DODI-Repacks/Dragon Ball Z Kakarot/Uninstall/
+Icon=2BEC_unins000.0
+StartupWMClass=unins000.exe

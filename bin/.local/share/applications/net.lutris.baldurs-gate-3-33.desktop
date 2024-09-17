@@ -1,0 +1,7 @@
+
+[Desktop Entry]
+Type=Application
+Name=Baldur's Gate 3
+Icon=lutris_baldurs-gate-3
+Exec=/mnt/1TB_Disk/Games/baldurs-gate-3/drive_c/BaldursGate3/bin/bg3.exe
+Categories=Game

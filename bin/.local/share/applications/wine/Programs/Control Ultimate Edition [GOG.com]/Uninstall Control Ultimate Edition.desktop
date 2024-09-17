@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Uninstall Control Ultimate Edition
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/Control Ultimate Edition" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Control\\ Ultimate\\ Edition\\ [GOG.com]\\\\Uninstall\\ Control\\ Ultimate\\ Edition.lnk
+Type=Application
+StartupNotify=true
+Path=/mnt/1TB_Disk/Games/Control Ultimate Edition/dosdevices/c:/GOG Games/Control
+Icon=6145_unins000.0
+StartupWMClass=unins000.exe

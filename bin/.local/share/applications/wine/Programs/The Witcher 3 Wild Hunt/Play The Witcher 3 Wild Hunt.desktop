@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Play The Witcher 3 Wild Hunt
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/the-witcher-3" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\The\\ Witcher\\ 3\\ Wild\\ Hunt\\\\Play\\ The\\ Witcher\\ 3\\ Wild\\ Hunt.lnk
+Type=Application
+StartupNotify=true
+Comment=The Witcher 3 Wild Hunt
+Path=/mnt/1TB_Disk/Games/the-witcher-3/dosdevices/c:/The Witcher 3 Wild Hunt/bin/x64
+Icon=533D_witcher3.0
+StartupWMClass=witcher3.exe

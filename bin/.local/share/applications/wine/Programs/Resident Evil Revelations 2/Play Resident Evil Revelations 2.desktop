@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Play Resident Evil Revelations 2
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/resident-evil-revelation-2" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Resident\\ Evil\\ Revelations\\ 2\\\\Play\\ Resident\\ Evil\\ Revelations\\ 2.lnk
+Type=Application
+StartupNotify=true
+Comment=Resident Evil Revelations 2
+Path=/mnt/1TB_Disk/Games/resident-evil-revelation-2/dosdevices/c:/Resident Evil Revelations 2/bin
+Icon=D923_rerev2.0
+StartupWMClass=rerev2.exe

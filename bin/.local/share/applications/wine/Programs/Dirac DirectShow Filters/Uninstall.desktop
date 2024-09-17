@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Uninstall
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/hogwarts-legacy" wine C:\\\\users\\\\vince\\\\AppData\\\\Roaming\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Dirac\\ DirectShow\\ Filters\\\\Uninstall.lnk
+Type=Application
+StartupNotify=true
+Path=/mnt/1TB_Disk/Games/hogwarts-legacy/dosdevices/c:/Program Files (x86)/Dirac
+Icon=D5CF_uninst.0
+StartupWMClass=uninst.exe

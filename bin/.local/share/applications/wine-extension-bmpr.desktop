@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=A Wine application
+MimeType=application/x-wine-extension-bmpr;
+Exec=env WINEPREFIX="/home/vince/.wine" wine start /ProgIDOpen Balsamiq\\ Wireframes %f
+NoDisplay=true
+StartupNotify=true

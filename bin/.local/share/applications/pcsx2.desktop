@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Pcsx2
+Exec=/opt/pcsx2/pcsx2.AppImage
+Icon=duckstation
+Type=Application
+Categories=Games;Emulation
+

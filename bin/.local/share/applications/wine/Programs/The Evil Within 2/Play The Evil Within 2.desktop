@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Play The Evil Within 2
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/the-evil-within-2" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\The\\ Evil\\ Within\\ 2\\\\Play\\ The\\ Evil\\ Within\\ 2.lnk
+Type=Application
+StartupNotify=true
+Comment=The Evil Within 2
+Path=/mnt/1TB_Disk/Games/the-evil-within-2/dosdevices/c:/The Evil Within 2/bin
+Icon=C635_TEW2.0
+StartupWMClass=tew2.exe

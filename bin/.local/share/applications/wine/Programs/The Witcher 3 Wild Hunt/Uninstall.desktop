@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Uninstall
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/the-witcher-3" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\The\\ Witcher\\ 3\\ Wild\\ Hunt\\\\Uninstall.lnk
+Type=Application
+StartupNotify=true
+Comment=Uninstall The Witcher 3 Wild Hunt
+Path=/mnt/1TB_Disk/Games/the-witcher-3/dosdevices/c:/The Witcher 3 Wild Hunt/Uninstall/
+Icon=3085_unins000.0
+StartupWMClass=unins000.exe

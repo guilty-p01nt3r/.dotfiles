@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Play Dragon Ball Z Kakarot
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/dragon-ball-z-kakarot" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Dragon\\ Ball\\ Z\\ Kakarot\\\\Play\\ Dragon\\ Ball\\ Z\\ Kakarot.lnk
+Type=Application
+StartupNotify=true
+Comment=Dragon Ball Z Kakarot
+Path=/mnt/1TB_Disk/Games/dragon-ball-z-kakarot/dosdevices/c:/Program Files (x86)/DODI-Repacks/Dragon Ball Z Kakarot
+Icon=300A_AT.0
+StartupWMClass=at.exe

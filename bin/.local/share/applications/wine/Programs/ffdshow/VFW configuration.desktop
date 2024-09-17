@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=VFW configuration
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/hogwarts-legacy" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\ffdshow\\\\VFW\\ configuration.lnk
+Type=Application
+StartupNotify=true
+Path=/mnt/1TB_Disk/Games/hogwarts-legacy/dosdevices/c:/windows/syswow64
+Icon=9DF5_ffdshow.5
+StartupWMClass=rundll32.exe

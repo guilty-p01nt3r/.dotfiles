@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=NOTEPAD
+MimeType=text/scriptlet;
+Exec=env WINEPREFIX="/mnt/1TB_Disk/SteamLibrary/SteamLibrary/steamapps/compatdata/1818750/pfx" wine start /ProgIDOpen scriptletfile %f
+NoDisplay=true
+StartupNotify=true
+Icon=B5C2_NOTEPAD.0

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=PINCE
+Comment=PINCE is a front-end/reverse engineering tool for the GNU Project Debugger
+Exec=/opt/PINCE/PINCE.sh
+#Icon=steam_icon_108710
+Terminal=false
+Type=Application
+Categories=Game;

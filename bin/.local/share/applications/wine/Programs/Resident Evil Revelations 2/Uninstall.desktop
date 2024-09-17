@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Uninstall
+Exec=env WINEPREFIX="/mnt/1TB_Disk/Games/resident-evil-revelation-2" wine C:\\\\ProgramData\\\\Microsoft\\\\Windows\\\\Start\\ Menu\\\\Programs\\\\Resident\\ Evil\\ Revelations\\ 2\\\\Uninstall.lnk
+Type=Application
+StartupNotify=true
+Comment=Uninstall Resident Evil Revelations 2
+Path=/mnt/1TB_Disk/Games/resident-evil-revelation-2/dosdevices/c:/Resident Evil Revelations 2/Uninstall/
+Icon=DD2B_unins000.0
+StartupWMClass=unins000.exe

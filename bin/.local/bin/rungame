@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <gamepath> "
+    exit 1
+fi
+
+if [ -z "$MANGOHUD_CONFIG" ]; then
+    export MANGOHUD_CONFIG=fps_limit=135,fps_only=1
+fi
+
+
+if [[ "$@" == *"Steam"* ]]; then
+    echo "Running $1 with mangohud and gamescope"
+    gamemoderun gamescope -W 1920 -H 1080 -e -f -- mangohud "$@"
+fi
+
+gamemoderun gamescope -W 1920 -H 1080 -f -- mangohud "$@"
