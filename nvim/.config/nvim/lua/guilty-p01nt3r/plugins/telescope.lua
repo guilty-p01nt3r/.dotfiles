@@ -23,6 +23,7 @@ return {
         })
 
         telescope.load_extension("fzf")
+        telescope.load_extension("emoji")
 
         vim.keymap.set('n', "<leader>ff", builtin.find_files, {desc = "Fuzzy find files in cwd"})
         vim.keymap.set('n', "<leader>fg", builtin.live_grep, {desc = "Fuzzy find string in cwd"})

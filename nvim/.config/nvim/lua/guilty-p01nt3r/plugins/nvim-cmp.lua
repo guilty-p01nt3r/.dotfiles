@@ -1,5 +1,6 @@
 return {
     "hrsh7th/nvim-cmp",
+	lazy = true,
     event = "InsertEnter",
     dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
@@ -47,6 +48,7 @@ return {
                 {name = "luasnip"}, -- snippets
                 {name = "buffer"}, -- text within current buffer
                 {name = "path"}, -- file system paths
+                {name = "emoji"}, -- emoji
             }),
             formatting = {
                 format = lspkind.cmp_format({
