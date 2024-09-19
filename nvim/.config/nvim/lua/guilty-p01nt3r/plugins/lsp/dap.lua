@@ -43,28 +43,28 @@ return {
 
 		vim.keymap.set("n", "<leader>db", function()
 			dap.toggle_breakpoint()
-		end)
+		end, { desc = "DAP: Toggle breakpoint" })
 		vim.keymap.set("n", "<leader>dc", function()
 			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end)
+		end, { desc = "DAP: Set breakpoint condition" })
 		vim.keymap.set("n", "<leader>di", function()
-            dapui.eval()
-		end)
+			dapui.eval()
+		end, { desc = "DAP: Evaluate expression" })
 		vim.keymap.set("n", "<F1>", function()
 			dap.continue()
-		end)
+		end, { desc = "DAP: Continue" })
 		vim.keymap.set("n", "<leader>de", function()
 			dap.set_exception_breakpoints()
-		end)
+		end, { desc = "DAP: Set exception breakpoints" })
 		vim.keymap.set("n", "<F2>", function()
 			dap.step_over()
-		end)
+		end, { desc = "DAP: Step over" })
 		vim.keymap.set("n", "<F3>", function()
 			dap.step_into()
-		end)
+		end, { desc = "DAP: Step into" })
 		vim.keymap.set("n", "<F4>", function()
 			dap.step_out()
-		end)
+		end, { desc = "DAP: Step out" })
 
 		----------------
 		--- ADAPTERS ---
@@ -79,6 +79,5 @@ return {
 		dap.listeners.before.event_exited["dapui_config"] = function()
 			dapui.close()
 		end
-
 	end,
 }
