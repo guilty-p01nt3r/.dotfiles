@@ -74,6 +74,9 @@ return {
 					vim.lsp.buf.signature_help()
 				end, opts)
 
+				vim.keymap.set("n", "<leader>vru", function()
+					telescope.lsp_references();
+				end, opts)
 				vim.keymap.set("n", "<leader>vrm", function()
 					telescope.lsp_document_symbols({ symbols = "method" })
 				end, opts)

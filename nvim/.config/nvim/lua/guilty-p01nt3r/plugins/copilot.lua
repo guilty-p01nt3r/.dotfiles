@@ -1,14 +1,20 @@
 return {
-    { 'github/copilot.vim',
-        config = function()
-            vim.g.copilot_filetypes = {
-                ['dap-repl'] = false,
-                ['dapui_watches'] = false,
-                ['dapui_console'] = false,
-            }
-
-            vim.api.nvim_set_keymap("i", "<C-a>", 'copilot#Accept("<CR>")', {expr=true, silent=true})
-        end,
-    },
+	"zbirenbaum/copilot.lua",
+	cmd = "Copilot",
+	lazy = true,
+	event = { "InsertEnter" },
+	opts = {
+		suggestion = {
+			enable = true,
+			auto_trigger = true,
+			keymap = {
+				accept = "<C-a>",
+				accept_word = false,
+				accept_line = false,
+        next = "<C-f>",
+				prev = "<C-d>",
+				dismiss = "<C-X>",
+			},
+		},
+	},
 }
-
