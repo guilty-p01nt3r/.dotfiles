@@ -22,6 +22,7 @@ export GAMEID=0
 # Switch WINEPREFIX based on user ( case-insensitive )
 # if equal to "luciano" => use lucianoPfx
 # if equal to "lina" => use linaPfx
+# if equal to "ida" => use idaPfx
 # if equal to "vincenzo" => use vincenzoPfx
 
 case $user in
@@ -33,6 +34,9 @@ case $user in
     ;;
   vincenzo)
     export WINEPREFIX=~/Games/umu/vincenzoPfx
+    ;;
+  ida)
+    export WINEPREFIX=~/Games/umu/idaPfx
     ;;
   *)
     export WINEPREFIX=~/Games/umu/defaultPrefix
