@@ -22,6 +22,7 @@ require("lazy").setup({
 		-- import your plugins
 		{ import = "guilty-p01nt3r.plugins" },
 		{ import = "guilty-p01nt3r.plugins.lsp" },
+		{ import = "guilty-p01nt3r.plugins.theme" },
 	},
 	checker = { enabled = true, notify = false },
 })

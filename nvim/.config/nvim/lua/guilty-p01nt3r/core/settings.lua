@@ -33,6 +33,7 @@ vim.opt.colorcolumn = "80"
 vim.lsp.set_log_level("off")
 
 vim.opt.undofile = true
+vim.opt.swapfile = false
 
 -- force the clipboard to use OSC 52
 vim.g.clipboard = {
@@ -46,6 +47,7 @@ vim.g.clipboard = {
 		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
 	},
 }
+
 
 
 -- ENV

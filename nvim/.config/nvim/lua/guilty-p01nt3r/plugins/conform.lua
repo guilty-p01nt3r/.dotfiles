@@ -7,20 +7,21 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "prettierd" },
-				typescript = { "prettierd" },
-				javascriptreact = { "prettierd" },
-				typescriptreact = { "prettierd" },
-				css = { "prettierd" },
-				scss = { "prettierd" },
-				html = { "prettierd" },
-				json = { "prettierd" },
-				yaml = { "prettierd" },
-				markdown = { "prettierd" },
+				-- javascript = { "prettierd" },
+				-- typescript = { "prettierd" },
+				-- javascriptreact = { "prettierd" },
+				-- typescriptreact = { "prettierd" },
+				-- css = { "prettierd" },
+				-- scss = { "prettierd" },
+				-- html = { "prettierd" },
+				-- json = { "prettierd" },
+				-- yaml = { "prettierd" },
+				-- markdown = { "prettierd" },
 				php = { lsp_format = "fallback" },
 				rust = { "rustfmt", lsp_format = "fallback" },
 				go = { "gofmt"},
 				sql = { "sleek" }, -- cargo install sleek
+        blade = {"blade-formatter"},
 			},
 		})
 		vim.keymap.set("n", "<leader>=", function()

@@ -75,7 +75,7 @@ return {
 				end, opts)
 
 				vim.keymap.set("n", "<leader>vru", function()
-					telescope.lsp_references();
+					telescope.lsp_references()
 				end, opts)
 				vim.keymap.set("n", "<leader>vrm", function()
 					telescope.lsp_document_symbols({ symbols = "method" })
@@ -219,6 +219,13 @@ return {
 					},
 				})
 			end,
+			-- ["tailwindcss"] = function()
+			-- 	lspconfig["tailwindcss"].setup({
+			-- 		capabilities = capabilities,
+			-- 		cmd = { "/home/vince/.local/share/nvim/mason/bin/tailwindcss-language-server", "--stdio" },
+			-- 		single_file_support = true,
+			-- 	})
+			-- end,
 			["htmx"] = function()
 				lspconfig["htmx"].setup({
 					on_attach = on_lsp_attach,
@@ -234,22 +241,40 @@ return {
 						vue = {
 							hybridMode = false,
 						},
-					},
-				})
-			end,
-			["omnisharp_mono"] = function()
-				lspconfig["omnisharp"].setup({
-					filetypes = { "vue" },
-					init_options = {
-						vue = {
-							hybridMode = false,
+						typescript = {
+							tsdk = "/home/vince/.local/share/nvim/mason/packages/vue-language-server/node_modules/typescript/lib/",
 						},
 					},
 				})
 			end,
 			["sqls"] = function()
 				lspconfig["sqls"].setup({
-          cmd = { "sqls", "-config", vim.fn.getcwd() .. "/.sqls.yml" },
+					cmd = { "sqls", "-config", vim.fn.getcwd() .. "/.sqls.yml" },
+				})
+			end,
+			["html"] = function()
+				lspconfig["html"].setup({
+					capabilities = capabilities,
+					filetypes = { "html", "blade" },
+					init_options = {
+						configurationSection = { "html", "css", "javascript" },
+						embeddedLanguages = {
+							css = true,
+							javascript = true,
+						},
+						provideFormatter = true,
+					},
+					settings = {
+						format = {
+							templating = true,
+							wrapLineLength = 80,
+							wrapAttributes = "force-aligned",
+						},
+						hover = {
+							documentation = true,
+							references = true,
+						},
+					},
 				})
 			end,
 		})

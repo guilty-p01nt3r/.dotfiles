@@ -15,9 +15,14 @@ done
 
 
 # default exports
-export PROTONPATH="~/.steam/compatibilitytools.d/proton-ge-custom"
-export WINEPREFIX=~/Games/umu/defaultPrefix 
-export GAMEID=0 
+# if PROTONPATH env doesn't exist, use default path
+  # https://github.com/Open-Wine-Components/umu-launcher/pull/427
+#if [ -z "$PROTONPATH" ]; then
+#  #export PROTONPATH="~/.steam/compatibilitytools.d/proton-ge-custom"
+#fi
+if [ -z "$GAMEID" ]; then
+  export GAMEID=0
+fi
 
 # Switch WINEPREFIX based on user ( case-insensitive )
 # if equal to "luciano" => use lucianoPfx
@@ -25,23 +30,25 @@ export GAMEID=0
 # if equal to "ida" => use idaPfx
 # if equal to "vincenzo" => use vincenzoPfx
 
-case $user in
-  luciano)
-    export WINEPREFIX=~/Games/umu/lucianoPfx
-    ;;
-  lina)
-    export WINEPREFIX=~/Games/umu/linaPfx
-    ;;
-  vincenzo)
-    export WINEPREFIX=~/Games/umu/vincenzoPfx
-    ;;
-  ida)
-    export WINEPREFIX=~/Games/umu/idaPfx
-    ;;
-  *)
-    export WINEPREFIX=~/Games/umu/defaultPrefix
-    ;;
-esac
+if [ -z "$WINEPREFIX" ]; then
+  case $user in
+    luciano)
+      export WINEPREFIX=~/Games/umu/lucianoPfx
+      ;;
+    lina)
+      export WINEPREFIX=~/Games/umu/linaPfx
+      ;;
+    vincenzo)
+      export WINEPREFIX=~/Games/umu/vincenzoPfx
+      ;;
+    ida)
+      export WINEPREFIX=~/Games/umu/idaPfx
+      ;;
+    *)
+      export WINEPREFIX=~/Games/umu/defaultPrefix
+      ;;
+  esac
+fi
 
 
 #Get first argument (without -u)

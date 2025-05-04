@@ -33,10 +33,23 @@ return {
 
 		telescope.load_extension("fzf")
 		telescope.load_extension("emoji")
-		telescope.load_extension("noice")
+		--telescope.load_extension("noice")
 
-    vim.keymap.set("n", "<leader>fa", ":Telescope find_files no_ignore=true hidden=true glob=!**/.git/* <CR>", { desc = "Fuzzy find files in cwd" })
+		vim.keymap.set(
+			"n",
+			"<leader>fa",
+			":Telescope find_files no_ignore=true hidden=true glob=!**/.git/* <CR>",
+			{ desc = "Fuzzy find files in cwd" }
+		)
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files in cwd" })
+		vim.keymap.set(
+			"n",
+			"<leader>fp",
+			function()
+				builtin.find_files({ previewer = false })
+			end,
+			({ desc = "Fuzzy find files in cwd" })
+		)
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fuzzy find string in cwd" })
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Fuzzy find among open buffers" })
 		vim.keymap.set("n", "<leader>fc", builtin.grep_string, { desc = "Find string under cursor in cwd" })

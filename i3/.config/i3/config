@@ -34,6 +34,7 @@ bindsym Ctrl+Shift+Print exec hyprpicker -a
 exec --no-startup-id kdeconnect-indicator &
 
 # Easy Effects
+# @INFO: It's inside: /home/vince/.config/autostart (It doesn't work)
 exec --no-startup-id com.github.wwmm.easyeffects --gapplication-service
 
 # Bar 
@@ -53,10 +54,11 @@ bindsym $mod+Shift+v exec --no-startup-id ~/.config/i3/audioManager.sh source-de
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec kitty
+set $term kitty
+bindsym $mod+Return exec --no-startup-id $term
 
 #start calculator(Python)
-bindsym $mod+c exec --no-startup-id kitty --class="calc" -e python3 -i -c 'import math'
+bindsym $mod+c exec --no-startup-id $term --class="calc" -e python3 -i -c 'import math'
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -162,27 +164,35 @@ output * adaptive_sync off
 #output $mon1 adaptive_sync on
 
 output $mon1 {
-    #mode 1920x1080@99.930Hz
+    #mode 1920x1080@144Hz
+    #adaptive_sync on
     mode 1920x1080@99Hz
     position 0,0 
-    render_bit_depth 8
+    #render_bit_depth 8
 }
 
 output $mon2 {
     mode 1920x1080@60Hz 
     position 1920,0
-    render_bit_depth 8
+    #render_bit_depth 8
 }
 
 output $mon3 {
   mode 1920x1080@30Hz 
   position 0,+1080
-  render_bit_depth 8
+  #render_bit_depth 8
+}
+
+
+input type:pointer {
+    accel_profile "flat"
+    pointer_accel 0
 }
 
 
 #  AOC preferred mode
 #output $mon1 modeline +hsync +vsync
+#output $mon1 modeline 452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync
 
 # Samsung preferred mode
 #output $mon2 modeline +hsync +vsync 
@@ -334,29 +344,31 @@ for_window [shell=".*"] title_format "%title :: %shell"
 
 # Steam 
 #for_window [class="^steam$"] floating enable
-for_window [title="^Steam Big Picture Mode$"] { 
-    focus
-    move to output $vmon1
-    fullscreen enable
-}
-for_window [title="^Steam$"] { 
-    focus
-    move to output $vmon1
-    fullscreen enable
-}
-for_window [class="^steam$"] { 
-    move to output $vmon1
-}
-
+#for_window [title="^Steam Big Picture Mode$"] { 
+#    focus
+#    move to output $mon2
+#    fullscreen enable
+#}
+#for_window [title="^Steam$"] { 
+#    focus
+#    move to output $mon2
+#    fullscreen enable
+#}
+#for_window [class="^steam$"] { 
+#    move to output $mon2
+#}
+#
 for_window [class="gamescope"] {
     focus
     move to output $vmon1
     fullscreen enable
+    border none
 }
 for_window [app_id="gamescope"] {
     focus
     move to output $vmon1
     fullscreen enable
+    border none
 }
 
 # Discord
@@ -364,13 +376,16 @@ assign [class="^discord$"] $ws10
 for_window [class="^discord$"] fullscreen
 # Teams
 assign [class="^teams$"] $ws10
-
 for_window [class="^teams$"] fullscreen
 
-for_window [app_id="lutris"] {
-    focus
-    move to output $vmon1
+for_window [class="^exiled-exchange-2$"] {
+    floating enable
 }
+
+#for_window [app_id="lutris"] {
+#    focus
+#    move to output $vmon1
+#}
 for_window [app_id="heroic"] {
     focus
     move to output $vmon1
@@ -418,7 +433,7 @@ exec --no-startup-id systemctl --user start psd.service
 
 # Load layouts
 exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
-exec --no-startup-id "kitty"
+#exec --no-startup-id "$term"
 #exec --no-startup-id "sleep 0.2; i3-msg 'workspace 20; append_layout ~/.config/i3/layout_tree/workspaces-2-firefox.json'"
 #exec --no-startup-id "sleep 2; firefox-developer-edition"
 
@@ -426,6 +441,11 @@ exec --no-startup-id "kitty"
 # Language Keyboard Layout Toggle
 # TODO: set in wayland way
 bindsym $mod+Ctrl+k exec --no-startup-id ~/.config/i3/togglekbmap.sh
+
+#exec --no-startup-id wl-paste --watch cliphist store
+#exec --no-startup-id wl-paste --primary --watch wl-copy
+#exec --no-startup-id wl-clip-persist --clipboard both
+#exec --no-startup-id clipboard-sync
 
 # Load layouts in the sway way
 input type:keyboard {
@@ -448,4 +468,4 @@ include /etc/sway/config.d/*
 exec $HOME/.config/i3/sway_scripts/90-systemd-user.sh
 
 exec wayvnc -S /tmp/dp_vnc -f 30 -o DP-1 94.94.94.2 5900
-exec wayvnc -S /tmp_hdmi_vnc_f1 -f 1 -o HDMI-A-1 94.94.94.2 5901
+exec wayvnc -S /tmp/hdmi_vnc_f1 -f 1 -o HDMI-A-1 94.94.94.2 5901

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# get -p is the path to watch
+# get -r is the reaction to the change
+path=.
+reaction="echo changed"
+
+while getopts ":p:r:" opt; do
+  case $opt in
+    p)
+      path=$OPTARG
+      ;;
+    r)
+      reaction=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+echo "watching $path and reacting with $reaction"
+while (true); do
+    inotifywait --recursive -e modify,create,delete $path
+    echo "change detected.Executing $reaction"
+    $reaction
+done
