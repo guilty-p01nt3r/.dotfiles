@@ -1,7 +1,10 @@
 return {
+	"mason-org/mason.nvim",
+	"mason-org/mason-lspconfig.nvim",
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	depedencies = {
+		"mason-org/mason.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 		{
 			{
@@ -31,211 +34,143 @@ return {
 	},
 
 	config = function()
+		
 		local lspconfig = require("lspconfig")
 		local mason_lspconfig = require("mason-lspconfig")
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-			callback = function(ev)
-				local opts = { buffer = ev.buf, silent = true }
-				-- local opts = { buffer = bufnr, remap = false }
-				local telescope = require("telescope.builtin")
+		local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-				vim.keymap.set("n", "gd", function()
-					vim.lsp.buf.definition()
-				end, opts)
-				vim.keymap.set("n", "K", function()
-					vim.lsp.buf.hover()
-				end, opts)
-				vim.keymap.set("n", "<leader>vws", function()
-					vim.lsp.buf.workspace_symbol()
-				end, opts)
-				vim.keymap.set("n", "<leader>vd", function()
-					vim.diagnostic.open_float({ scope = "line" })
-				end, opts)
-
-				vim.keymap.set("n", "[d", function()
-					vim.diagnostic.goto_next()
-				end, opts)
-				vim.keymap.set("n", "]d", function()
-					vim.diagnostic.goto_prev()
-				end, opts)
-				vim.keymap.set("n", "<leader>vca", function()
-					vim.lsp.buf.code_action()
-				end, opts)
-				vim.keymap.set("n", "<leader>vrr", function()
-					vim.lsp.buf.references()
-				end, opts)
-				vim.keymap.set("n", "<leader>vrn", function()
-					vim.lsp.buf.rename()
-				end, opts)
-				vim.keymap.set("n", "<C-h>", function()
-					vim.lsp.buf.signature_help()
-				end, opts)
-
-				vim.keymap.set("n", "<leader>vru", function()
-					telescope.lsp_references()
-				end, opts)
-				vim.keymap.set("n", "<leader>vrm", function()
-					telescope.lsp_document_symbols({ symbols = "method" })
-				end, opts)
-				vim.keymap.set("n", "<leader>vrf", function()
-					telescope.lsp_document_symbols({ symbols = "function" })
-				end, opts)
-				vim.keymap.set("n", "<leader>vrp", function()
-					telescope.lsp_document_symbols({ symbols = "property" })
-				end, opts)
-			end,
+		-- Optional: auto-install servers
+		mason_lspconfig.setup({
+			ensure_installed = { "lua_ls", "html", "cssls", "jsonls" },
 		})
 
-		require("lspconfig.ui.windows").default_options.border = "rounded"
+		-- Get list of installed servers
+		local servers = mason_lspconfig.get_installed_servers()
 
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		-- Loop over them and apply custom or default config
+		for _, server in ipairs(servers) do
+			local opts = {
+				capabilities = capabilities,
+			}
 
-		local signs = {
-			Error = "😡",
-			Warn = "😥",
-			Hint = "🧐",
-			Info = "🤔",
-		}
+			if server == "lua_ls" then
+				opts.settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
+						completion = {
+							callSnippet = "Replace",
+						},
+					},
+				}
+				lspconfig[server].setup(opts)
+			end
 
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
-
-		mason_lspconfig.setup_handlers({
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-				})
-			end,
-			["lua_ls"] = function()
-				lspconfig["lua_ls"].setup({
-					capabilities = capabilities,
-					settings = {
-						Lua = {
-							diagnostics = {
-								globals = { "vim" },
-							},
-							completion = {
-								callSnippet = "Replace",
+			if server == "intelephense" then
+				opts.settings = {
+					intelephense = {
+						init_options = {
+							globalStoragePath = os.getenv("HOME") .. "/.local/share/intelephense",
+						},
+						stubs = {
+							"apache",
+							"bcmath",
+							"bz2",
+							"calendar",
+							"com_dotnet",
+							"Core",
+							"ctype",
+							"curl",
+							"date",
+							"dba",
+							"dom",
+							"enchant",
+							"exif",
+							"FFI",
+							"fileinfo",
+							"filter",
+							"fpm",
+							"ftp",
+							"gd",
+							"gettext",
+							"gmp",
+							"hash",
+							"iconv",
+							"imap",
+							"intl",
+							"json",
+							"ldap",
+							"libxml",
+							"mbstring",
+							"meta",
+							"mysqli",
+							"oci8",
+							"odbc",
+							"openssl",
+							"pcntl",
+							"pcre",
+							"PDO",
+							"pdo_ibm",
+							"pdo_mysql",
+							"pdo_pgsql",
+							"pdo_sqlite",
+							"pgsql",
+							"Phar",
+							"posix",
+							"pspell",
+							"readline",
+							"Reflection",
+							"session",
+							"shmop",
+							"SimpleXML",
+							"snmp",
+							"soap",
+							"sockets",
+							"sodium",
+							"SPL",
+							"sqlite3",
+							"standard",
+							"superglobals",
+							"sysvmsg",
+							"sysvsem",
+							"sysvshm",
+							"tidy",
+							"tokenizer",
+							"xml",
+							"xmlreader",
+							"xmlrpc",
+							"xmlwriter",
+							"xsl",
+							"Zend OPcache",
+							"zip",
+							"zlib",
+							-- "wordpress",
+							"phpunit",
+							"random",
+						},
+						environment = {
+							includePaths = {
+								"/vendor/phar_libs",
 							},
 						},
 					},
-				})
-			end,
-			["intelephense"] = function()
-				lspconfig["intelephense"].setup({
-					on_attach = on_lsp_attach,
-					settings = {
-						intelephense = {
-							init_options = {
-								globalStoragePath = os.getenv("HOME") .. "/.local/share/intelephense",
-							},
-							stubs = {
-								"apache",
-								"bcmath",
-								"bz2",
-								"calendar",
-								"com_dotnet",
-								"Core",
-								"ctype",
-								"curl",
-								"date",
-								"dba",
-								"dom",
-								"enchant",
-								"exif",
-								"FFI",
-								"fileinfo",
-								"filter",
-								"fpm",
-								"ftp",
-								"gd",
-								"gettext",
-								"gmp",
-								"hash",
-								"iconv",
-								"imap",
-								"intl",
-								"json",
-								"ldap",
-								"libxml",
-								"mbstring",
-								"meta",
-								"mysqli",
-								"oci8",
-								"odbc",
-								"openssl",
-								"pcntl",
-								"pcre",
-								"PDO",
-								"pdo_ibm",
-								"pdo_mysql",
-								"pdo_pgsql",
-								"pdo_sqlite",
-								"pgsql",
-								"Phar",
-								"posix",
-								"pspell",
-								"readline",
-								"Reflection",
-								"session",
-								"shmop",
-								"SimpleXML",
-								"snmp",
-								"soap",
-								"sockets",
-								"sodium",
-								"SPL",
-								"sqlite3",
-								"standard",
-								"superglobals",
-								"sysvmsg",
-								"sysvsem",
-								"sysvshm",
-								"tidy",
-								"tokenizer",
-								"xml",
-								"xmlreader",
-								"xmlrpc",
-								"xmlwriter",
-								"xsl",
-								"Zend OPcache",
-								"zip",
-								"zlib",
-								-- "wordpress",
-								"phpunit",
-								"random",
-							},
-							environment = {
-								includePaths = {
-									"/vendor/phar_libs",
-								},
-							},
-						},
-					},
-				})
-			end,
-			-- ["tailwindcss"] = function()
-			-- 	lspconfig["tailwindcss"].setup({
-			-- 		capabilities = capabilities,
-			-- 		cmd = { "/home/vince/.local/share/nvim/mason/bin/tailwindcss-language-server", "--stdio" },
-			-- 		single_file_support = true,
-			-- 	})
-			-- end,
-			["htmx"] = function()
-				lspconfig["htmx"].setup({
-					on_attach = on_lsp_attach,
+				}
+				lspconfig[server].setup(opts)
+			end
+
+			if server == "htmx" then
+				opts.settings = {
 					cmd = { "htmx-lsp" },
 					filetypes = { "html", "templ", "php", "tmpl", "template" },
 					single_file_support = true,
-				})
-			end,
-			["volar"] = function()
-				lspconfig["volar"].setup({
+				}
+				lspconfig[server].setup(opts)
+			end
+
+			if server == "volar" then
+				opts.settings = {
 					filetypes = { "vue" },
 					init_options = {
 						vue = {
@@ -245,16 +180,19 @@ return {
 							tsdk = "/home/vince/.local/share/nvim/mason/packages/vue-language-server/node_modules/typescript/lib/",
 						},
 					},
-				})
-			end,
-			["sqls"] = function()
-				lspconfig["sqls"].setup({
+				}
+				lspconfig[server].setup(opts)
+			end
+
+			if server == "sqls" then
+				opts.settings = {
 					cmd = { "sqls", "-config", vim.fn.getcwd() .. "/.sqls.yml" },
-				})
-			end,
-			["html"] = function()
-				lspconfig["html"].setup({
-					capabilities = capabilities,
+				}
+				lspconfig[server].setup(opts)
+			end
+
+			if server == "html" then
+				opts.settings = {
 					filetypes = { "html", "blade" },
 					init_options = {
 						configurationSection = { "html", "css", "javascript" },
@@ -275,8 +213,24 @@ return {
 							references = true,
 						},
 					},
-				})
-			end,
-		})
+				}
+				lspconfig[server].setup(opts)
+			end
+		end
+
+
+		require("lspconfig.ui.windows").default_options.border = "rounded"
+
+		local signs = {
+			Error = "😡",
+			Warn = "😥",
+			Hint = "🧐",
+			Info = "🤔",
+		}
+
+		for type, icon in pairs(signs) do
+			local hl = "DiagnosticSign" .. type
+			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+		end
 	end,
 }
