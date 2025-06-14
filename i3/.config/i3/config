@@ -58,7 +58,9 @@ set $term kitty
 bindsym $mod+Return exec --no-startup-id $term
 
 #start calculator(Python)
-bindsym $mod+c exec --no-startup-id $term --class="calc" -e python3 -i -c 'import math'
+#bindsym $mod+c exec --no-startup-id $term --class="calc" -e python3 -i -c 'import math'
+#start calculator (bc)
+bindsym $mod+c exec --no-startup-id $term --class="calc" -e bc -q -l
 
 # kill focused window
 bindsym $mod+Shift+q kill
