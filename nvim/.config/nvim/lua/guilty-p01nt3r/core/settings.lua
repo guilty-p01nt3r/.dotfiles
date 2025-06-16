@@ -47,19 +47,32 @@ vim.g.clipboard = {
 		["*"] = require("vim.ui.clipboard.osc52").paste("*"),
 	},
 }
-
 vim.diagnostic.config({
+	-- Show as virtual text
+	-- virtual_text = true,
 
-  -- Show as virtual text
-  virtual_text = true,
+	-- Show as hover buffer
+	virtual_lines = true,
 
-  -- Show as hover buffer
-  -- virtual_lines = true,
-
-  -- virtual_lines = {
-  --   -- Only show virtual line diagnostics for the current cursor line
-  -- current_line = true,
-  -- },
+	-- virtual_lines = {
+	-- 	-- Only show virtual line diagnostics for the current cursor line
+	-- 	current_line = true,
+	-- },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "😡",
+			[vim.diagnostic.severity.WARN] = "😥",
+			[vim.diagnostic.severity.HINT] = "🧐",
+			[vim.diagnostic.severity.INFO] = "🤔",
+		},
+		-- Red on the entire line
+		-- linehl = {
+		-- 	[vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+		-- },
+		numhl = {
+			[vim.diagnostic.severity.WARN] = 'WarningMsg',
+		},
+	},
 })
 
 -- ENV

@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   ---@type snacks.Config
   opts = {
-    bigfile = {}
+    bigfile = {}, -- Deal with big files
+    indent = {},  -- Indentation guides
   }
 }

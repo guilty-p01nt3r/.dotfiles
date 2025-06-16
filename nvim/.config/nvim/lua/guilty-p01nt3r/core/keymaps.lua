@@ -40,16 +40,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>vws", function()
       vim.lsp.buf.workspace_symbol()
     end, opts)
+
+    -- ]d jumps to the next diagnostic in the buffer. ]d-default
+    -- [d jumps to the previous diagnostic in the buffer. [d-default
+    -- ]D jumps to the last diagnostic in the buffer. ]D-default
+    -- [D jumps to the first diagnostic in the buffer. [D-default
+    -- <C-w>d shows diagnostic at cursor in a floating window. CTRL-W_d-default 
     vim.keymap.set("n", "<leader>vd", function()
       vim.diagnostic.open_float({ scope = "line" })
     end, opts)
 
-    vim.keymap.set("n", "[d", function()
-      vim.diagnostic.goto_next()
-    end, opts)
-    vim.keymap.set("n", "]d", function()
-      vim.diagnostic.goto_prev()
-    end, opts)
     vim.keymap.set("n", "<leader>vca", function()
       vim.lsp.buf.code_action()
     end, opts)
@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.rename()
     end, opts)
     -- Using blink for signature help
-    -- vim.keymap.set("n", "<C-k>", function()
+    -- vim.keymap.set("n", "<C-K>", function()
     --   vim.lsp.buf.signature_help()
     -- end, opts)
     --

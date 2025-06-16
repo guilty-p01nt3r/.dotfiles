@@ -8,7 +8,7 @@ return {
   opts = {
     keymap = {
       preset = 'default',
-      ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+      ["<C-K>"] = { "show_signature", "hide_signature", "fallback" },
     },
     signature = {
       enabled = true,
