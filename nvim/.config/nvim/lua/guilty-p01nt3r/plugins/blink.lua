@@ -8,7 +8,7 @@ return {
   opts = {
     keymap = {
       preset = 'default',
-      ["<C-K>"] = { "show_signature", "hide_signature", "fallback" },
+      ['<C-h>'] = { 'show', 'show_documentation', 'hide_documentation' },
     },
     signature = {
       enabled = true,
@@ -21,7 +21,13 @@ return {
 
     -- (Default) Only show the documentation popup when manually triggered
     completion = {
-      documentation = { auto_show = true }
+      -- trigger = {
+      --   show_on_keyword = false,
+      --   show_on_trigger_character = false,
+      -- },
+      documentation = {
+        auto_show = true
+      }
     },
 
     -- Default list of enabled providers defined so that you can extend it

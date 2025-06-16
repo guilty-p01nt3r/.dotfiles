@@ -33,9 +33,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.lsp.buf.definition()
     end, opts)
 
-    vim.keymap.set( 'n', 'K', function()
-        vim.lsp.buf.hover({title = " hover "})
-      end, {desc = 'Hover Documentation'})
+    vim.keymap.set('n', 'K', function()
+      vim.lsp.buf.hover({ title = " hover " })
+    end, { desc = 'Hover Documentation' })
 
     vim.keymap.set("n", "<leader>vws", function()
       vim.lsp.buf.workspace_symbol()
@@ -45,7 +45,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- [d jumps to the previous diagnostic in the buffer. [d-default
     -- ]D jumps to the last diagnostic in the buffer. ]D-default
     -- [D jumps to the first diagnostic in the buffer. [D-default
-    -- <C-w>d shows diagnostic at cursor in a floating window. CTRL-W_d-default 
+    -- <C-w>d shows diagnostic at cursor in a floating window. CTRL-W_d-default
     vim.keymap.set("n", "<leader>vd", function()
       vim.diagnostic.open_float({ scope = "line" })
     end, opts)
