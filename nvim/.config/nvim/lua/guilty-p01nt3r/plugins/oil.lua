@@ -1,4 +1,5 @@
 -- Declare a global function to retrieve the current directory
+--
 function _G.get_oil_winbar()
 	local dir = require("oil").get_current_dir()
 	if dir then

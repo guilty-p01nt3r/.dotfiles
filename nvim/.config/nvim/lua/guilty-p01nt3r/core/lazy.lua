@@ -15,14 +15,17 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require("guilty-p01nt3r.core.settings")
+require("guilty-p01nt3r.core.keymaps")
+require("guilty-p01nt3r.core.autocmds")
+require("guilty-p01nt3r.core.lsp")
+
 -- Setup lazy.nvim
 require("lazy").setup({
-	ui = { border = "rounded" },
 	spec = {
 		-- import your plugins
 		{ import = "guilty-p01nt3r.plugins" },
-		{ import = "guilty-p01nt3r.plugins.lsp" },
-		{ import = "guilty-p01nt3r.plugins.theme" },
+		{ import = "guilty-p01nt3r.theme" },
 	},
 	checker = { enabled = true, notify = false },
 })

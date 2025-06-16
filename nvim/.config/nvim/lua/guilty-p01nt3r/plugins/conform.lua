@@ -2,6 +2,9 @@ return {
 	"stevearc/conform.nvim",
 	lazy = true,
 	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"nmac427/guess-indent.nvim",
+	},
 	config = function()
 		local conform = require("conform")
 		conform.setup({
@@ -17,9 +20,7 @@ return {
 				-- json = { "prettierd" },
 				-- yaml = { "prettierd" },
 				-- markdown = { "prettierd" },
-				php = { lsp_format = "fallback" },
-				rust = { "rustfmt", lsp_format = "fallback" },
-				go = { "gofmt"},
+				--php = { lsp_format = "fallback" },
 				sql = { "sleek" }, -- cargo install sleek
         blade = {"blade-formatter"},
 			},
@@ -33,3 +34,4 @@ return {
 		end, { desc = "Format code file or range (in visual mode)" })
 	end,
 }
+

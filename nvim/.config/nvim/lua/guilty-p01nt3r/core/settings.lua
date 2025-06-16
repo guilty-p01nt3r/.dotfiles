@@ -48,7 +48,19 @@ vim.g.clipboard = {
 	},
 }
 
+vim.diagnostic.config({
 
+  -- Show as virtual text
+  virtual_text = true,
+
+  -- Show as hover buffer
+  -- virtual_lines = true,
+
+  -- virtual_lines = {
+  --   -- Only show virtual line diagnostics for the current cursor line
+  -- current_line = true,
+  -- },
+})
 
 -- ENV
 --vim.env.ANTHROPIC_API_KEY = ""
