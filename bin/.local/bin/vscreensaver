@@ -2,5 +2,5 @@
 
 
 sleep 1
-kill -USR1 $(ps axf | grep swayidle | grep -v grep | awk '{print $1}')
+kill -USR1 "$(ps axf | grep swayidle | grep -v grep | awk '{print $1}')"
 

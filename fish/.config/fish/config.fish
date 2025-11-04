@@ -53,10 +53,13 @@ alias dcl="docker-compose logs -ft"
 alias dls="docker ps -a"
 alias ssh="TERM=xterm-256color /usr/bin/ssh"
 alias oh="thunar . & disown"
-alias zed="zeditor"
 
 # I do not want to shoot myself in the foot
 alias rm="trash -i"
+
+# cd alias
+#zoxide init fish | source
+#alias cd="z"
 
 # Fish Configs
 fish_vi_key_bindings insert

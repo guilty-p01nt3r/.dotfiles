@@ -40,7 +40,12 @@ exec --no-startup-id com.github.wwmm.easyeffects --gapplication-service
 # Bar 
 bar {
     swaybar_command waybar
+    position top
+    mode dock
 }
+
+bindsym Mod4+minus bar mode toggle
+
 
 # change volume or toggle mute | TODO: use waybar
 ### Using pamixer 
@@ -58,9 +63,9 @@ set $term kitty
 bindsym $mod+Return exec --no-startup-id $term
 
 #start calculator(Python)
-#bindsym $mod+c exec --no-startup-id $term --class="calc" -e python3 -i -c 'import math'
+bindsym $mod+c exec --no-startup-id $term --class="calc" -e python3 -i -c 'import math'
 #start calculator (bc)
-bindsym $mod+c exec --no-startup-id $term --class="calc" -e bc -q -l
+#bindsym $mod+c exec --no-startup-id $term --class="calc" -e bc -q -l
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -76,8 +81,14 @@ bindsym $mod+Shift+q kill
 
 #tofi
 # Launch directly
-set $drun tofi-drun --drun-launch=true --font "~/.local/share/fonts/Fira Code Regular Nerd Font Complete Mono.ttf"
-bindsym $mod+d exec $drun
+set $drun sed --in-place "s/^output =.*/output = $(swaymsg --type get_outputs | jq '.[] | select(.focused).name')/" ~/.config/tofi/config && tofi-drun --drun-launch=true --font "~/.local/share/fonts/Fira Code Regular Nerd Font Complete Mono.ttf"
+bindsym $mod+d exec --no-startup-id $drun
+
+exec_always --no-startup-id clipcatd # start clipcatd at startup
+set $launcher-clipboard-insert clipcat-menu insert
+set $launcher-clipboard-remove clipcat-menu remove
+#bindsym $mod+p exec $launcher-clipboard-insert
+#bindsym $mod+o exec $launcher-clipboard-remove
 
 ## Movement ## 
 # change focus
@@ -125,7 +136,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -158,32 +169,45 @@ set $vws1 "v1"
 set $mon1 DP-1
 set $mon2 DP-3
 set $mon3 HDMI-A-1
-set $vmon1 HDMI-A-1
-#set $vmon1 HEADLESS-1
+#set $vmon1 HDMI-A-1
+set $vmon1 HEADLESS-1
 
 # Monitors config 
-output * adaptive_sync off
+#output * adaptive_sync off
 #output $mon1 adaptive_sync on
 
 output $mon1 {
-    #mode 1920x1080@144Hz
-    #adaptive_sync on
-    mode 1920x1080@99Hz
+    mode 1920x1080@144Hz
+    #mode 1920x1080@99Hz
+    #mode 1920x1080@60Hz
     position 0,0 
     #render_bit_depth 8
+    adaptive_sync off
+    allow_tearing on
 }
+# 1920x1080 119.88 Hz (CVT) hsync: 137.14 kHz; pclk: 285.25 MHz
+#output $mon1 modeline 285.25 1920 1968 2000 2080  1080 1083 1088 1144 +hsync -vsync
+
+# 1920x1080 59.93 Hz (CVT 2.07M9-R) hsync: 66.59 kHz; pclk: 138.50 MHz
+# output $mon1 modeline  138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 
 output $mon2 {
-    mode 1920x1080@60Hz 
+    #mode 1920x1080@60Hz 
     position 1920,0
     #render_bit_depth 8
+    allow_tearing on
+    #adaptive_sync on
 }
+# 1920x1080 59.93 Hz (CVT 2.07M9-R) hsync: 66.59 kHz; pclk: 138.50 MHz
+output $mon2 modeline  138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 
-output $mon3 {
-  mode 1920x1080@30Hz 
-  position 0,+1080
-  #render_bit_depth 8
-}
+#output $mon3 {
+#  #mode 1920x1080@30Hz 
+#  position 0,+1080
+#  #render_bit_depth 8
+#}
+
+#output $mon3 modeline 65.76  1920 1928 1960 2000  1080 1082 1090 1096 +hsync -vsync
 
 
 input type:pointer {
@@ -194,13 +218,19 @@ input type:pointer {
 
 #  AOC preferred mode
 #output $mon1 modeline +hsync +vsync
-#output $mon1 modeline 452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync
 
 # Samsung preferred mode
 #output $mon2 modeline +hsync +vsync 
 
 
-#exec swaymsg "create_output $vmon1 resolution 1920x1080"
+exec swaymsg "create_output $vmon1 resolution 1920x1080 disable"
+output $vmon1 {
+    pos 0,+1080
+    mode 1920x1080@60Hz
+    allow_tearing on
+    adaptive_sync off
+    disable
+}
 
 # HDMI preffered mode
 #output $mon3 modeline 148.500 1920 2448 2492 2640 1080 1084 1089 1125 +hsync +vsync
@@ -238,6 +268,7 @@ bindsym $mod+F7 workspace $ws17
 bindsym $mod+F8 workspace $ws18
 bindsym $mod+F9 workspace $ws19
 bindsym $mod+F10 workspace $ws20
+bindsym $mod+F11 workspace $vws1
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -373,16 +404,27 @@ for_window [app_id="gamescope"] {
     border none
 }
 
+
+for_window [class="^exiled-exchange-2$"] {
+    no_focus
+    floating enable
+}
+
+no_focus [class="^exiled-exchange-2$"]
+for_window [class="exiled-exchange-2" instance="exiled-exchange-2"] floating enable
+assign [class="steam_app_2694490" instance="steam_app_2694490"] 15
+assign [class="exiled-exchange-2" instance="exiled-exchange-2"] 15
+no_focus [class="exiled-exchange-2" instance="exiled-exchange-2"]
+no_focus [tiling]
+
+
+
 # Discord
 assign [class="^discord$"] $ws10
 for_window [class="^discord$"] fullscreen
 # Teams
 assign [class="^teams$"] $ws10
 for_window [class="^teams$"] fullscreen
-
-for_window [class="^exiled-exchange-2$"] {
-    floating enable
-}
 
 #for_window [app_id="lutris"] {
 #    focus

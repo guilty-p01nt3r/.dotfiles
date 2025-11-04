@@ -30,12 +30,17 @@ return {
     config = function()
         --vim.lsp.config("*", {})
         vim.lsp.enable({
-            "lua_ls",
-            --"phpactor",
+            "bashls",
+            "clangd",
+            "gopls",
+            "html",
             "intelephense",
-            --"ts_ls",
+            "lua_ls",
+            "tailwindcss",
             "vtsls",
             "vue_ls",
+            --"phpactor",
+            --"ts_ls",
         })
     end,
 }

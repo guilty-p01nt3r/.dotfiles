@@ -1,0 +1,1 @@
+watch -n 2.0 -t  "sensors | tail -25 | head -11"

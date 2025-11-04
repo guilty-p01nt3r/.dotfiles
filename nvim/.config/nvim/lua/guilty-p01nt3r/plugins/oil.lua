@@ -28,20 +28,31 @@ return {
 		},
 		keymaps = {
 			["<C-p>"] = {
-        desc = "Open preview window",
+				desc = "Open preview window",
 				callback = function()
 					local oil = require("oil")
 					oil.open_preview({ vertical = true, split = "botright" })
 				end,
 			},
-      ["<C-y>"] = {
-        desc = "Copy entry filename with full path to clipboard",
-        callback = function()
-          local actions = require("oil.actions")
-          actions.yank_entry.callback()
-          vim.notify("Copied to clipboard: " .. vim.fn.getreg('"'), vim.log.levels.INFO)
-        end,
-      },
+			["<C-r>"] = {
+				desc = "Copy entry filename with relative path to clipboard",
+				callback = function()
+					local actions = require("oil.actions")
+					actions.yank_entry.callback({
+							modify = ":."
+						}
+					)
+					vim.notify("Copied(relative) to clipboard: " .. vim.fn.getreg('"'), vim.log.levels.INFO)
+				end,
+			},
+			["<C-y>"] = {
+			  desc = "Copy entry filename with full path to clipboard",
+			  callback = function()
+			    local actions = require("oil.actions")
+			    actions.yank_entry.callback()
+			    vim.notify("Copied to clipboard: " .. vim.fn.getreg('"'), vim.log.levels.INFO)
+			  end,
+			},
 
 		},
 	},

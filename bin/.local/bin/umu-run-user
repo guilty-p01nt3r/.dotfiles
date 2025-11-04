@@ -17,9 +17,10 @@ done
 # default exports
 # if PROTONPATH env doesn't exist, use default path
   # https://github.com/Open-Wine-Components/umu-launcher/pull/427
-#if [ -z "$PROTONPATH" ]; then
-#  #export PROTONPATH="~/.steam/compatibilitytools.d/proton-ge-custom"
-#fi
+if [ -z "$PROTONPATH" ]; then
+  #export PROTONPATH="~/.steam/compatibilitytools.d/proton-ge-custom"
+  export PROTONPATH=GE-Proton
+fi
 if [ -z "$GAMEID" ]; then
   export GAMEID=0
 fi
@@ -53,5 +54,5 @@ fi
 
 #Get first argument (without -u)
 shift $((OPTIND -1))
-$preCmd umu-run "$1"
+umu-run "$@"
 

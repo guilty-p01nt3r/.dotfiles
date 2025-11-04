@@ -20,7 +20,7 @@ return {
 				-- json = { "prettierd" },
 				-- yaml = { "prettierd" },
 				-- markdown = { "prettierd" },
-				--php = { lsp_format = "fallback" },
+				php = { "pint", lsp_format = "fallback" },
 				sql = { "sleek" }, -- cargo install sleek
         blade = {"blade-formatter"},
 			},

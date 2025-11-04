@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Check first argument is on or off
+
+if [ "$1" != "on" ] && [ "$1" != "off" ]; then
+  echo "Usage: $0 [on|off]"
+  exit 1
+fi
+
+screen_action="disable"
+if [ "$1" == "on" ]; then
+  export VS_GAMEMODE=1
+  screen_action="disable"
+else
+  unset VS_GAMEMODE
+  screen_action="enable"
+fi
+
+swaymsg output DP-3 $screen_action
+#swaymsg output HEADLESS-1 $screen_action

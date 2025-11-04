@@ -66,7 +66,8 @@ return {
 				map("n", "<leader>hD", function()
 					gs.diffthis("~")
 				end)
-				map("n", "<leader>td", gs.toggle_deleted)
+				map("n", "<leader>tid", gs.preview_hunk_inline)
+				map("n", "<leader>td", gs.preview_hunk)
 
 				-- Text object
 				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

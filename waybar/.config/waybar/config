@@ -1,4 +1,7 @@
 {
+    // Global configuration
+    "bar_id": "bar-0",
+    "ipc": true,
     "output": ["DP-1", "DP-3"],
     "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["sway/window"],

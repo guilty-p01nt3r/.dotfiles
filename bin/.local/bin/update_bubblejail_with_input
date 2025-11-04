@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -e
+
+# Input parsing
+INSTANCE_NAME="$1"
+
+# Validate input
+if [[ -z "$INSTANCE_NAME" ]]; then
+    echo "Error: instance-name is required."
+    echo "Usage: update_bubblejail_with_input <instance-name>"
+    exit 1
+fi
+
+# Construct TOML path
+TOML="$HOME/.local/share/bubblejail/instances/$INSTANCE_NAME/services.toml"
+BACKUP="${TOML}.prev"
+
+# Ensure file exists
+if [[ ! -f "$TOML" ]]; then
+    echo "Error: $TOML not found"
+    exit 1
+fi
+
+# Backup
+if [[ ! -f "$BACKUP" ]]; then
+    echo "Backup file $BACKUP already, overwrite."
+    cp "$TOML" "${TOML}.bak"
+fi
+cp "$TOML" "$BACKUP"
+
+# Generate updated --dev-bind lines
+DEV_BIND_LINES=()
+for dev in /dev/input/event*; do
+    DEV_BIND_LINES+=( "\"--dev-bind\", \"$dev\", \"$dev\"," )
+done
+
+# Function to join new dev-binds into TOML array format
+new_dev_binds=$(printf "  %s\n" "${DEV_BIND_LINES[@]}")
+
+# Rebuild TOML with only updated dev-bind lines
+awk -v new_devs="$new_dev_binds" '
+    BEGIN { in_args = 0 }
+    /^\[debug\]/ { print; next }
+    /^\s*raw_bwrap_args\s*=\s*\[/ { print; in_args = 1; next }
+    /^\s*\]/ && in_args { in_args = 0; print new_devs; print; next }
+    in_args && $1 ~ /"--dev-bind"/ { next }  # skip old dev-bind lines
+    { print }
+' "$BACKUP" > "$TOML"
+
