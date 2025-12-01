@@ -23,7 +23,8 @@ return {
     display = {
       chat = {
         window = {
-          position = "right",
+          position ="right",
+          width = 0.3,
         },
       }
     },
@@ -54,7 +55,7 @@ return {
   },
   config = function(_, opts)
     require("codecompanion").setup(opts)
-    vim.keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+    vim.keymap.set({ "n", "v" }, "<Leader><C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
     vim.keymap.set({ "n", "v" }, "<Leader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
     vim.keymap.set("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
 

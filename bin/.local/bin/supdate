@@ -8,9 +8,9 @@ yay -Syuu
 flatpak update
 
 # Update Sunshine
-~/.config/sunshine/update.sh
+#~/.config/sunshine/update.sh
 
 # Update ProtonGE
 ~/.config/protonge/update.sh
 
-sudo setcap 'CAP_SYS_NICE=eip' $(which gamescope)
+sudo setcap 'CAP_SYS_NICE=eip' "$(which gamescope)"

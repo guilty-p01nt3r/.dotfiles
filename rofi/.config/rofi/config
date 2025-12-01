@@ -60,6 +60,6 @@
     font: "UbuntuMono NF 12";
 }
 
-@import "gruvbox-common.rasi"
+//@import "gruvbox-common.rasi"
 
 //rofi.theme: /usr/share/rofi/themes/gruvbox-dark-soft.rasi

@@ -39,6 +39,7 @@ return {
             "tailwindcss",
             "vtsls",
             "vue_ls",
+            --"htmx", -- Break lsp entirely
             --"phpactor",
             --"ts_ls",
         })

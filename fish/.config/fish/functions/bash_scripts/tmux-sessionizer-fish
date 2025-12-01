@@ -62,4 +62,3 @@ else
     tmux switch-client -t "$selected_name" -c "$selected"
 fi
 
-

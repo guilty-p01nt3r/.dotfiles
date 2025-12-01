@@ -35,7 +35,7 @@ exec --no-startup-id kdeconnect-indicator &
 
 # Easy Effects
 # @INFO: It's inside: /home/vince/.config/autostart (It doesn't work)
-exec --no-startup-id com.github.wwmm.easyeffects --gapplication-service
+#exec --no-startup-id com.github.wwmm.easyeffects --gapplication-service
 
 # Bar 
 bar {
