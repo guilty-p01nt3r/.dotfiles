@@ -20,9 +20,9 @@ M.setup = function(config, mason_dap, lspconfig)
 
   config.configurations = {
     {
+      name = "Listen for Xdebug (neovim DAP)",
       type = "php",
       request = "launch",
-      name = "Listen for Xdebug (neovim DAP)",
       port = 9001,
       localSourceRoot = local_root(vim.fn.getcwd()),
       serverSourceRoot = server_root,

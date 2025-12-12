@@ -52,6 +52,8 @@ if [ -z "$WINEPREFIX" ]; then
 fi
 
 
+echo "Setting WINEPREFIX to: $WINEPREFIX"
+
 #Get first argument (without -u)
 shift $((OPTIND -1))
 umu-run "$@"

@@ -8,6 +8,7 @@ return {
     local mason_dap = require("mason-nvim-dap")
     local lspconfig = require("lspconfig")
     local php_adapter = require("guilty-p01nt3r.plugins.dap-adapter.php")
+    local bash_adapter = require("guilty-p01nt3r.plugins.dap-adapter.bash")
 
     mason_dap.setup({
       handlers = {
@@ -16,6 +17,9 @@ return {
         end,
         php = function(config)
           php_adapter.setup(config, mason_dap, lspconfig)
+        end,
+        bash = function(config)
+          bash_adapter.setup(config, mason_dap, lspconfig)
         end,
       },
     })

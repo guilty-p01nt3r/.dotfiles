@@ -1,65 +1,138 @@
 #!/usr/bin/env bash
 
+# Check if opts --no-exec is provided
+no_exec=false
+for arg in "$@"; do
+    if [[ $arg == "--no-exec" ]]; then
+        no_exec=true
+        break
+    fi
+done
+
 ## Configs
 shellPath="/usr/bin/bash"
-script_folder_name=".tmux_session"
-selected=""
+script_folder_name=".vs_tmux_session"
+projDir=$1
+projName=""
 
+echoDbg() {
+    if [[ $DEBUG_TMUX_SESSIONIZER == "1" ]]; then
+        echoDbg "$1"
+    fi
+}
 
 # tmux send-keys ($1=arg $2="C-m")
 tsk() {
-    tmux send-keys -t "$sname":"$window" "clear" C-m
-    tmux send-keys -t "$sname":"$window" "$1" "$2"
+    if [[ -z $window ]]; then
+        echoDbg "Error: Missing window env for tsk function."
+        return 1;
+    fi
+
+    tmux send-keys -c "$projName" -t "$projName":"$window" "clear" C-m
+    echoDbg "Executing in $projName:$window -> $1 $2"
+    tmux send-keys -c "$projName" -t "$projName":"$window" "$1" "$2"
 }
 export -f tsk
 
 # tmux new window
 tnw() {
-    tmux new-window -c "#{pane_current_path}" -t "$sname" -n "$window";
+    if [[ -z $window ]]; then
+        echoDbg "Error: Missing window env for tnw function."
+        return 1;
+    fi
+    tmux new-window -c "$workingDir" -t "$projName": -n "$window";
+    if [[ ! -z $1 ]]; then
+        tsk "$1" "$2"
+    fi
+}
+export -f tnw 
+
+tmux_clean_0win() {
+    num_windows=$(tmux list-windows -t "$projName" | wc -l)
+    if tmux list-windows -t "$projName" | grep -q "^0:" && [[ $num_windows -gt 1 ]]; then
+        tmux set-option -t "$projName" renumber-windows on
+        tmux kill-window -t "$projName":0
+        tmux set-option -t "$projName" renumber-windows off
+    fi
 }
 
-export -f tnw 
+create_default_csession() {
+    
+    echoDbg "Creating default tmux session layout @ $workingDir"
+
+    window="NVIM"
+    tnw "clear; nvim ." "C-m"
+
+    window="SH"
+    tnw "clear"
+    
+    window="GIT"
+    gitCmd=""
+    if [[ -d "$workingDir/.git" && $no_exec == false ]]; then
+        gitCmd="C-m"
+        echoDbg "Git repository found."
+    fi
+    tnw "clear; lazygit" "$gitCmd"
+    
+    window="DOCKER"
+    dockerCmd=""
+    if [[ -f "$workingDir/docker-compose.yml" || -f "$workingDir/docker-compose.yaml" && $no_exec == false ]]; then
+        dockerCmd="C-m"
+        echoDbg "Docker Compose file found."
+    fi
+    tnw "dcd && dcu && dcl" "$dockerCmd"
+}
+export -f create_default_csession
 
 # Execute custom session script
 load_csession_script() {
-    script_path="$1/${script_folder_name}/session.sh";
-    echo "Looking for custom session script at: $script_path";
-    if [[ -e $script_path ]]; then 
-        $shellPath $script_path "$selected_name"
-        return 0;
+    script_path="$projDir/$script_folder_name/session.sh";
+
+    if [[ -f "$script_path" ]]; then
+        "$shellPath" "$script_path" "$projName"
+    else
+        create_default_csession
     fi
-    return 1
+    tmux_clean_0win
 }
+export -f load_csession_script
 
 # Select folder or fuzzy find it
 if [[ $# -eq 1 ]]; then
-    selected=$1
+    projDir=$1
 else
-    selected=$(find ~/work ~/personal -mindepth 1 -maxdepth 2 -type d | fzf)
+    projDir=$(find ~/work ~/personal -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
-if [[ -z $selected ]]; then
-    exit 0
+if [[ -z $projDir ]]; then
+    exit 1
 fi
 
-# Set TMUX helper variables
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
+projName=$(basename "$projDir" | tr . _)
+#tmux_running=$(pgrep tmux)
 
-echo "Selected project: $selected_name"
+echoDbg "Selected project: $projName @ $projDir"
+
+cd "$projDir" || exit 1
+
+workingDir="$projDir"
 
 # If session doesn't not exist create it
-if ! tmux has-session -t "$selected_name" 2> /dev/null; then
-tmux new-session -ds "$selected_name" -c "$selected"
-
-    # Execute the project scoped custom script if exists
-    load_csession_script "$selected"
+if ! tmux has-session -t "$projName" 2> /dev/null; then
+    tmux new-session -ds "$projName" -c "$projDir"
+    load_csession_script
 fi
 
 # If i'm not in TMUX attach the session, switch to it otherwise
 if [[ -z $TMUX ]]; then
-    tmux attach-session -t "$selected_name"
+    tmux attach-session -t "$projName"
 else
-    tmux switch-client -t "$selected_name" -c "$selected"
+    tmux switch-client -t "$projName" -c "$projDir"
 fi
+
+if [[ -z $projName || -z $workingDir || -z $projDir ]]; then
+    echoDbg "Error: projName or workingDir variable is not set."
+    exit 1;
+fi
+
 
 

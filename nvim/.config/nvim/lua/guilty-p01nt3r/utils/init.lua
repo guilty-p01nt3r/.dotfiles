@@ -1,11 +1,13 @@
 local M = {}
 
 local dataPath = vim.fn.stdpath("data");
-local masonSubPath = "/mason/bin/"
+
+M.MASON_BIN_PATH = dataPath .. "/mason/bin/"
+M.MASON_PACKAGE_PATH = dataPath .. "/mason/packages/"
 
 function M.get_mason_executable(package_name)
 
-  local mason_path = dataPath .. masonSubPath ..  package_name
+  local mason_path = M.MASON_BIN_PATH .. package_name
 
   -- Optional: check if it exists
   if vim.fn.filereadable(mason_path) == 1 then
