@@ -64,11 +64,17 @@ create_default_csession() {
     no_nvim=false
     no_git=false
     no_docker=false
-    cwd_debugger=false
+    cwd_debugger=true
 
     # if the code_path env is set use it as working dir
     if [[  -z $code_path ]]; then
         code_path="."
+        if [[ -d "$workingDir/src" ]]; then
+            code_path="src"
+        fi
+        if [[ -d "$workingDir/code" ]]; then
+            code_path="code"
+        fi
     fi
 
 
@@ -76,8 +82,8 @@ create_default_csession() {
         if [[ $arg == "--no-nvim" || $arg == "--no-vim" ]]; then
             no_nvim=true
         fi
-        if [[ $arg == "--cwd-debugger" ]]; then
-            cwd_debugger=true
+        if [[ $arg == "--no-cwd-debugger" ]]; then
+            cwd_debugger=false
         fi
         if [[ $arg == "--no-git" ]]; then
             no_git=true
@@ -94,7 +100,7 @@ create_default_csession() {
             debugger_cmd="export SERVER_SOURCE_ROOT=/var/www/html; export LOCAL_SOURCE_PATH=.;"
             echoDbg "CWD Debugger enabled."
         fi
-        tnw "clear; $debugger_cmd nvim $code_path" "C-m"
+        tnw "cd $code_path; clear; $debugger_cmd nvim ." "C-m"
     fi
 
     window="SH"
