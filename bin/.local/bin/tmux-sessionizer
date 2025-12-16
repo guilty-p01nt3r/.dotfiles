@@ -16,10 +16,11 @@ projDir=$1
 projName=""
 
 echoDbg() {
-    if [[ $DEBUG_TMUX_SESSIONIZER == "1" ]]; then
-        echoDbg "$1"
+    if [[ ! -z $DEBUG_TMUX_SESSIONIZER  ]]; then
+        echo "$1"
     fi
 }
+export -f echoDbg
 
 # tmux send-keys ($1=arg $2="C-m")
 tsk() {
@@ -57,15 +58,49 @@ tmux_clean_0win() {
 }
 
 create_default_csession() {
-    
     echoDbg "Creating default tmux session layout @ $workingDir"
 
-    window="NVIM"
-    tnw "clear; nvim ." "C-m"
+    # if arguments contains --no-nvim or --no-vim skip nvim window
+    no_nvim=false
+    no_git=false
+    no_docker=false
+    cwd_debugger=false
+
+    # if the code_path env is set use it as working dir
+    if [[  -z $code_path ]]; then
+        code_path="."
+    fi
+
+
+    for arg in "$@"; do
+        if [[ $arg == "--no-nvim" || $arg == "--no-vim" ]]; then
+            no_nvim=true
+        fi
+        if [[ $arg == "--cwd-debugger" ]]; then
+            cwd_debugger=true
+        fi
+        if [[ $arg == "--no-git" ]]; then
+            no_git=true
+        fi
+        if [[ $arg == "--no-docker" ]]; then
+            no_docker=true
+        fi
+    done
+
+    if [[ $no_nvim == false ]]; then
+        window="NVIM"
+        debugger_cmd="."
+        if [[ $cwd_debugger == true ]]; then
+            debugger_cmd="export SERVER_SOURCE_ROOT=/var/www/html; export LOCAL_SOURCE_PATH=.;"
+            echoDbg "CWD Debugger enabled."
+        fi
+        tnw "clear; $debugger_cmd nvim $code_path" "C-m"
+    fi
 
     window="SH"
     tnw "clear"
     
+    if [[ $no_git == false ]]; then
     window="GIT"
     gitCmd=""
     if [[ -d "$workingDir/.git" && $no_exec == false ]]; then
@@ -73,14 +108,17 @@ create_default_csession() {
         echoDbg "Git repository found."
     fi
     tnw "clear; lazygit" "$gitCmd"
+    fi
     
+    if [[ $no_docker == false ]]; then
     window="DOCKER"
     dockerCmd=""
     if [[ -f "$workingDir/docker-compose.yml" || -f "$workingDir/docker-compose.yaml" && $no_exec == false ]]; then
         dockerCmd="C-m"
-        echoDbg "Docker Compose file found."
     fi
-    tnw "dcd && dcu && dcl" "$dockerCmd"
+        echoDbg "Docker Compose file found."
+        tnw "dcd && dcu && dcl" "$dockerCmd"
+    fi
 }
 export -f create_default_csession
 
@@ -91,7 +129,7 @@ load_csession_script() {
     if [[ -f "$script_path" ]]; then
         "$shellPath" "$script_path" "$projName"
     else
-        create_default_csession
+        create_default_csession --default 
     fi
     tmux_clean_0win
 }
@@ -115,6 +153,7 @@ echoDbg "Selected project: $projName @ $projDir"
 cd "$projDir" || exit 1
 
 workingDir="$projDir"
+export workingDir
 
 # If session doesn't not exist create it
 if ! tmux has-session -t "$projName" 2> /dev/null; then
