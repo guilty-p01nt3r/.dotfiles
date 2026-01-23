@@ -1,29 +1,36 @@
 return {
   "olimorris/codecompanion.nvim",
+  version = "^18.0.0",
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     "ravitemer/mcphub.nvim",
-    "olimorris/codecompanion.nvim",
-    "j-hui/fidget.nvim",
-    --"Davidyz/VectorCode",
   },
   opts = {
-    strategies = {
+    interactions = {
       chat = {
-        name = "copilot",
+        adapter = {
+          name = "opencode",
+          model = "github-copilot/gpt-5-mini",
+        },
       },
       inline = {
-        adapter = "copilot",
+        adapter = {
+          name = "opencode",
+          model = "github-copilot/gpt-5-mini",
+        },
       },
       cmd = {
-        name = "copilot",
+        adapter = {
+          name = "opencode",
+          model = "github-copilot/gpt-5-mini",
+        },
       },
     },
     display = {
       chat = {
         window = {
-          position ="right",
+          position = "right",
           width = 0.3,
         },
       }
@@ -36,21 +43,10 @@ return {
           make_slash_commands = true,
           show_result_in_chat = true
         }
-      },
+      }
     },
-    adapters = {
-      acp = {
-        codex = function()
-          return require("codecompanion.adapters").extend("codex", {
-            defaults = {
-              auth_method = "openai-api-key",   -- "openai-api-key"|"codex-api-key"|"chatgpt"
-            },
-            env = {
-              OPENAI_API_KEY = "cmd:cat ${HOME}/personal/openai_cred",
-            },
-          })
-        end,
-      },
+    opts = {
+      log_level = "INFO", -- TRACE|DEBUG|ERROR|INFO
     },
   },
   config = function(_, opts)
@@ -61,6 +57,6 @@ return {
 
     vim.cmd([[cab cc CodeCompanion]])
 
-    require("guilty-p01nt3r.plugins.codecompanion.fidget-spinner"):init()
+    -- require("guilty-p01nt3r.plugins.codecompanion.fidget-spinner"):init()
   end,
 }

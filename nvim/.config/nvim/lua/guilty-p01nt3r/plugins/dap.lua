@@ -69,6 +69,9 @@ return {
 		----------------
 		--- ADAPTERS ---
 		----------------
+		local godot_adapter = require("guilty-p01nt3r.plugins.dap-adapter.godot")
+
+		godot_adapter.setup(dap)
 
 		dap.listeners.after.event_initialized["dapui_config"] = function()
 			dapui.open()
