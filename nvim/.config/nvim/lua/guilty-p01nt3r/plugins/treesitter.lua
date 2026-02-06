@@ -56,7 +56,7 @@ return {
 				ensure_installed = {
 					"blade",
 					"c",
-          "css",
+					"css",
 					"go",
 					"html",
 					"javascript",
@@ -68,7 +68,16 @@ return {
 					"vimdoc",
 				},
 				sync_install = false,
-				highlight = { enable = true },
+				highlight = {
+					enable = true,
+					disable = function(lang, bufnr)
+						if lang == "dockerfile" then
+							local name = vim.api.nvim_buf_get_name(bufnr)
+							if name:match("Dockerfile$") then return true end
+						end
+						return false
+					end,
+				},
 				indent = { enable = true },
 				autotag = {
 					enable = true,
