@@ -91,7 +91,6 @@ button:hover {
 #custom-media,
 #tray,
 #mode,
-#idle_inhibitor,
 #scratchpad,
 #mpd {
     padding: 0 10px;
@@ -158,7 +157,7 @@ label:focus {
 }
 
 #disk {
-    background-color: #6b6b6b;
+    /*background-color: #6b6b6b;*/
 }
 
 #backlight {
@@ -208,7 +207,7 @@ label:focus {
 
 #cpu,
 #temperature.cpu {
-    background-color: #08579a;
+    /*background-color: #08579a;*/
     color: #ffffff;
 }
 

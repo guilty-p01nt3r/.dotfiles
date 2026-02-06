@@ -121,9 +121,6 @@
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2"
-    },
     "disk" : {
         "format": "{used} / {total}"
     },
@@ -185,6 +182,9 @@
        "return-type": "",
        "interval": 5
      },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
