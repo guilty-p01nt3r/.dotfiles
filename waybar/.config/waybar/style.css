@@ -1,5 +1,17 @@
 /*style_11*/
 
+@define-color dark #3C3836;
+@define-color gray #504945;
+@define-color lightGray #DFDFDF;
+@define-color red #EB4D4B;
+@define-color lightRed #DD0000;
+@define-color orange #D65D0E;
+@define-color darkYellow #FFA500;
+@define-color yellow #FABD2F;
+@define-color beige #EBDBB2;
+@define-color light #FBF1C7;
+@define-color white #FFFFFF;
+
 * {
     border: none;
     border-radius: 0;
@@ -16,107 +28,82 @@ window#waybar {
     color: #ebdbb2;     
 }
 tooltip {
-     border-radius: 12px;
+     background: transparent;
      background-color: #504945;
+     /*
      border: 1px solid #d65d0e;
+     border-radius: 12px;
+     */
+
 }
 
 /* Modules: Base Style */
 #clock,
-#custom-countdown,
-#custom-todo,
-#backlight,
-#pulseaudio,
-#custom-clip,
-#custom-taskmanager,
-#custom-galculator,
-#custom-snip,
-#tray,
+#cpu,
+#disk,
 #idle_inhibitor,
-#custom-power,
-#custom-reboot,
-#custom-quit,
-#custom-lock,
-#custom-launcher
+#language,
+#memory,
+#network,
+#tray
 {
-    background: #504945; 
-    padding: 3px 13px;
+    background: @light;
+    color:      @dark;
+    padding: 0px 10px;
     margin: 4px 2px;
     border-radius: 6px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Modules: Specific Styles */
+#idle_inhibitor:hover
+{
+    background: #D65D0E; 
+    color:      #3C3836;     
+}
 #idle_inhibitor.activated {
-    background: #d65d0e;
-    color: #3c3836;     
+    background: @orange;
+    color: @dark;
+}
+#idle_inhibitor.activated:hover {
+    background: @orange;
+    color: @dark;
 }
 
-#pulseaudio, 
-#language,
-#tray
-{
-    background: #504945; 
+#tray{
+    background: transparent;
+    color: @lightGray;
     padding: 0px 10px;
     margin: 4px 2px;
     border-radius: 6px;
 }
-
-#disk,
-#cpu,
-#memory,
-#network
-{
-    background: #504945;
-    padding: 3px 5px;
-    margin: 4px 1px;
-    border-radius: 6px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Modules: Hover Effects */
-#backlight:hover,
-#custom-todo:hover,
 #clock:hover,
-#custom-countdown:hover,
-#pulseaudio:hover,
-#custom-clip:hover,
-#custom-snip:hover,
-#tray:hover,
-#idle_inhibitor:hover,
-#custom-power:hover,
-#custom-reboot:hover,
-#custom-quit:hover,
-#custom-lock:hover {
-    background: #d65d0e; 
-    color: #3c3836;     
+#pulseaudio:hover
+{
+    background: @orange;
+    color:      @dark;
 }
 
-/* Modules: Specific Styles */
-#custom-countdown,
-#custom-todo,
-#clock {
-    background: #fbf1c7;
-    color: #3c3836;
-    font-weight: bold;
+#pulseaudio{
+    padding: 0px 10px;
+    margin: 4px 2px;
+    border-radius: 6px;
+    background:linear-gradient(90deg, @light, @light);
+    color: @dark;
 }
-
-/*
 #pulseaudio.muted {
-    background: #fabd2f;
-    color: #3c3836;
-}
-
-#pulseaudio.source-muted #pulseaudio.muted{
-    background: #eb4d4b;
-    color: #3c3836;
-}
-*/
-#pulseaudio.muted {
-    color: #EBDBB2;
+    background:linear-gradient(90deg, @yellow, @light);
+    color: @dark;
 }
 
 #pulseaudio.source-muted {
-    color: #EBDBB2;
+    background:linear-gradient(90deg, @light, @yellow);
+    color: @dark;
+}
+
+#pulseaudio.source-muted.muted{
+    background:linear-gradient(90deg, @yellow, @yellow);
+    color: @dark;
 }
 
 #keyboard-state {
@@ -124,15 +111,15 @@ tooltip {
 }
 
 #keyboard-state label.locked {
-    background: #d65d0e; 
-    color: #3c3836;
+    background: @orange;
+    color: @light;
     padding: 0px 12px;
     margin: 4px 0px;
     border-radius: 6px;
 }
 
 #taskbar {
-    background: #504945;
+    background: @gray;
     padding: 0 5px;
     margin: 4px 2px;
     border-radius: 6px;
@@ -153,7 +140,6 @@ tooltip {
     border-bottom-color: #fbf1c7; 
 }
 
-/* Workspaces: use gruvbox palette for consistency */
 #workspaces button {
     padding: 0;
     margin: 4px;
@@ -186,22 +172,24 @@ tooltip {
 
 /* Temperatures */
 #cpu {
-    background: #504945; 
+    color: @dark;
+    background: @light;
     padding: 3px 3px 3px 5px;
     margin: 4px 0 4px 1px;
     border-radius: 6px 0 0 6px;
 }
 
 #temperature.cpu {
-    background: #504945; 
+    color: @dark;
+    background: @light;
     padding: 3px 5px 3px 3px;
     margin: 4px 2px 4px 0px;
     border-radius: 0px 6px 6px 0px;
 }
 
 #custom-amdgpu{
-    background-color: #11601c;
-    background: #504945; 
+    color: @dark;
+    background: @light;
     padding: 3px 3px 3px 5px;
     margin: 4px 0 4px 2px;
     border-radius: 6px 0 0px 6px;
@@ -210,36 +198,38 @@ tooltip {
 #temperature.gpu-tempjunc,
 #temperature.gpu-tempmem,
 #temperature.gpu-tempedge {
-    background-color: #11601c;
-    background: #504945; 
+    color: @dark;
+    background: @light;
     padding: 1px;
     margin: 4px 0px 4px 0px;
 }
 
 #custom-amdgpu-fan{
-    background-color: #11601c;
-    background: #504945; 
+    color: @dark;
+    background: @light;
     padding: 3px 5px 3px 3px;
     margin: 4px 0px 4px 0px;
     border-radius: 0px 6px 6px 0px;
 }
 
 #temperature.warning {
-    background-color: #ffa500;
-    color: #3c3836;
+    background-color: @darkYellow;
+    color: @dark;
+    padding: 0 5px;
 }
 
 #temperature.critical {
-    background-color: #ff0000;
-    color: #3c3836;
+    background-color: @red;
+    color: @dark;
+    padding: 0 5px;
 }
 
 #window {
-    background: #504945;
+    background: @gray;
+    color: @beige;
     padding: 0 10px;
     margin: 4px 2px;
     border-radius: 6px;
-    color: #ebdbb2;
 }
 window#waybar.empty #window{
     background: transparent;
@@ -247,8 +237,8 @@ window#waybar.empty #window{
 
 
 #systemd-failed-units.degraded {
-    background-color: #DD0000;
-    color: #FFFFFF;
+    background-color: @red;
+    color: @dark;
     padding: 0 10px;
     margin: 4px 2px;
     border-radius: 6px;

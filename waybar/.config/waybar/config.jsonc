@@ -88,7 +88,7 @@
         "format": "{icon}",
         "format-icons":
         {
-            "locked": " Caps ",
+            "locked": " Caps",
             "unlocked": ""
         }
     },
@@ -394,9 +394,10 @@
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "warning-threshold": 70,
         "critical-threshold": 80,
-        "format-critical": "{temperatureC}°C {icon}",
+        "format-critical": "{temperatureC}° ",
+        "format-warning": "{temperatureC}° ",
         "format": "{temperatureC}°",
-        "format-icons": ["", "", ""],
+        //"format-icons": ["", "", ""],
         "interval": 5
     },
 
@@ -409,9 +410,10 @@
 
     "temperature#gpu-tempedge": {
         "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
-        "warning-threshold": 85,
+        "warning-threshold": 90,
         "critical-threshold": 100,
-        "format-critical": "{temperatureC}°C ",
+        "format-critical": "{temperatureC}° ",
+        "format-warning": "{temperatureC}° ",
         //"format-icons": ["", "", ""],
         "format": "{temperatureC}°"
     },
@@ -420,7 +422,8 @@
         "hwmon-path": "/sys/class/hwmon/hwmon0/temp2_input",
         "critical-threshold": 110,
         "warning-threshold": 90,
-        "format-critical": "{temperatureC}°C ",
+        "format-critical": "{temperatureC}° ",
+        "format-warning": "{temperatureC}° ",
         //"format-icons": ["", "", ""],
         "format": "{temperatureC}° "
     },
@@ -429,7 +432,8 @@
         "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input",
         "warning-threshold": 90,
         "critical-threshold": 108,
-        "format-critical": "{temperatureC}°C ",
+        "format-critical": "{temperatureC}° ",
+        "format-warning": "{temperatureC}° ",
         //"format-icons": ["", "", ""],
         "format": "{temperatureC}°"
     },
