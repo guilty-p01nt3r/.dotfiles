@@ -1,5 +1,6 @@
 /*style_11*/
 
+@define-color black #000000;
 @define-color dark #3C3836;
 @define-color gray #504945;
 @define-color lightGray #DFDFDF;
@@ -9,23 +10,29 @@
 @define-color darkYellow #FFA500;
 @define-color yellow #FABD2F;
 @define-color beige #EBDBB2;
+@define-color darkLight #EAE0B9;
 @define-color light #FBF1C7;
 @define-color white #FFFFFF;
+
+@define-color mainColor @dark;
+@define-color mainBg @darkLight;
+
 
 * {
     border: none;
     border-radius: 0;
     font-family: "Ubuntu","Font Awesome 7 Free";
-    font-size: 14px;
+    font-size: 12px;
     min-height: 0;
 }
 
 /* Waybar: Base Style 
     background: #3c3836;
+    rgba(60, 56, 54, 0.3)
 * */
 window#waybar {
-    background: rgba(60, 56, 54, 0.3);
-    color: #ebdbb2;     
+    background: transparent;
+    color: @beige;
 }
 tooltip {
      background: transparent;
@@ -47,8 +54,8 @@ tooltip {
 #network,
 #tray
 {
-    background: @light;
-    color:      @dark;
+    background: @mainBg;
+    color:      @mainColor;
     padding: 0px 10px;
     margin: 4px 2px;
     border-radius: 6px;
@@ -62,17 +69,17 @@ tooltip {
     color:      #3C3836;     
 }
 #idle_inhibitor.activated {
-    background: @orange;
-    color: @dark;
+    background: @white;
+    color: @mainColor;
 }
 #idle_inhibitor.activated:hover {
     background: @orange;
-    color: @dark;
+    color: @mainColor;
 }
 
 #tray{
     background: transparent;
-    color: @lightGray;
+    color: @mainBgGray;
     padding: 0px 10px;
     margin: 4px 2px;
     border-radius: 6px;
@@ -81,29 +88,29 @@ tooltip {
 #pulseaudio:hover
 {
     background: @orange;
-    color:      @dark;
+    color:      @mainColor;
 }
 
 #pulseaudio{
     padding: 0px 10px;
     margin: 4px 2px;
     border-radius: 6px;
-    background:linear-gradient(90deg, @light, @light);
-    color: @dark;
+    background:linear-gradient(90deg, @mainBg, @mainBg);
+    color: @mainColor;
 }
 #pulseaudio.muted {
-    background:linear-gradient(90deg, @yellow, @light);
-    color: @dark;
+    background:linear-gradient(90deg, @yellow, @mainBg);
+    color: @mainColor;
 }
 
 #pulseaudio.source-muted {
-    background:linear-gradient(90deg, @light, @yellow);
-    color: @dark;
+    background:linear-gradient(90deg, @mainBg, @yellow);
+    color: @mainColor;
 }
 
 #pulseaudio.source-muted.muted{
     background:linear-gradient(90deg, @yellow, @yellow);
-    color: @dark;
+    color: @mainColor;
 }
 
 #keyboard-state {
@@ -112,7 +119,7 @@ tooltip {
 
 #keyboard-state label.locked {
     background: @orange;
-    color: @light;
+    color: @mainBg;
     padding: 0px 12px;
     margin: 4px 0px;
     border-radius: 6px;
@@ -166,30 +173,30 @@ tooltip {
 
 #mode {
     background-color: #64727D;
-    border-bottom: 3px solid #fbf1c7; /* use gruvbox light instead of plain white */
+    border-bottom: 3px solid #fbf1c7; /* use gruvbox mainBg instead of plain white */
 }
 
 
 /* Temperatures */
 #cpu {
-    color: @dark;
-    background: @light;
+    color: @mainColor;
+    background: @mainBg;
     padding: 3px 3px 3px 5px;
     margin: 4px 0 4px 1px;
     border-radius: 6px 0 0 6px;
 }
 
 #temperature.cpu {
-    color: @dark;
-    background: @light;
+    color: @mainColor;
+    background: @mainBg;
     padding: 3px 5px 3px 3px;
     margin: 4px 2px 4px 0px;
     border-radius: 0px 6px 6px 0px;
 }
 
 #custom-amdgpu{
-    color: @dark;
-    background: @light;
+    color: @mainColor;
+    background: @mainBg;
     padding: 3px 3px 3px 5px;
     margin: 4px 0 4px 2px;
     border-radius: 6px 0 0px 6px;
@@ -198,29 +205,29 @@ tooltip {
 #temperature.gpu-tempjunc,
 #temperature.gpu-tempmem,
 #temperature.gpu-tempedge {
-    color: @dark;
-    background: @light;
+    color: @mainColor;
+    background: @mainBg;
     padding: 1px;
     margin: 4px 0px 4px 0px;
 }
 
 #custom-amdgpu-fan{
-    color: @dark;
-    background: @light;
+    color: @mainColor;
+    background: @mainBg;
     padding: 3px 5px 3px 3px;
     margin: 4px 0px 4px 0px;
     border-radius: 0px 6px 6px 0px;
 }
 
 #temperature.warning {
-    background-color: @darkYellow;
-    color: @dark;
+    background-color: @mainColorYellow;
+    color: @mainColor;
     padding: 0 5px;
 }
 
 #temperature.critical {
     background-color: @red;
-    color: @dark;
+    color: @mainColor;
     padding: 0 5px;
 }
 
@@ -238,7 +245,7 @@ window#waybar.empty #window{
 
 #systemd-failed-units.degraded {
     background-color: @red;
-    color: @dark;
+    color: @mainColor;
     padding: 0 10px;
     margin: 4px 2px;
     border-radius: 6px;
