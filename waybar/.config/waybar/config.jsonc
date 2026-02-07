@@ -21,6 +21,7 @@
     /////////////////////////////////////////////
 
     "modules-left": ["sway/workspaces", "sway/mode",
+
         "sway/window"
         //,"custom/todo"
     ],
@@ -40,6 +41,7 @@
         "keyboard-state",
         //"idle_inhibitor",
         "group/group-tools",
+        "custom/timer",
         "clock"
     ],
 
@@ -443,6 +445,19 @@
         "format": "  {} ",
         "return-type": "",
         "interval": 5
+    },
+
+    "custom/timer": {
+        "exec": "~/.config/waybar/scripts/timer.sh",
+        "return-type": "json",
+        "format": "{}",
+        "on-click": "~/.config/waybar/scripts/timer.sh click",
+        "on-click-right": "~/.config/waybar/scripts/timer.sh 25m",
+        "on-click-middle": "~/.config/waybar/scripts/timer.sh reset",
+        "on-scroll-up": "~/.config/waybar/scripts/timer.sh down",
+        "on-scroll-down": "~/.config/waybar/scripts/timer.sh up",
+        "tooltip": true,
+        "escape": true
     }
 
 }
