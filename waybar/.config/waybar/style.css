@@ -52,7 +52,7 @@ tooltip {
 #language,
 #memory,
 #network,
-#timer,
+#custom-timer,
 #tray
 {
     background: @mainBg;
@@ -243,11 +243,17 @@ window#waybar.empty #window{
     background: transparent;
 }
 
-
-#systemd-failed-units.degraded {
-    background-color: @red;
+#systemd-failed-units {
     color: @mainColor;
     padding: 0 10px;
     margin: 4px 2px;
     border-radius: 6px;
+}
+
+#systemd-failed-units.ok {
+    background-color: @light;
+}
+
+#systemd-failed-units.degraded {
+    background-color: @red;
 }
