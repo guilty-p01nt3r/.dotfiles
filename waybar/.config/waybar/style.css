@@ -52,6 +52,7 @@ tooltip {
 #idle_inhibitor,
 #language,
 #memory,
+#mode,
 #network,
 #custom-timer,
 #tray
@@ -172,12 +173,6 @@ tooltip {
 #workspaces button.urgent {
     background-color: @red;
 }
-
-#mode {
-    background-color: @darkGray;
-    border-bottom: 3px solid @light;
-}
-
 
 /* Temperatures */
 #cpu {
