@@ -481,7 +481,7 @@
             //,"custom/todo"
         ],
         "modules-center": [ 
-            "systemd-failed-units"
+            //"systemd-failed-units"
         ],
         "modules-right": [ 
             //"custom/countdown", 
@@ -508,7 +508,7 @@
         ///////////////////////////////////
 
         "systemd-failed-units": {
-            "hide-on-ok": false, // Do not hide if there is zero failed units.
+            "hide-on-ok": true, 
             "format": " {nr_failed}",
             "format": "",
             "system": true, 
