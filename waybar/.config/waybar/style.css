@@ -217,7 +217,7 @@ tooltip {
 }
 
 #temperature.warning {
-    background-color: @mainColorYellow;
+    background-color: @yellow;
     color: @mainColor;
     padding: 0 5px;
 }
