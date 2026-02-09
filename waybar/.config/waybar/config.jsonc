@@ -480,9 +480,7 @@
             "sway/window"
             //,"custom/todo"
         ],
-        "modules-center": [ 
-            //"systemd-failed-units"
-        ],
+        "modules-center": [],
         "modules-right": [ 
             //"custom/countdown", 
 
