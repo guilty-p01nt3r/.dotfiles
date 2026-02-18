@@ -46,7 +46,7 @@ return {
       }
     },
     opts = {
-      log_level = "INFO", -- TRACE|DEBUG|ERROR|INFO
+      log_level = "ERROR", -- TRACE|DEBUG|ERROR|INFO
     },
   },
   config = function(_, opts)

@@ -10,10 +10,11 @@ for arg in "$@"; do
 done
 
 ## Configs
-shellPath="/usr/bin/bash"
-script_folder_name=".vs_tmux_session"
-projDir=$1
-projName=""
+export shellPath="/usr/bin/bash"
+export script_folder_name=".vs_tmux_session"
+export projDir=$1
+export projName=""
+export default_debugger_cmd="export SERVER_SOURCE_ROOT=/var/www/html; export LOCAL_SOURCE_PATH=.; "
 
 echoDbg() {
     if [[ ! -z $DEBUG_TMUX_SESSIONIZER  ]]; then
@@ -57,14 +58,14 @@ tmux_clean_0win() {
     fi
 }
 
-create_default_csession() {
-    echoDbg "Creating default tmux session layout @ $workingDir"
+# shellcheck disable=SC2120
+create_default_nvim_win() {
 
-    # if arguments contains --no-nvim or --no-vim skip nvim window
-    no_nvim=false
-    no_git=false
-    no_docker=false
-    cwd_debugger=true
+    # check if number of arugment is greater than 0
+    # if there is at least one set code_path var to first argument
+    if [[ $# -gt 0 ]]; then
+        code_path=$1
+    fi
 
     # if the code_path env is set use it as working dir
     if [[  -z $code_path ]]; then
@@ -78,12 +79,33 @@ create_default_csession() {
     fi
 
 
+    if [[ -z $cwd_debugger || $cwd_debugger == true ]]; then
+        debugger_cmd=$default_debugger_cmd
+        echoDbg "CWD Debugger enabled."
+    fi
+    window="NVIM" tnw "cd $code_path; clear; $debugger_cmd nvim ." "C-m"
+}
+export -f create_default_nvim_win
+
+create_default_csession() {
+    echoDbg "Creating default tmux session layout @ $workingDir"
+
+    # if arguments contains --no-nvim or --no-vim skip nvim window
+    no_nvim=false
+    no_ai=false
+    no_git=false
+    no_docker=false
+    cwd_debugger=true
+
     for arg in "$@"; do
         if [[ $arg == "--no-nvim" || $arg == "--no-vim" ]]; then
             no_nvim=true
         fi
         if [[ $arg == "--no-cwd-debugger" ]]; then
             cwd_debugger=false
+        fi
+        if [[ $arg == "--no-ai" ]]; then
+            no_ai=true
         fi
         if [[ $arg == "--no-git" ]]; then
             no_git=true
@@ -94,13 +116,12 @@ create_default_csession() {
     done
 
     if [[ $no_nvim == false ]]; then
-        window="NVIM"
-        debugger_cmd="."
-        if [[ $cwd_debugger == true ]]; then
-            debugger_cmd="export SERVER_SOURCE_ROOT=/var/www/html; export LOCAL_SOURCE_PATH=.;"
-            echoDbg "CWD Debugger enabled."
-        fi
-        tnw "cd $code_path; clear; $debugger_cmd nvim ." "C-m"
+        create_default_nvim_win
+    fi
+
+    if [[ $no_ai == false ]]; then
+        window="AI"
+        tnw "opencode $workingDir" "C-m"
     fi
 
     window="SH"
@@ -108,12 +129,18 @@ create_default_csession() {
     
     if [[ $no_git == false ]]; then
     window="GIT"
-    gitCmd=""
+    if [[ -z $gitCmd ]]; then
+        gitCmd="lazygit"
+    fi
+    if [[ -z $gitCmdPath ]]; then
+        gitCmdPath=""
+    fi
+    gitExecCmd=""
     if [[ -d "$workingDir/.git" && $no_exec == false ]]; then
-        gitCmd="C-m"
+        gitExecCmd="C-m"
         echoDbg "Git repository found."
     fi
-    tnw "clear; lazygit" "$gitCmd"
+    tnw "clear; cd $gitCmdPath; $gitCmd" "$gitExecCmd"
     fi
     
     if [[ $no_docker == false ]]; then
