@@ -83,7 +83,10 @@ create_default_nvim_win() {
         debugger_cmd=$default_debugger_cmd
         echoDbg "CWD Debugger enabled."
     fi
-    window="NVIM" tnw "cd $code_path; clear; $debugger_cmd nvim ." "C-m"
+    if [[ -z $window ]]; then
+        window="NVIM"
+    fi
+    window=$window tnw "cd $code_path; clear; $debugger_cmd nvim ." "C-m"
 }
 export -f create_default_nvim_win
 
@@ -92,6 +95,7 @@ create_default_csession() {
 
     # if arguments contains --no-nvim or --no-vim skip nvim window
     no_nvim=false
+    no_shell=false
     no_ai=false
     no_git=false
     no_docker=false
@@ -100,6 +104,9 @@ create_default_csession() {
     for arg in "$@"; do
         if [[ $arg == "--no-nvim" || $arg == "--no-vim" ]]; then
             no_nvim=true
+        fi
+        if [[ $arg == "--no-shell" ]]; then
+            no_shell=true
         fi
         if [[ $arg == "--no-cwd-debugger" ]]; then
             cwd_debugger=false
@@ -124,8 +131,10 @@ create_default_csession() {
         tnw "opencode $workingDir" "C-m"
     fi
 
-    window="SH"
-    tnw "clear"
+    if [[ $no_shell == false ]]; then
+        window="SH"
+        tnw "clear"
+    fi
     
     if [[ $no_git == false ]]; then
     window="GIT"
@@ -134,13 +143,15 @@ create_default_csession() {
     fi
     if [[ -z $gitCmdPath ]]; then
         gitCmdPath=""
+    else
+        gitCmdPath="cd $workingDir; clear;"
     fi
     gitExecCmd=""
     if [[ -d "$workingDir/.git" && $no_exec == false ]]; then
         gitExecCmd="C-m"
         echoDbg "Git repository found."
     fi
-    tnw "clear; cd $gitCmdPath; $gitCmd" "$gitExecCmd"
+    tnw "clear; $gitCmdPath $gitCmd" "$gitExecCmd"
     fi
     
     if [[ $no_docker == false ]]; then
