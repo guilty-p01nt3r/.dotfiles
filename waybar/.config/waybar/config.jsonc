@@ -402,14 +402,14 @@
         },
 
         "custom/amdgpu":{
-            "exec": "cat /sys/class/hwmon/hwmon0/device/gpu_busy_percent",
+            "exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
             "format": " {}",
             "return-type": "",
             "interval": 5
         },
 
         "temperature#gpu-tempedge": {
-            "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+            "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
             "warning-threshold": 90,
             "critical-threshold": 100,
             "format-critical": "{temperatureC}° ",
@@ -419,7 +419,7 @@
         },
 
         "temperature#gpu-tempjunc": {
-            "hwmon-path": "/sys/class/hwmon/hwmon0/temp2_input",
+            "hwmon-path": "/sys/class/hwmon/hwmon1/temp2_input",
             "critical-threshold": 110,
             "warning-threshold": 90,
             "format-critical": "{temperatureC}° ",
@@ -429,7 +429,7 @@
         },
 
         "temperature#gpu-tempmem": {
-            "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input",
+            "hwmon-path": "/sys/class/hwmon/hwmon1/temp3_input",
             "warning-threshold": 90,
             "critical-threshold": 108,
             "format-critical": "{temperatureC}° ",
@@ -439,7 +439,7 @@
         },
 
         "custom/amdgpu-fan":{
-            "exec": "cat /sys/class/hwmon/hwmon0/fan1_input",
+            "exec": "cat /sys/class/hwmon/hwmon1/fan1_input",
             "format": "  {} ",
             "return-type": "",
             "interval": 5
@@ -857,14 +857,14 @@
         },
 
         "custom/amdgpu":{
-            "exec": "cat /sys/class/hwmon/hwmon0/device/gpu_busy_percent",
+            "exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
             "format": " {}",
             "return-type": "",
             "interval": 5
         },
 
         "temperature#gpu-tempedge": {
-            "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+            "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
             "warning-threshold": 90,
             "critical-threshold": 100,
             "format-critical": "{temperatureC}° ",
@@ -874,7 +874,7 @@
         },
 
         "temperature#gpu-tempjunc": {
-            "hwmon-path": "/sys/class/hwmon/hwmon0/temp2_input",
+            "hwmon-path": "/sys/class/hwmon/hwmon1/temp2_input",
             "critical-threshold": 110,
             "warning-threshold": 90,
             "format-critical": "{temperatureC}° ",
@@ -884,7 +884,7 @@
         },
 
         "temperature#gpu-tempmem": {
-            "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input",
+            "hwmon-path": "/sys/class/hwmon/hwmon1/temp3_input",
             "warning-threshold": 90,
             "critical-threshold": 108,
             "format-critical": "{temperatureC}° ",
@@ -894,7 +894,7 @@
         },
 
         "custom/amdgpu-fan":{
-            "exec": "cat /sys/class/hwmon/hwmon0/fan1_input",
+            "exec": "cat /sys/class/hwmon/hwmon1/fan1_input",
             "format": "  {} ",
             "return-type": "",
             "interval": 5

@@ -48,11 +48,11 @@ bindsym Mod4+minus bar mode toggle
 
 # change volume or toggle mute | TODO: use waybar
 ### Using pamixer 
-bindsym $mod+Shift+x exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-increase
-bindsym $mod+Shift+z exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-decrease
-bindsym $mod+Shift+b exec --no-startup-id ~/.config/i3/audioManager.sh sink-default-tmute
+bindsym $mod+Shift+x exec --no-startup-id ~/.config/sway/audioManager.sh sink-default-increase
+bindsym $mod+Shift+z exec --no-startup-id ~/.config/sway/audioManager.sh sink-default-decrease
+bindsym $mod+Shift+b exec --no-startup-id ~/.config/sway/audioManager.sh sink-default-tmute
 ## Mic toggle
-bindsym $mod+Shift+v exec --no-startup-id ~/.config/i3/audioManager.sh source-default-tmute
+bindsym $mod+Shift+v exec --no-startup-id ~/.config/sway/audioManager.sh source-default-tmute
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -83,9 +83,9 @@ set $drun rofi -show drun -show-icons -config ~/.config/rofi/config
 #set $drun sed --in-place "s/^output =.*/output = $(swaymsg --type get_outputs | jq '.[] | select(.focused).name')/" ~/.config/tofi/config && tofi-drun --drun-launch=true --font "~/.local/share/fonts/Fira Code Regular Nerd Font Complete Mono.ttf"
 bindsym $mod+d exec --no-startup-id $drun
 
-exec_always --no-startup-id clipcatd # start clipcatd at startup
-set $launcher-clipboard-insert clipcat-menu insert
-set $launcher-clipboard-remove clipcat-menu remove
+#exec_always --no-startup-id clipcatd # start clipcatd at startup
+#set $launcher-clipboard-insert clipcat-menu insert
+#set $launcher-clipboard-remove clipcat-menu remove
 #bindsym $mod+p exec $launcher-clipboard-insert
 #bindsym $mod+o exec $launcher-clipboard-remove
 
@@ -361,7 +361,7 @@ output $mon2 bg ~/Pictures/getCapeWearCapeFly.jpg fill
 output $mon3 bg #000000 solid_color
 
 # Session Manager (gui)
-exec --no-startup-id /usr/bin/lxpolkit &
+#exec --no-startup-id /usr/bin/lxpolkit &
 
 default_border pixel 1
 default_floating_border pixel 1
@@ -482,7 +482,7 @@ for_window [app_id="Thunar" title="Rename.*"] floating enable
 
 
 # Load Profile Sync Daemon (psd) before starting firefox
-exec --no-startup-id systemctl --user start psd.service
+#exec --no-startup-id systemctl --user start psd.service
 
 # Load layouts
 #exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/layout_tree/workspaces-1.json'"
@@ -507,7 +507,6 @@ input type:keyboard {
 }
 
 # Theme 
-set $gnome-schema org.gnome.desktop.interface
 
 ## Colours
 set $dark        #3C3836
@@ -532,12 +531,7 @@ client.urgent                $red        $red            $light      $orange    
 client.background            $dark       $dark           $dark       $dark           $dark
 client.placeholder           $dark       $dark           $dark       $dark           $dark
 
-exec_always {
-    gsettings set $gnome-schema gtk-theme 'Klaus'
-    gsettings set $gnome-schema icon-theme 'Vimix-dark'
-    gsettings set $gnome-schema cursor-theme "Vimix-dark"
-    #gsettings set $gnome-schema font-name 'Your font name'
-}
+seat seat0 xcursor_theme Oxygen_White 24
 
 include /etc/sway/config.d/*
 exec $HOME/.config/i3/sway_scripts/90-systemd-user.sh

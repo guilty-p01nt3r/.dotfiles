@@ -5,6 +5,8 @@ end
 
 # Global Variables
 set -x PATH $PATH /sbin/
+export EDITOR="nvim"
+export SHELL="/usr/bin/fish"
 export PAGER="less -R"
 export LANG="en_US.UTF-8"
 export UID=(id -u)
