@@ -3,3 +3,4 @@ bin/.local/share/applications
 bin/.local/share/applications
 /bin/.local/bin
 /bin/.local/bin
+/sway/.config/sway/logs/sway.log
