@@ -3,4 +3,4 @@ systemctl --user stop pipewire wireplumber xdg-desktop-portal xdg-desktop-portal
 systemctl --user start wireplumber
 
 systemctl --user start sunshine
-systemctl --user restart opentabletdriver
+#systemctl --user restart opentabletdriver

@@ -1,10 +1,3 @@
-# Sway env_variables for wlroots support 
-#exec --no-startup-id systemctl --user import-environment DISPLAY SWAYSOCK WAYLAND_DISPLAY  XDG_CURRENT_DESKTOP
-#exec --no-startup-id dbus-update-activation-environment --systemd DISPLAY SWAYSOCK WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-#exec --no-startup-id ~/.dotfiles/scripts/sway/repairportal
-#exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
-
-
 # gnome keyring
 #exec dbus-update-activation-environment --all
 exec gnome-keyring-daemon --start --components=secrets
@@ -31,7 +24,7 @@ bindsym Ctrl+Shift+Print exec hyprpicker -a
 
 
 # KdeConnect (Mobile Phone Integration)
-exec --no-startup-id kdeconnect-indicator &
+#exec --no-startup-id kdeconnect-indicator &
 
 # Easy Effects
 exec --no-startup-id flatpak run com.github.wwmm.easyeffects --gapplication-service
@@ -74,8 +67,8 @@ bindsym $mod+d exec --no-startup-id $drun
 
 # Clipboard
 exec --no-startup-id  wl-paste --watch cliphist store
-bindsym $mod+p exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
-bindsym $mod+o exec cliphist list | rofi -dmenu | cliphist delete
+#bindsym $mod+p exec cliphist list | rofi -dmenu | cliphist decode | wl-copy
+#bindsym $mod+o exec cliphist list | rofi -dmenu | cliphist delete
 
 ## Movement ## 
 # change focus
@@ -522,7 +515,7 @@ client.placeholder           $dark       $dark           $dark       $dark      
 seat seat0 xcursor_theme Oxygen_White 24
 
 include /etc/sway/config.d/*
-exec $HOME/.config/i3/sway_scripts/90-systemd-user.sh
+exec $HOME/.config/sway/sway_scripts/90-systemd-user.sh
 
 #exec wayvnc -S /tmp/dp_vnc -f 30 -o DP-1 192.168.1.100 5900
 #exec wayvnc -S /tmp/hdmi_vnc_f1 -f 1 -o HDMI-A-1 100.64.0.1 5901

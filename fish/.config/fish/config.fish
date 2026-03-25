@@ -75,3 +75,6 @@ set fish_cursor_visual block
 
 # Icons in terminal
 #source ~/.local/share/icons-in-terminal/icons.fish
+
+# Created by `pipx` on 2026-03-24 22:23:37
+set PATH $PATH /home/vince/.local/bin
