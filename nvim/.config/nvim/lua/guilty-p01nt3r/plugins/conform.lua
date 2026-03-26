@@ -22,7 +22,7 @@ return {
 				-- markdown = { "prettierd" },
 				php = { "pint", lsp_format = "fallback" },
 				sql = { "sleek" }, -- cargo install sleek
-        blade = {"blade-formatter"},
+				--      blade = {"blade-formatter"},
 			},
 		})
 		vim.keymap.set("n", "<leader>=", function()

@@ -39,19 +39,25 @@ return {
 				callback = function()
 					local actions = require("oil.actions")
 					actions.yank_entry.callback({
-							modify = ":."
-						}
+						modify = ":."
+					}
 					)
 					vim.notify("Copied(relative) to clipboard: " .. vim.fn.getreg('"'), vim.log.levels.INFO)
 				end,
 			},
 			["<C-y>"] = {
-			  desc = "Copy entry filename with full path to clipboard",
-			  callback = function()
-			    local actions = require("oil.actions")
-			    actions.yank_entry.callback()
-			    vim.notify("Copied to clipboard: " .. vim.fn.getreg('"'), vim.log.levels.INFO)
-			  end,
+				desc = "Copy entry filename with full path to clipboard",
+				callback = function()
+					local actions = require("oil.actions")
+					actions.yank_entry.callback()
+					vim.notify("Copied to clipboard: " .. vim.fn.getreg('"'), vim.log.levels.INFO)
+				end,
+			},
+			view_options = {
+				show_hidden = false,
+				is_hidden_file = function(name, _)
+					return vim.startswith(name, ".") or vim.endswith(name, "_templ.go")
+				end,
 			},
 
 		},

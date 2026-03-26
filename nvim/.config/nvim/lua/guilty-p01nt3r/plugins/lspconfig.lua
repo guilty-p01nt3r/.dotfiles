@@ -40,7 +40,8 @@ return {
             "vtsls",
             "vue_ls",
             "gdscript",
-            --"htmx", -- Break lsp entirely
+            "htmx", -- Break lsp entirely
+            "templ",
             --"phpactor",
             --"ts_ls",
         })
