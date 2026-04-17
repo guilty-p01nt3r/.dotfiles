@@ -112,7 +112,7 @@
                     ],
                     "right": [
                         {
-                            "compactMode": false,
+                            "compactMode": true,
                             "diskPath": "/",
                             "iconColor": "none",
                             "id": "SystemMonitor",
@@ -164,6 +164,12 @@
                             "useCustomFont": false
                         },
                         {
+                            "id": "plugin:tailscale"
+                        },
+                        {
+                            "id": "plugin:privacy-indicator"
+                        },
+                        {
                             "blacklist": [
                             ],
                             "chevronColor": "none",
@@ -173,18 +179,6 @@
                             "id": "Tray",
                             "pinned": [
                             ]
-                        },
-                        {
-                            "id": "plugin:tailscale"
-                        },
-                        {
-                            "id": "plugin:privacy-indicator"
-                        },
-                        {
-                            "id": "plugin:ssh-sessions"
-                        },
-                        {
-                            "id": "plugin:screen-recorder"
                         }
                     ]
                 }
@@ -264,7 +258,7 @@
             ],
             "right": [
                 {
-                    "compactMode": false,
+                    "compactMode": true,
                     "diskPath": "/",
                     "iconColor": "none",
                     "id": "SystemMonitor",
@@ -316,6 +310,12 @@
                     "useCustomFont": false
                 },
                 {
+                    "id": "plugin:tailscale"
+                },
+                {
+                    "id": "plugin:privacy-indicator"
+                },
+                {
                     "blacklist": [
                     ],
                     "chevronColor": "none",
@@ -333,18 +333,6 @@
                     "id": "NotificationHistory",
                     "showUnreadBadge": true,
                     "unreadBadgeColor": "primary"
-                },
-                {
-                    "id": "plugin:tailscale"
-                },
-                {
-                    "id": "plugin:privacy-indicator"
-                },
-                {
-                    "id": "plugin:ssh-sessions"
-                },
-                {
-                    "id": "plugin:screen-recorder"
                 }
             ]
         }
@@ -425,6 +413,30 @@
                 }
             ],
             "right": [
+                {
+                    "defaultSettings": {
+                        "audioCodec": "opus",
+                        "audioSource": "default_output",
+                        "colorRange": "limited",
+                        "copyToClipboard": false,
+                        "customReplayDuration": "30",
+                        "directory": "",
+                        "filenamePattern": "recording_yyyyMMdd_HHmmss",
+                        "frameRate": "60",
+                        "hideInactive": false,
+                        "iconColor": "none",
+                        "quality": "very_high",
+                        "replayDuration": "30",
+                        "replayEnabled": false,
+                        "replayStorage": "ram",
+                        "resolution": "original",
+                        "restorePortalSession": false,
+                        "showCursor": true,
+                        "videoCodec": "h264",
+                        "videoSource": "portal"
+                    },
+                    "id": "plugin:screen-recorder"
+                }
             ]
         }
     },
