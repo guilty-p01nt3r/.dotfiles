@@ -22,6 +22,16 @@ vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set("n", "Q", "<nop>", { noremap = true, silent = true })
 
 
+
+-- Copy Current file relative path
+vim.keymap.set("n", "<leader>cfp", function()
+  local file_path = vim.fn.expand("%:p")
+  local relative_path = vim.fn.fnamemodify(file_path, ":.")
+  vim.fn.setreg("+", relative_path)
+  print("Copied relative path: " .. relative_path)
+end, { desc = "Copy current file relative path" })
+
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)

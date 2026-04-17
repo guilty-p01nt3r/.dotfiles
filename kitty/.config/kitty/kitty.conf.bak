@@ -1,0 +1,25 @@
+font_family      FiraCode Nerd Font Mono
+bold_font        FiraCode Nerd Font Mono
+italic_font      auto
+bold_italic_font auto
+font_size 14.0
+
+#background_opacity 0.97
+
+cursor_shape beam
+
+enable_audio_bell no
+
+# Remap
+map ctrl+shift+plus change_font_size all +2.0
+map ctrl+shift+plus change_font_size all +2.0
+map ctrl+shift+backspace change_font_size all 0
+
+# Added by Gogh
+include colors.conf
+#include  gruvbox-material-kitty/colors/gruvbox-material-dark-soft.conf
+#include  gruvbox-material-kitty/colors/gruvbox-material-dark-hard.conf
+
+allow_remote_control true
+listen_on unix:/tmp/mykitty
+shell /usr/bin/fish

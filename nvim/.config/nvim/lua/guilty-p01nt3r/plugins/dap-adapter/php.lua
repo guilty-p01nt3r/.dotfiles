@@ -16,7 +16,7 @@ M.setup = function(config, mason_dap, lspconfig)
 
   local local_root = lspconfig.util.root_pattern(local_root_path)
 
-  -- print("Using local root path: " .. local_root(vim.fn.getcwd()))
+  --  print("Using local root path: " .. local_root(vim.fn.getcwd()) .. " and server root: " .. server_root)
 
   config.configurations = {
     {

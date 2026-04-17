@@ -32,6 +32,7 @@ return {
 			"markdown",
 			"python",
 			"rust",
+			"templ",
 			"terraform",
 			"toml",
 			"vim",
@@ -39,10 +40,20 @@ return {
 			"yaml",
 		},
 	},
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		'vrischmann/tree-sitter-templ',
+	},
 	config = function(_, opts)
 		local TS = require("nvim-treesitter")
 		TS.install(opts.ensure_installed)
 
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "templ",
+			callback = function()
+				vim.treesitter.start()
+			end,
+		})
 		vim.api.nvim_create_autocmd("FileType", {
 			group = vim.api.nvim_create_augroup("treesitter.setup", {}),
 			callback = function(args)

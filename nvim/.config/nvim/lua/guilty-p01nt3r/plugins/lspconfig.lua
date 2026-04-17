@@ -26,9 +26,26 @@ return {
         -- INFO `prepend` ensures it is loaded before the user's LSP configs, so
         -- that the user's configs override nvim-lspconfig.
         vim.opt.runtimepath:prepend(lspConfigPath)
+        vim.filetype.add({ extension = { templ = "templ" } })
     end,
+
     config = function()
         --vim.lsp.config("*", {})
+        --
+--         lspconfig.htmx.setup({
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     filetypes = { "html", "templ" },
+-- })
+        vim.lsp.config("htmx", {
+            filetypes = { "html", "templ" },
+        })
+        vim.lsp.config("html", {
+            filetypes = { "html", "templ" },
+        })
+        vim.lsp.config("tailwindcss", {
+            filetypes = { "templ", "astro", "javascript", "typescript", "react", "html" },
+        })
         vim.lsp.enable({
             "bashls",
             "clangd",
@@ -40,7 +57,7 @@ return {
             "vtsls",
             "vue_ls",
             "gdscript",
-            "htmx", -- Break lsp entirely
+            --"htmx", -- Break lsp entirely
             "templ",
             --"phpactor",
             --"ts_ls",

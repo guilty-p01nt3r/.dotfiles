@@ -53,13 +53,15 @@ return {
 					vim.notify("Copied to clipboard: " .. vim.fn.getreg('"'), vim.log.levels.INFO)
 				end,
 			},
-			view_options = {
-				show_hidden = false,
-				is_hidden_file = function(name, _)
-					return vim.startswith(name, ".") or vim.endswith(name, "_templ.go")
-				end,
-			},
-
 		},
+		view_options = {
+			show_hidden = false,
+			is_hidden_file = function(name, _)
+				return vim.startswith(name, ".")
+					or vim.endswith(name, "_templ.go")
+					or vim.endswith(name, "_test.go")
+			end,
+		},
+
 	},
 }

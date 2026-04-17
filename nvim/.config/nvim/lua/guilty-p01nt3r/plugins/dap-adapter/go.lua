@@ -1,6 +1,7 @@
 local M = {}
 
-M.setup = function(config, mason_dap, lspconfig)
+-- _ is lspconfig, which is not used in this adapter
+M.setup = function(config, mason_dap, _)
     config.configurations = {
         {
             type = "delve",

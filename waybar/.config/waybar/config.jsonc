@@ -112,8 +112,9 @@
         "clock":
         {
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-            "format-alt": "{:%d-%m-%Y}",
-            "format": "{:%I:%M %p}"
+            //"format-alt": "{:%d-%m-%Y}",
+            "format-alt": "{:%I:%M %p}",
+            "format": "{:%I:%M %p  %d-%m-%Y}"
         },
 
         "backlight":
@@ -567,8 +568,9 @@
         "clock":
         {
             "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-            "format-alt": "{:%d-%m-%Y}",
-            "format": "{:%I:%M %p}"
+            //"format-alt": "{:%d-%m-%Y}",
+            "format-alt": "{:%I:%M %p}",
+            "format": "{:%I:%M %p  %d-%m-%Y}"
         },
 
         "backlight":

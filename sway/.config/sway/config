@@ -29,6 +29,7 @@ bindsym Ctrl+Shift+Print exec hyprpicker -a
 # Easy Effects
 exec --no-startup-id flatpak run com.github.wwmm.easyeffects --gapplication-service
 
+#exec --no-startup-id qs -c noctalia-shell
 # Bar 
 bar {
     swaybar_command waybar

@@ -55,6 +55,7 @@ alias dcl="docker-compose logs -ft"
 alias dls="docker ps -a"
 alias ssh="TERM=xterm-256color /usr/bin/ssh"
 alias oh="thunar . & disown"
+alias opencode="~/.local/bin/sopencode"
 
 # I do not want to shoot myself in the foot
 alias rm="trash -i"

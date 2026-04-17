@@ -30,7 +30,7 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level("off")
 
 vim.opt.undofile = true
 vim.opt.swapfile = false
