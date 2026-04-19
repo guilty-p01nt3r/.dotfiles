@@ -1,919 +1,118 @@
-/////////////////////////////////
-//                             //
-//  // Waybar configuration//  //
-//                             //
-/////////////////////////////////
-
-[
-    {
-        "layer": "top",
-        "position": "top",
-        "output": ["DP-1"],
-        //"height": 16,
-        "spacing": 2,
-        "margin-top": 0,
-        "margin-bottom": 0,
-        "reload_style_on_change": true,
-
-        /////////////////////////////////////////////
-        //                                         //
-        //  // Choose the order of the modules //  //
-        //                                         //
-        /////////////////////////////////////////////
-
-        "modules-left": ["sway/workspaces", "sway/mode",
-
-            "sway/window"
-            //,"custom/todo"
-        ],
-        "modules-center": [ ],
-        "modules-right": [ 
-            //"custom/countdown", 
-
-            "group/group-temperature", 
-            "memory",
-            "disk",
-            "network#25",
-
-            "pulseaudio", 
-            "tray", 
-            "keyboard-state",
-            //"idle_inhibitor",
-            "group/group-tools",
-            "clock"
-        ],
-
-
-        ///////////////////////////////////
-        //                               //
-        //  // Modules configuration//   //
-        //                               //
-        ///////////////////////////////////
-
-        "systemd-failed-units": {
-            "hide-on-ok": true, 
-            "format": " {nr_failed}",
-            "format": "",
-            "system": true, 
-            "user": true 
-        },
-
-        "wlr/taskbar":
-        {
-            "format": "{icon}",
-            "icon-size": 20,
-            "icon-theme": "Numix-Circle",
-            "tooltip-format": "{title:.50}",
-            "on-click": "minimize-raise",
-            "on-click-middle": "close",
-            "on-click-right": "fullscreen"
-        },
-
-        "ext/workspaces":
-        {
-            "format": "{icon}",
-            "format-icons":
-            {
-                "urgent": "",
-                "active": "",
-                "default": ""
-            },
-            "sort-by-number": true,
-            "on-click": "activate"
-        },
-
-        "keyboard-state":
-        {
-            "capslock": true,
-            "format": "{icon}",
-            "format-icons":
-            {
-                "locked": " Caps",
-                "unlocked": ""
-            }
-        },
-
-        "idle_inhibitor":
-        {
-            "format": "{icon}",
-            "format-icons":
-            {
-                "activated": "",
-                "deactivated": ""
-            }
-        },
-
-        "tray":
-        {
-            "icon-size": 20,
-            "spacing": 10
-        },
-
-        "clock":
-        {
-            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-            //"format-alt": "{:%d-%m-%Y}",
-            "format-alt": "{:%I:%M %p}",
-            "format": "{:%I:%M %p  %d-%m-%Y}"
-        },
-
-        "backlight":
-        {
-            "device": "acpi_video0", // Assuming acpi_video0, adjust if needed
-            "tooltip": false,
-            "format": "{percent}% {icon}",
-            "format-icons": ["", ""],
-            "on-scroll-up": "brightnessctl s +5%",
-            "on-scroll-down": "brightnessctl s 5%-"
-        },
-
-        "pulseaudio":
-        {
-            "format": "{volume}% {icon} {format_source}",
-            "tooltip": false,
-            "format-bluetooth": "{volume}% {icon}",
-            "format-bluetooth-muted": "{icon} {format_source}",
-            "format-muted": " {format_source}",
-            "format-source": "",
-            "format-source-muted": "",
-            "format-icons":
-            {
-                "headphone": "",
-                "hands-free": "",
-                "headset": "",
-                "phone": "",
-                "portable": "",
-                "car": "",
-                "default": ["", "", ""]
-            },
-            "on-click": "pavucontrol",
-        },
-
-
-        ///////////////////////////
-        //                       //
-        //  // Custom module //  //
-        //                       //
-        ///////////////////////////  
-
-
-        "custom/countdown":
-        {
-            "exec": "~/.config/waybar/scripts/countdown/countdown.sh",
-            "return-type": "json",
-            "format": "{}",
-            "interval": 3600,
-            "on-click-right": "foot bash ~/.config/waybar/scripts/countdown/countdown.sh interactive",
-            "on-scroll-up": "~/.config/waybar/scripts/countdown/countdown.sh scroll-up",
-            "on-scroll-down": "~/.config/waybar/scripts/countdown/countdown.sh scroll-down"
-        },
-
-        "group/group-tools":
-        {
-            "orientation": "inherit",
-            "drawer":
-            {
-                "transition-duration": 500,
-                "children-class": "other-apps",
-                "transition-left-to-right": false
-            },
-            "modules": [
-                "idle_inhibitor",
-                "sway/language",
-            ]
-        },
-
-        "group/group-temperature":
-        {
-            "orientation": "inherit",
-            "modules": [
-                "cpu",
-                "temperature#cpu",
-                "custom/amdgpu" ,
-                "temperature#gpu-tempedge",
-                "temperature#gpu-tempjunc",
-                "temperature#gpu-tempmem",
-                "custom/amdgpu-fan",
-            ]
-        },
-
-
-
-        "custom/todo":
-        {
-            "format": "\u00a0{}",
-            "exec": "~/.config/waybar/scripts/todo/todo.sh",
-            "on-double-click": "~/.config/waybar/scripts/todo/todo.sh mark_done",
-            "on-click-right": "~/.config/waybar/scripts/todo/todo.sh open_tui",
-            "on-click-middle": "~/.config/waybar/scripts/todo/todo.sh middle_click",
-            "return-type": "json",
-            "interval": 5,
-            "tooltip": true
-        },
-
-
-        ///////////////////////////
-        //                       //
-        //  // Apps section //   //
-        //                       //
-        ///////////////////////////
-
-
-        "group/group-apps":
-        {
-            "orientation": "inherit",
-            "drawer":
-            {
-                "transition-duration": 500,
-                "children-class": "other-apps",
-                "transition-left-to-right": true
-            },
-            "modules": [
-                "custom/chrome",
-                "custom/terminal",
-                "custom/music",
-                "custom/thunar"
-            ]
-        },
-
-        "custom/launcher":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Menu\nRight click to change theme",
-            "on-click": "killall wofi 2>/dev/null || wofi --show drun",
-            "on-click-right": "bash ~/.config/waybar/scripts/theme.sh"
-        },
-
-        "custom/chrome":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Browser",
-            "on-click": "google-chrome-stable",
-            "on-click-right": "chromium",
-            "on-click-middle": "brave"
-        },
-
-        "custom/terminal":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Terminal",
-            "on-click": "xfce4-terminal",
-            "on-click-right": "foot"
-        },
-
-        "custom/code":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Code Editor",
-            "on-click": "/opt/sublime_text/sublime_text"
-        },
-
-        "custom/music":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Music",
-            "on-click": "env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U >/dev/null 2>&1 &",
-            "on-click-right": "g4music"
-        },
-
-        "custom/thunar":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "File Manager",
-            "on-click": "thunar"
-        },
-
-        "custom/snip":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Screenshot",
-            "on-click": "grim -g \"$(slurp)\" ~/Pictures/$(date +%s).png"
-        },
-
-        "custom/clip":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Clipboard",
-            "on-click": "killall wofi 2>/dev/null || cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-        },
-
-
-        ///////////////////////////
-        //                       //
-        //  // Power section //  //
-        //                       //
-        ///////////////////////////
-
-
-        "group/group-power":
-        {
-            "orientation": "inherit",
-            "drawer":
-            {
-                "transition-duration": 500,
-                "children-class": "not-power",
-                "transition-left-to-right": false
-            },
-            "modules": [
-                "custom/power",
-                "custom/quit",
-                "custom/lock",
-                "custom/reboot"
-            ]
-        },
-
-        "custom/quit":
-        {
-            "format": "󰗼",
-            "tooltip": true,
-            "tooltip-format": "Logout",
-            "on-click": "bash ~/.config/waybar/scripts/power.sh --logout"
-        },
-
-        "custom/lock":
-        {
-            "format": "󰍁",
-            "tooltip": true,
-            "tooltip-format": "Lock",
-            "on-click": "bash ~/.config/waybar/scripts/lock.sh"
-        },
-
-        "custom/reboot":
-        {
-            "format": "󰜉",
-            "tooltip": true,
-            "tooltip-format": "Reboot",
-            "on-click": "bash ~/.config/waybar/scripts/power.sh --reboot"
-        },
-
-        "custom/power":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Shutdown",
-            "on-click": "bash ~/.config/waybar/scripts/power.sh --shutdown"
-        },
-
-        "memory": {
-            "format": " {used} / {total} GB",
-            "interval": 5
-        },
-
-        "network#25": {
-            "format": " {bandwidthDownBytes}  / {bandwidthUpBytes} ",
-            "interval": 5,
-            "interface": "enp37s0"
-        },
-
-        /////////////////////////
-        //                     //
-        //  // Temperature //  //
-        //                     //
-        /////////////////////////
-
-        "disk": {
-            "format": " {used}/{total} GB",
-            "tooltip-format": "  Used: {used} GB\n  Total: {total} GB\n  Free: {free} GB",
-            "path": "/"
-        },
-
-        "cpu": {
-            "format": "  {usage}",
-            "tooltip-format": "  CPU Usage: {}%"
-        },
-
-        "temperature#cpu": {
-            "thermal-zone": 2,
-            "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-            "warning-threshold": 70,
-            "critical-threshold": 80,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            "format": "{temperatureC}°",
-            //"format-icons": ["", "", ""],
-            "interval": 5
-        },
-
-        "custom/amdgpu":{
-            "exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
-            "format": " {}",
-            "return-type": "",
-            "interval": 5
-        },
-
-        "temperature#gpu-tempedge": {
-            "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
-            "warning-threshold": 90,
-            "critical-threshold": 100,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            //"format-icons": ["", "", ""],
-            "format": "{temperatureC}°"
-        },
-
-        "temperature#gpu-tempjunc": {
-            "hwmon-path": "/sys/class/hwmon/hwmon1/temp2_input",
-            "critical-threshold": 110,
-            "warning-threshold": 90,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            //"format-icons": ["", "", ""],
-            "format": "{temperatureC}° "
-        },
-
-        "temperature#gpu-tempmem": {
-            "hwmon-path": "/sys/class/hwmon/hwmon1/temp3_input",
-            "warning-threshold": 90,
-            "critical-threshold": 108,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            //"format-icons": ["", "", ""],
-            "format": "{temperatureC}°"
-        },
-
-        "custom/amdgpu-fan":{
-            "exec": "cat /sys/class/hwmon/hwmon1/fan1_input",
-            "format": "  {} ",
-            "return-type": "",
-            "interval": 5
-        },
-
-        "custom/timer": {
-            "exec": "~/.config/waybar/scripts/timer.sh",
-            "return-type": "json",
-            "format": "{}",
-            "output": ["DP-1"],
-            "on-click": "~/.config/waybar/scripts/timer.sh click",
-            "on-click-right": "~/.config/waybar/scripts/timer.sh 25m",
-            "on-click-middle": "~/.config/waybar/scripts/timer.sh reset",
-            "on-scroll-up": "~/.config/waybar/scripts/timer.sh down",
-            "on-scroll-down": "~/.config/waybar/scripts/timer.sh up",
-            "tooltip": true,
-            "escape": true
-        }
-
-    }, 
-    {   "layer": "top",
-        "position": "top",
-        "output": ["DP-3"],
-        //"height": 16,
-        "spacing": 2,
-        "margin-top": 0,
-        "margin-bottom": 0,
-        "reload_style_on_change": true,
-
-        /////////////////////////////////////////////
-        //                                         //
-        //  // Choose the order of the modules //  //
-        //                                         //
-        /////////////////////////////////////////////
-
-        "modules-left": ["sway/workspaces", "sway/mode",
-
-            "sway/window"
-            //,"custom/todo"
-        ],
-        "modules-center": [],
-        "modules-right": [ 
-            //"custom/countdown", 
-
-            "group/group-temperature", 
-            "memory",
-            "disk",
-            "network#25",
-
-            "pulseaudio", 
-            "tray", 
-            "keyboard-state",
-            //"idle_inhibitor",
-            "group/group-tools",
-            "custom/timer",
-            "clock"
-        ],
-
-
-        ///////////////////////////////////
-        //                               //
-        //  // Modules configuration//   //
-        //                               //
-        ///////////////////////////////////
-
-        "systemd-failed-units": {
-            "hide-on-ok": true, 
-            "format": " {nr_failed}",
-            "format": "",
-            "system": true, 
-            "user": true 
-        },
-
-        "wlr/taskbar":
-        {
-            "format": "{icon}",
-            "icon-size": 20,
-            "icon-theme": "Numix-Circle",
-            "tooltip-format": "{title:.50}",
-            "on-click": "minimize-raise",
-            "on-click-middle": "close",
-            "on-click-right": "fullscreen"
-        },
-
-        "ext/workspaces":
-        {
-            "format": "{icon}",
-            "format-icons":
-            {
-                "urgent": "",
-                "active": "",
-                "default": ""
-            },
-            "sort-by-number": true,
-            "on-click": "activate"
-        },
-
-        "keyboard-state":
-        {
-            "capslock": true,
-            "format": "{icon}",
-            "format-icons":
-            {
-                "locked": " Caps",
-                "unlocked": ""
-            }
-        },
-
-        "idle_inhibitor":
-        {
-            "format": "{icon}",
-            "format-icons":
-            {
-                "activated": "",
-                "deactivated": ""
-            }
-        },
-
-        "tray":
-        {
-            "icon-size": 20,
-            "spacing": 10
-        },
-
-        "clock":
-        {
-            "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-            //"format-alt": "{:%d-%m-%Y}",
-            "format-alt": "{:%I:%M %p}",
-            "format": "{:%I:%M %p  %d-%m-%Y}"
-        },
-
-        "backlight":
-        {
-            "device": "acpi_video0", // Assuming acpi_video0, adjust if needed
-            "tooltip": false,
-            "format": "{percent}% {icon}",
-            "format-icons": ["", ""],
-            "on-scroll-up": "brightnessctl s +5%",
-            "on-scroll-down": "brightnessctl s 5%-"
-        },
-
-        "pulseaudio":
-        {
-            "format": "{volume}% {icon} {format_source}",
-            "tooltip": false,
-            "format-bluetooth": "{volume}% {icon}",
-            "format-bluetooth-muted": "{icon} {format_source}",
-            "format-muted": " {format_source}",
-            "format-source": "",
-            "format-source-muted": "",
-            "format-icons":
-            {
-                "headphone": "",
-                "hands-free": "",
-                "headset": "",
-                "phone": "",
-                "portable": "",
-                "car": "",
-                "default": ["", "", ""]
-            },
-            "on-click": "pavucontrol",
-        },
-
-
-        ///////////////////////////
-        //                       //
-        //  // Custom module //  //
-        //                       //
-        ///////////////////////////  
-
-
-        "custom/countdown":
-        {
-            "exec": "~/.config/waybar/scripts/countdown/countdown.sh",
-            "return-type": "json",
-            "format": "{}",
-            "interval": 3600,
-            "on-click-right": "foot bash ~/.config/waybar/scripts/countdown/countdown.sh interactive",
-            "on-scroll-up": "~/.config/waybar/scripts/countdown/countdown.sh scroll-up",
-            "on-scroll-down": "~/.config/waybar/scripts/countdown/countdown.sh scroll-down"
-        },
-
-        "group/group-tools":
-        {
-            "orientation": "inherit",
-            "drawer":
-            {
-                "transition-duration": 500,
-                "children-class": "other-apps",
-                "transition-left-to-right": false
-            },
-            "modules": [
-                "idle_inhibitor",
-                "sway/language",
-            ]
-        },
-
-        "group/group-temperature":
-        {
-            "orientation": "inherit",
-            "modules": [
-                "cpu",
-                "temperature#cpu",
-                "custom/amdgpu" ,
-                "temperature#gpu-tempedge",
-                "temperature#gpu-tempjunc",
-                "temperature#gpu-tempmem",
-                "custom/amdgpu-fan",
-            ]
-        },
-
-
-
-        "custom/todo":
-        {
-            "format": "\u00a0{}",
-            "exec": "~/.config/waybar/scripts/todo/todo.sh",
-            "on-double-click": "~/.config/waybar/scripts/todo/todo.sh mark_done",
-            "on-click-right": "~/.config/waybar/scripts/todo/todo.sh open_tui",
-            "on-click-middle": "~/.config/waybar/scripts/todo/todo.sh middle_click",
-            "return-type": "json",
-            "interval": 5,
-            "tooltip": true
-        },
-
-
-        ///////////////////////////
-        //                       //
-        //  // Apps section //   //
-        //                       //
-        ///////////////////////////
-
-
-        "group/group-apps":
-        {
-            "orientation": "inherit",
-            "drawer":
-            {
-                "transition-duration": 500,
-                "children-class": "other-apps",
-                "transition-left-to-right": true
-            },
-            "modules": [
-                "custom/chrome",
-                "custom/terminal",
-                "custom/music",
-                "custom/thunar"
-            ]
-        },
-
-        "custom/launcher":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Menu\nRight click to change theme",
-            "on-click": "killall wofi 2>/dev/null || wofi --show drun",
-            "on-click-right": "bash ~/.config/waybar/scripts/theme.sh"
-        },
-
-        "custom/chrome":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Browser",
-            "on-click": "google-chrome-stable",
-            "on-click-right": "chromium",
-            "on-click-middle": "brave"
-        },
-
-        "custom/terminal":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Terminal",
-            "on-click": "xfce4-terminal",
-            "on-click-right": "foot"
-        },
-
-        "custom/code":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Code Editor",
-            "on-click": "/opt/sublime_text/sublime_text"
-        },
-
-        "custom/music":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Music",
-            "on-click": "env LD_PRELOAD=/usr/lib/spotify-adblock.so spotify --uri=%U >/dev/null 2>&1 &",
-            "on-click-right": "g4music"
-        },
-
-        "custom/thunar":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "File Manager",
-            "on-click": "thunar"
-        },
-
-        "custom/snip":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Screenshot",
-            "on-click": "grim -g \"$(slurp)\" ~/Pictures/$(date +%s).png"
-        },
-
-        "custom/clip":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Clipboard",
-            "on-click": "killall wofi 2>/dev/null || cliphist list | wofi --dmenu | cliphist decode | wl-copy"
-        },
-
-
-        ///////////////////////////
-        //                       //
-        //  // Power section //  //
-        //                       //
-        ///////////////////////////
-
-
-        "group/group-power":
-        {
-            "orientation": "inherit",
-            "drawer":
-            {
-                "transition-duration": 500,
-                "children-class": "not-power",
-                "transition-left-to-right": false
-            },
-            "modules": [
-                "custom/power",
-                "custom/quit",
-                "custom/lock",
-                "custom/reboot"
-            ]
-        },
-
-        "custom/quit":
-        {
-            "format": "󰗼",
-            "tooltip": true,
-            "tooltip-format": "Logout",
-            "on-click": "bash ~/.config/waybar/scripts/power.sh --logout"
-        },
-
-        "custom/lock":
-        {
-            "format": "󰍁",
-            "tooltip": true,
-            "tooltip-format": "Lock",
-            "on-click": "bash ~/.config/waybar/scripts/lock.sh"
-        },
-
-        "custom/reboot":
-        {
-            "format": "󰜉",
-            "tooltip": true,
-            "tooltip-format": "Reboot",
-            "on-click": "bash ~/.config/waybar/scripts/power.sh --reboot"
-        },
-
-        "custom/power":
-        {
-            "format": "",
-            "tooltip": true,
-            "tooltip-format": "Shutdown",
-            "on-click": "bash ~/.config/waybar/scripts/power.sh --shutdown"
-        },
-
-        "memory": {
-            "format": " {used} / {total} GB",
-            "interval": 5
-        },
-
-        "network#25": {
-            "format": " {bandwidthDownBytes}  / {bandwidthUpBytes} ",
-            "interval": 5,
-            "interface": "enp37s0"
-        },
-
-        /////////////////////////
-        //                     //
-        //  // Temperature //  //
-        //                     //
-        /////////////////////////
-
-        "disk": {
-            "format": " {used}/{total} GB",
-            "tooltip-format": "  Used: {used} GB\n  Total: {total} GB\n  Free: {free} GB",
-            "path": "/"
-        },
-
-        "cpu": {
-            "format": "  {usage}",
-            "tooltip-format": "  CPU Usage: {}%"
-        },
-
-        "temperature#cpu": {
-            "thermal-zone": 2,
-            "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-            "warning-threshold": 70,
-            "critical-threshold": 80,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            "format": "{temperatureC}°",
-            //"format-icons": ["", "", ""],
-            "interval": 5
-        },
-
-        "custom/amdgpu":{
-            "exec": "cat /sys/class/hwmon/hwmon1/device/gpu_busy_percent",
-            "format": " {}",
-            "return-type": "",
-            "interval": 5
-        },
-
-        "temperature#gpu-tempedge": {
-            "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
-            "warning-threshold": 90,
-            "critical-threshold": 100,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            //"format-icons": ["", "", ""],
-            "format": "{temperatureC}°"
-        },
-
-        "temperature#gpu-tempjunc": {
-            "hwmon-path": "/sys/class/hwmon/hwmon1/temp2_input",
-            "critical-threshold": 110,
-            "warning-threshold": 90,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            //"format-icons": ["", "", ""],
-            "format": "{temperatureC}° "
-        },
-
-        "temperature#gpu-tempmem": {
-            "hwmon-path": "/sys/class/hwmon/hwmon1/temp3_input",
-            "warning-threshold": 90,
-            "critical-threshold": 108,
-            "format-critical": "{temperatureC}° ",
-            "format-warning": "{temperatureC}° ",
-            //"format-icons": ["", "", ""],
-            "format": "{temperatureC}°"
-        },
-
-        "custom/amdgpu-fan":{
-            "exec": "cat /sys/class/hwmon/hwmon1/fan1_input",
-            "format": "  {} ",
-            "return-type": "",
-            "interval": 5
-        },
-
-        "custom/timer": {
-            "exec": "~/.config/waybar/scripts/timer.sh",
-            "return-type": "json",
-            "format": "{}",
-            "output": ["DP-1"],
-            "on-click": "~/.config/waybar/scripts/timer.sh click",
-            "on-click-right": "~/.config/waybar/scripts/timer.sh 25m",
-            "on-click-middle": "~/.config/waybar/scripts/timer.sh reset",
-            "on-scroll-up": "~/.config/waybar/scripts/timer.sh down",
-            "on-scroll-down": "~/.config/waybar/scripts/timer.sh up",
-            "tooltip": true,
-            "escape": true
-        }
+// -*- mode: jsonc -*-
+{
+  "layer": "top",
+  // Waybar at top layer
+  "position": "top",
+  // Waybar position (top|bottom|left|right)
+  "height": 30,
+  // Waybar height (to be removed for auto height)
+  // "width": 1280, // Waybar width
+  "spacing": 4,
+  // Gaps between modules (4px)
+  // Choose the order of the modules
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "sway/scratchpad",
+    "custom/kitty"
+  ],
+  "modules-center": [
+    "sway/window"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    "network",
+    "cpu",
+    "memory",
+    "temperature",
+    "sway/language",
+    "custom/clock"
+  ],
+  "custom/kitty": {
+    "format": "{} ",
+    "tooltip": false,
+    "on-click": "kitty"
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "sway/scratchpad": {
+    "format": "{icon} {count}",
+    "show-empty": false,
+    "format-icons": [
+      "",
+      ""
+    ],
+    "tooltip": true,
+    "tooltip-format": "{app}: {title}"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
     }
-]
+  },
+  "tray": {
+    // "icon-size": 21,
+    "spacing": 10
+  },
+  "custom/clock": {
+    // see: https://github.com/games-on-whales/wolf/issues/137
+    // and: https://github.com/Alexays/Waybar/issues/3575#issuecomment-2338813343
+    "format": "  {}",
+    "tooltip": false,
+    "interval": 60,
+    "exec": "date +'%d %a %H:%M'"
+  },
+  "cpu": {
+    "format": "{usage}% ",
+    "tooltip": false
+  },
+  "memory": {
+    "format": "{}% "
+  },
+  "temperature": {
+    // "thermal-zone": 2,
+    // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+    "critical-threshold": 80,
+    // "format-critical": "{temperatureC}°C {icon}",
+    "format": "{temperatureC}°C",
+    "format-icons": [
+      "",
+      "",
+      ""
+    ]
+  },
+  "network": {
+    // "interface": "wlp2*", // (Optional) To force the use of this interface
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ipaddr}/{cidr}",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}"
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    }
+  }
+}
