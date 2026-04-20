@@ -232,6 +232,14 @@ layer-rule {
     place-within-backdrop true
 }
 
+cursor {
+//    xcursor-theme "Oxygen_White"
+//    xcursor-size 24
+//
+    hide-when-typing
+    hide-after-inactive-ms 1000
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -431,7 +439,9 @@ binds {
 
     Mod+Ctrl+Page_Down { move-workspace-down; }
     Mod+Ctrl+Page_Up   { move-workspace-up; }
+    Mod+Ctrl+y         { move-workspace-to-monitor-left; }
     Mod+Ctrl+u         { move-workspace-down; }
+    Mod+Ctrl+o         { move-workspace-to-monitor-right; }
     Mod+Ctrl+i         { move-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
