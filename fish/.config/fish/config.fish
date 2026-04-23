@@ -54,11 +54,18 @@ alias dcub="docker-compose up -d --build"
 alias dcl="docker-compose logs -ft"
 alias dls="docker ps -a"
 alias ssh="TERM=xterm-256color /usr/bin/ssh"
-alias oh="thunar . & disown"
+#alias oh="thunar . & disown"
+alias oh="nautilus . & disown"
 alias opencode="~/.local/bin/sopencode"
 
 # I do not want to shoot myself in the foot
 alias rm="trash -i"
+
+
+# Niri
+alias nirissw='niri msg action set-dynamic-cast-window --id $(niri msg --json pick-window | jq .id)'
+alias nirissm='niri msg action set-dynamic-cast-monitor $(niri msg --json outputs | jq -r \'.[].name\' | fzf)'
+alias nirissc='niri msg action clear-dynamic-cast-target'
 
 # cd alias
 #zoxide init fish | source

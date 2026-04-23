@@ -249,6 +249,9 @@ cursor {
 //spawn-at-startup "waybar"
 
 spawn-at-startup "env" "QT_QPA_PLATFORMTHEME=gtk3" "qs" "-c" "noctalia-shell"
+spawn-at-startup "com.github.wwmm.easyeffects" "--gapplication-service"
+
+spawn-at-startup "systemctl" "--user" "start" "sway-sunshine.service" "&&" "systemctl" "--user" "start" "sunshine-headless.service"
 
 hotkey-overlay {
     skip-at-startup
@@ -283,6 +286,7 @@ animations {
 window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
+    opacity 1.00
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -303,6 +307,42 @@ window-rule {
     match app-id=r#"^org\.gnome\.World\.Secrets$"#
 
     block-out-from "screen-capture"
+}
+
+layer-rule {
+    match namespace="^notifications$"
+
+    block-out-from "screen-capture"
+}
+
+window-rule {
+    match title=r#"(?i)gmail"#
+    match title="Signal"
+
+    block-out-from "screen-capture"
+}
+
+// Indicate screencasted windows with red colors.
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
 }
 
 //window-rule {
@@ -549,6 +589,7 @@ binds {
     Mod+Ctrl+R { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
+    Mod+Ctrl+Shift+F { toggle-windowed-fullscreen; }
 
     // While maximize-column leaves gaps and borders around the window,
     // maximize-window-to-edges doesn't: the window expands to the edges of the screen.

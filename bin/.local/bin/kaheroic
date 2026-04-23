@@ -12,12 +12,12 @@ else
     kill -9 $pid
 fi
 
-pid=$(ps -ef | grep '.*[b]wrap.*' | grep -v '.*kaheroic.*' | awk '{print $2}')
+#pid=$(ps -ef | grep '.*[b]wrap.*' | grep -v '.*kaheroic.*' | awk '{print $2}')
+#
+#if [ -z "$pid" ]; then
+#    echo "No process found"
+#else
+#    kill -9 $pid
+#fi
 
-if [ -z "$pid" ]; then
-    echo "No process found"
-else
-    kill -9 $pid
-fi
-
-systemctl --user restart sunshine
+#systemctl --user restart sunshine
