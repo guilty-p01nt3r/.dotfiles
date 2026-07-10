@@ -3,7 +3,7 @@
 
 #pkill -9 -f '.*\.exe$'
 
-pid=$(pgrep '.*\.exe$')
+pid=$(pgrep -f '.*\.exe$')
 
 if [ -z "$pid" ]; then
     echo "No process found"

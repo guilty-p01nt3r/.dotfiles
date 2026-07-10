@@ -57,6 +57,7 @@ alias ssh="TERM=xterm-256color /usr/bin/ssh"
 #alias oh="thunar . & disown"
 alias oh="nautilus . & disown"
 alias opencode="~/.local/bin/sopencode"
+alias glow="glow -p -w 0"
 
 # I do not want to shoot myself in the foot
 alias rm="trash -i"
