@@ -18,4 +18,16 @@ function M.get_mason_executable(package_name)
   end
 end
 
+function M.copy_file_range()
+  local start_line = vim.fn.line('v')
+  local end_line = vim.fn.line('.')
+  local first_line = math.min(start_line, end_line)
+  local last_line = math.max(start_line, end_line)
+
+  local rel_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':~:.')
+  local formatted = string.format('%s L%d-%d', rel_path, first_line, last_line)
+
+  vim.fn.setreg('+', formatted)
+end
+
 return M

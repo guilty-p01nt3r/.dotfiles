@@ -49,6 +49,7 @@ if [ -z "$WINEPREFIX" ]; then
       export WINEPREFIX=~/Games/umu/vrPfx
       export PROTON_VR_RUNTIME=/home/vince/.local/share/envision/d3dbac7c-69b1-4f49-be16-99cf3b1d08ad/xrizer/target/release
       export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
+      export OXR_PARALLEL_VIEWS=1
       ;;
     *)
       export WINEPREFIX=~/Games/umu/defaultPrefix

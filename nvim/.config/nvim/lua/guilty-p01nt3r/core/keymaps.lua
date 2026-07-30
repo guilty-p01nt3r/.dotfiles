@@ -31,6 +31,21 @@ vim.keymap.set("n", "<leader>cfp", function()
   print("Copied relative path: " .. relative_path)
 end, { desc = "Copy current file relative path" })
 
+-- Copy file range (visual selection lines)
+vim.keymap.set('v', "<leader>cfr", function()
+  local start_line = vim.fn.line('v')
+  local end_line = vim.fn.line('.')
+  local first_line = math.min(start_line, end_line)
+  local last_line = math.max(start_line, end_line)
+
+  local rel_path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':~:.')
+  local formatted = string.format('%s L%d-%d', rel_path, first_line, last_line)
+
+  vim.api.nvim_feedkeys(vim.keycode('<Esc>'), 'x', false)
+  vim.fn.setreg('+', formatted)
+  vim.notify("Copied to the clipboard: " .. formatted, vim.log.levels.INFO, { title = "Copied" })
+end, { desc = "Copy file range to clipboard" })
+
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
