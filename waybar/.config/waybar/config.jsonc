@@ -13,7 +13,7 @@
   "modules-left": [
     "sway/workspaces",
     "sway/mode",
-    "sway/scratchpad",
+    //"sway/scratchpad",
     "custom/kitty"
   ],
   "modules-center": [

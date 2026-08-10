@@ -164,9 +164,6 @@
                             "textColor": "none"
                         },
                         {
-                            "id": "plugin:tailscale"
-                        },
-                        {
                             "id": "plugin:privacy-indicator"
                         },
                         {
@@ -309,25 +306,6 @@
                     "id": "KeyboardLayout",
                     "showIcon": true,
                     "textColor": "none"
-                },
-                {
-                    "defaultSettings": {
-                        "compactMode": false,
-                        "defaultPeerAction": "copy-ip",
-                        "hideDisconnected": false,
-                        "hideMullvadExitNodes": true,
-                        "loginServer": "",
-                        "pingCount": 5,
-                        "refreshInterval": 5000,
-                        "showIpAddress": true,
-                        "showPeerCount": true,
-                        "sshUsername": "",
-                        "taildropDownloadDir": "~/Downloads",
-                        "taildropEnabled": true,
-                        "taildropReceiveMode": "operator",
-                        "terminalCommand": ""
-                    },
-                    "id": "plugin:tailscale"
                 },
                 {
                     "defaultSettings": {

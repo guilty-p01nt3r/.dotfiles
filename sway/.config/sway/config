@@ -27,7 +27,7 @@ bindsym Ctrl+Shift+Print exec hyprpicker -a
 #exec --no-startup-id kdeconnect-indicator &
 
 # Easy Effects
-exec --no-startup-id flatpak run com.github.wwmm.easyeffects --gapplication-service
+#exec --no-startup-id flatpak run com.github.wwmm.easyeffects --gapplication-service
 
 # Bar 
 bar {
