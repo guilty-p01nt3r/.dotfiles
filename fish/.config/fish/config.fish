@@ -21,7 +21,7 @@ export GOPATH=$HOME/.lang/go
 
 # Rust
 #fish_add_path $HOME/.cargo/bin
-set PATH $PATH:$HOME/.cargo/bin:$GOPATH/bin
+set PATH $PATH $HOME/.cargo/bin $GOPATH/bin
 
 ## Perl
 #fish_add_path /home/vince/.perl5/bin

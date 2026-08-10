@@ -128,7 +128,7 @@ create_default_csession() {
 
     if [[ $no_ai == false ]]; then
         window="OC"
-        tnw "sopencode $workingDir" "C-m"
+        tnw "sopencode $workingDir" #"C-m"
     fi
 
     if [[ $no_shell == false ]]; then
