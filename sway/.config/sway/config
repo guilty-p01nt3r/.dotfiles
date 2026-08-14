@@ -167,11 +167,6 @@ output $mon1 {
     allow_tearing on
     max_render_time off
 }
-# 1920x1080 119.88 Hz (CVT) hsync: 137.14 kHz; pclk: 285.25 MHz
-#output $mon1 modeline 285.25 1920 1968 2000 2080  1080 1083 1088 1144 +hsync -vsync
-
-# 1920x1080 59.93 Hz (CVT 2.07M9-R) hsync: 66.59 kHz; pclk: 138.50 MHz
-# output $mon1 modeline  138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
 
 output $mon2 {
     mode 1920x1080@60Hz 
@@ -181,16 +176,6 @@ output $mon2 {
     max_render_time off
     adaptive_sync off
 }
-# 1920x1080 59.93 Hz (CVT 2.07M9-R) hsync: 66.59 kHz; pclk: 138.50 MHz
-#output $mon2 modeline  138.50  1920 1968 2000 2080  1080 1083 1088 1111 +hsync -vsync
-
-#output $mon3 {
-#  #mode 1920x1080@30Hz 
-#  position 0,+1080
-#  #render_bit_depth 8
-#}
-
-#output $mon3 modeline 65.76  1920 1928 1960 2000  1080 1082 1090 1096 +hsync -vsync
 
 
 input type:pointer {
@@ -198,12 +183,6 @@ input type:pointer {
     pointer_accel 0
 }
 
-
-#  AOC preferred mode
-#output $mon1 modeline +hsync +vsync
-
-# Samsung preferred mode
-#output $mon2 modeline +hsync +vsync 
 
 
 #exec swaymsg "create_output $vmon1 resolution 1920x1080 disable"
@@ -215,9 +194,6 @@ input type:pointer {
 #    adaptive_sync off
 #    disable
 #}
-
-# HDMI preffered mode
-#output $mon3 modeline 148.500 1920 2448 2492 2640 1080 1084 1089 1125 +hsync +vsync
 
 # Lock Screen and DPMS
 set $lock 'swaylock -f -c 212121'
