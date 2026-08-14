@@ -5,8 +5,11 @@
 
 
 environment {
-    QT_QPA_PLATFORMTHEME "qt6ct"
+    XDG_CURRENT_DESKTOP "niri"
+    QT_QPA_PLATFORM "wayland"
     ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
 }
 
 input {
@@ -55,7 +58,7 @@ input {
 // https://niri-wm.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
 output "DP-1" {
-    mode "1920x1080"
+    mode "1920x1080@144"
     scale 1
 
     // Transform allows to rotate the output counter-clockwise, valid values are:
@@ -70,6 +73,15 @@ output "DP-3" {
 
     transform "normal"
     position x=1920 y=0
+}
+
+output "HDMI-A-1" {
+    mode custom=true "1840x1036@60.000"
+    //mode "1920x1080@60"
+    scale 1
+    transform "normal"
+    position x=0 y=-1080
+    //position x=3840 y=0
 }
 
 // Settings that influence how windows are positioned and sized.
@@ -132,7 +144,8 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        //active-color "#7fc8ff"
+        active-color "#b8bb26"
 
         // Color of the ring on inactive monitors.
         //
@@ -227,11 +240,6 @@ layout {
     }
 }
 
-layer-rule {
-    match namespace="^noctalia-overview*"
-    place-within-backdrop true
-}
-
 cursor {
 //    xcursor-theme "Oxygen_White"
 //    xcursor-size 24
@@ -248,8 +256,10 @@ cursor {
 // This line starts waybar, a commonly used bar for Wayland compositors.
 //spawn-at-startup "waybar"
 
-spawn-at-startup "env" "QT_QPA_PLATFORMTHEME=gtk3" "qs" "-c" "noctalia-shell"
 spawn-at-startup "com.github.wwmm.easyeffects" "--gapplication-service"
+spawn-at-startup "noctalia"
+//spawn-at-startup "dms" "run"
+//spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 
 hotkey-overlay {
     skip-at-startup
@@ -353,6 +363,12 @@ window-rule {
 //}
 
 binds {
+    // Core Noctalia binds
+    Mod+D { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    //Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
+    //Alt+Tab { spawn-sh "noctalia msg window-switcher"; }
+
     // Keys consist of modifiers separated by + signs, followed by an XKB key name
     // in the end. To find an XKB name for a particular key, you may use a program
     // like wev.
@@ -369,7 +385,6 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     //Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+D hotkey-overlay-title="Open Noctalia Launcher" { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     // Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
@@ -388,6 +403,8 @@ binds {
     XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
     XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
     XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+
+    XF86Tools     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
 
     // Calculator(Python)
     Mod+c hotkey-overlay-title="Open Calculator: pycalc" { spawn-sh "kitty python3 -i -c 'import math'"; }
@@ -593,7 +610,7 @@ binds {
     // maximize-window-to-edges doesn't: the window expands to the edges of the screen.
     // This bind corresponds to normal window maximizing,
     // e.g. by double-clicking on the titlebar.
-    Mod+M { maximize-window-to-edges; }
+    //Mod+M { maximize-window-to-edges; }
 
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
@@ -660,5 +677,30 @@ binds {
 }
 
 
-include "./noctalia.kdl"
+//include "dms/colors.kdl"
+//include "dms/layout.kdl"
+//include "dms/alttab.kdl"
+//include "dms/binds.kdl"
 
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
+
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}
+
+// Floating Noctalia settings window.
+window-rule {
+  match app-id="dev.noctalia.Noctalia"
+  open-floating true
+  default-column-width { fixed 1080; }
+  default-window-height { fixed 920; }
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+include "noctalia.kdl"
