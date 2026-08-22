@@ -111,6 +111,7 @@ layout {
         // fixed 1920
     }
 
+
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
     // preset-window-heights { }
 
