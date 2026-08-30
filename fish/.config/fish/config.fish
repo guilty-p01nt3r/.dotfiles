@@ -4,7 +4,7 @@ end
 
 
 # Global Variables
-set -x PATH $PATH /sbin/
+set -x PATH $PATH /sbin/ $HOME/.local/share/nvim/mason/bin
 export EDITOR="nvim"
 export SHELL="/usr/bin/fish"
 export PAGER="less -R"
