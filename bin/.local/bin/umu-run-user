@@ -19,7 +19,10 @@ done
   # https://github.com/Open-Wine-Components/umu-launcher/pull/427
 if [ -z "$PROTONPATH" ]; then
   #export PROTONPATH="~/.steam/compatibilitytools.d/proton-ge-custom"
+  echo "Using default PROTONPATH: GE-Proton"
   export PROTONPATH=GE-Proton
+else
+  echo "Using custom PROTONPATH: $PROTONPATH"
 fi
 if [ -z "$GAMEID" ]; then
   export GAMEID=0
@@ -50,6 +53,15 @@ if [ -z "$WINEPREFIX" ]; then
       export PROTON_VR_RUNTIME=/home/vince/.local/share/envision/d3dbac7c-69b1-4f49-be16-99cf3b1d08ad/xrizer/target/release
       export PRESSURE_VESSEL_IMPORT_OPENXR_1_RUNTIMES=1
       export OXR_PARALLEL_VIEWS=1
+      ;;
+    hypervisor)
+      export WINEPREFIX=~/Games/umu/hypervisorPfx
+      ;;
+    hypervisorlina)
+      export WINEPREFIX=~/Games/umu/hypervisorlinaPfx
+      ;;
+    hypervisorlucio)
+      export WINEPREFIX=~/Games/umu/hypervisorlucioPfx
       ;;
     *)
       export WINEPREFIX=~/Games/umu/defaultPrefix

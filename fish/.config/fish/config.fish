@@ -87,3 +87,7 @@ set fish_cursor_visual block
 
 # Created by `pipx` on 2026-03-24 22:23:37
 set PATH $PATH /home/vince/.local/bin
+
+if set -q PROJECT_DIR
+    cd $PROJECT_DIR
+end
