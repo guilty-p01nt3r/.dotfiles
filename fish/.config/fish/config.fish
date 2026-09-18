@@ -88,6 +88,24 @@ set fish_cursor_visual block
 # Created by `pipx` on 2026-03-24 22:23:37
 set PATH $PATH /home/vince/.local/bin
 
+# Herdr configs
+
 if set -q PROJECT_DIR
     cd $PROJECT_DIR
+end
+
+for _f in $HOME/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.fish
+    test -r "$_f"; and source "$_f"; and break
+end
+
+# Orca configs
+# Automatically cd into Orca's target worktree directory on new terminal tabs
+if set -q ORCA_WORKTREE_ID
+    # Extract the target directory path following the '::' delimiter
+    set -l target_dir (string split -m 1 '::' -- $ORCA_WORKTREE_ID)[2]
+
+    # Change directory if target_dir is valid and not already $PWD
+    if test -n "$target_dir"; and test -d "$target_dir"; and test "$PWD" != "$target_dir"
+        cd "$target_dir"
+    end
 end
