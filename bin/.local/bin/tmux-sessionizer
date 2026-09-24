@@ -128,7 +128,7 @@ create_default_csession() {
 
     if [[ $no_ai == false ]]; then
         window="OC"
-        tnw "pi $code_path" #"C-m"
+        tnw "herdr $code_path" #"C-m"
     fi
 
     if [[ $no_shell == false ]]; then

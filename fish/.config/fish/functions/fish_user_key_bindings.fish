@@ -4,6 +4,8 @@ function fish_user_key_bindings
     # Insert here your bindings
     bind -M insert \cf tmux-sessionizer
     bind -M normal \cf tmux-sessionizer
+    #bind -M insert \cf herdr-sessionizer
+    #bind -M normal \cf herdr-sessionizer
     bind -M insert \cy\cy copyPwd
     bind -M normal \cy\cy copyPwd
 
