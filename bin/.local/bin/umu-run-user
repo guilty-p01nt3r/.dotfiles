@@ -1,5 +1,55 @@
 #!/bin/bash
 
+inject_optiscaler_ini() {
+    local target_dir=""
+    local default_ini="$HOME/.config/Optiscaler/OptiScaler.ini"
+    local default_nvapi="$HOME/.config/Optiscaler/fakenvapi.ini"
+
+    # Skip if global default template doesn't exist
+    [[ -f "$default_ini" ]] || return 0
+
+    # Search arguments for a game executable or file path
+    for arg in "$@"; do
+        if [[ "$arg" == *.exe ]] || [[ "$arg" == *.bat ]] || [[ -f "$arg" ]]; then
+            target_dir="$(dirname "$arg")"
+            break
+        fi
+    done
+
+    # Fallback to the last argument's directory if no explicit .exe was matched
+    if [[ -z "$target_dir" ]] && [[ $# -gt 0 ]]; then
+        local last_arg="${@: -1}"
+        if [[ -d "$last_arg" ]]; then
+            target_dir="$last_arg"
+        else
+            target_dir="$(dirname "$last_arg")"
+        fi
+    fi
+
+    # If a valid directory was found, check and copy
+    if [[ -n "$target_dir" ]] && [[ -d "$target_dir" ]]; then
+        local local_ini="$target_dir/OptiScaler.ini"
+        if [[ ! -f "$local_ini" ]]; then
+            cp "$default_ini" "$local_ini"
+            echo "-> OptiScaler.ini automatically deployed to: $target_dir"
+        else
+            echo "-> OptiScaler.ini already exists in: $target_dir"
+            cat "$default_ini" > "$local_ini"
+            echo "-> OptiScaler.ini overwritten in: $target_dir"
+        fi 
+
+        local local_ini="$target_dir/fakenvapi.ini"
+        if [[ ! -f "$local_ini" ]]; then
+            cp "$default_nvapi" "$local_ini"
+            echo "-> fakenvapi.ini automatically deployed to: $target_dir"
+        else
+            echo "-> fakenvapi.ini already exists in: $target_dir"
+            cat "$default_nvapi" > "$local_ini"
+            echo "-> fakenvapi.ini overwritten in: $target_dir"
+        fi 
+    fi
+}
+
 # Get -u "user" argument
 user=""
 while getopts "u:" opt; do
@@ -19,16 +69,19 @@ export CLUTTER_BACKEND=wayland
 export GDK_BACKEND=wayland
 
 # --- Graphics Driver & WSI ---
-export MESA_VK_WSI_PRESENT_MODE=immediate
+#export MESA_VK_WSI_PRESENT_MODE=immediate
 export RADV_PERFTEST=aco,nogttspill
 
 export MESA_SHADER_CACHE_DISABLE=0
 export MESA_SHADER_CACHE_MAX_SIZE=12G
+export LOW_LATENCY_LAYER=1
 
 # --- Proton / Threading ---
 export WINEFSYNC=1
 export PROTON_USE_NTSYNC=1
 export PROTON_ENABLE_WAYLAND=1
+export PROTON_VKD3D_LOWLATENCY=1
+export PROTON_DXVK_LOWLATENCY=1
 
 # --- DXVK (DirectX 9 / 11) ---
 export DXVK_CONFIG="dxgi.syncInterval = 0; dxgi.maxFrameLatency = 1; d3d9.maxFrameLatency = 1; dxgi.maxFrameRate = 60; d3d9.maxFrameRate = 60; dxgi.deferSurfaceCreation = True"
@@ -36,9 +89,17 @@ export DXVK_ASYNC=1
 
 # --- VKD3D (DirectX 12) ---
 export VKD3D_FRAME_RATE=60
+export VKD3D_SWAPCHAIN_PRESENT_MODE=immediate
 export VKD3D_CONFIG=no_upload_hvv,single_queue,force_static_cbv
-#export VKD3D_SWAPCHAIN_PRESENT_MODE=immediate
 
+# --- OfalseptiScaler Integration ---
+export PROTON_USE_OPTISCALER=1
+#export PROTON_ENABLE_NVAPI=1
+inject_optiscaler_ini "$@"
+
+# FSR 4
+export PROTON_FSR4_UPGRADE=1
+#export DXIL_SPIRV_CONFIG=wmma_rdna3_workaround
 
 # default exports
 # if PROTONPATH env doesn't exist, use default path
