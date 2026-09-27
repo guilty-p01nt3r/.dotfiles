@@ -63,43 +63,66 @@ while getopts "u:" opt; do
   esac
 done
 
-# --- Gaming Environment & Latency Optimizations ---
-export SDL_VIDEODRIVER=wayland
-export CLUTTER_BACKEND=wayland
-export GDK_BACKEND=wayland
 
-# --- Graphics Driver & WSI ---
-#export MESA_VK_WSI_PRESENT_MODE=immediate
-export RADV_PERFTEST=aco,nogttspill
+# ============================================================
+# AMD / Wayland / GE-Proton + Proton-CachyOS
+# 60 FPS / No VSync / No VRR / Low Latency
+# ============================================================
 
-export MESA_SHADER_CACHE_DISABLE=0
-export MESA_SHADER_CACHE_MAX_SIZE=12G
-export LOW_LATENCY_LAYER=1
 
-# --- Proton / Threading ---
-export WINEFSYNC=1
-export PROTON_USE_NTSYNC=1
+# --- Native Wine Wayland ---
+export PROTON_ENABLE_WAYLAND=1
+
+# --- Proton-CachyOS / GE-Proton ---
 export PROTON_ENABLE_WAYLAND=1
 export PROTON_VKD3D_LOWLATENCY=1
 export PROTON_DXVK_LOWLATENCY=1
 
-# --- DXVK (DirectX 9 / 11) ---
-export DXVK_CONFIG="dxgi.syncInterval = 0; dxgi.maxFrameLatency = 1; d3d9.maxFrameLatency = 1; dxgi.maxFrameRate = 60; d3d9.maxFrameRate = 60; dxgi.deferSurfaceCreation = True"
-export DXVK_ASYNC=1
+# --- Mesa / RADV ---
+export MESA_SHADER_CACHE_MAX_SIZE=12G
 
-# --- VKD3D (DirectX 12) ---
-export VKD3D_FRAME_RATE=60
-export VKD3D_SWAPCHAIN_PRESENT_MODE=immediate
-export VKD3D_CONFIG=no_upload_hvv,single_queue,force_static_cbv
+# Force tearing / no VSync at Vulkan WSI level.
+# Useful since you explicitly do NOT want VSync or VRR.
+export MESA_VK_WSI_PRESENT_MODE=immediate
 
-# --- OfalseptiScaler Integration ---
+
+# --- Generic Low-Latency Layer ---
+# Included by BOTH GE-Proton and Proton-CachyOS.
+export LOW_LATENCY_LAYER=1
+
+
+# ============================================================
+# DXVK - DirectX 9 / 10 / 11
+# ============================================================
+
+export DXVK_CONFIG="
+dxgi.syncInterval = 0;
+d3d9.presentInterval = 0;
+dxgi.maxFrameLatency = 1;
+d3d9.maxFrameLatency = 1;
+"
+
+
+# ============================================================
+# VKD3D-Proton - DirectX 12
+# ============================================================
+
+export VKD3D_SWAPCHAIN_PRESENT_MODE=IMMEDIATE
+
+
+# ============================================================
+# OptiScaler
+# ============================================================
+
 export PROTON_USE_OPTISCALER=1
-#export PROTON_ENABLE_NVAPI=1
 inject_optiscaler_ini "$@"
 
-# FSR 4
+
+# ============================================================
+# FSR4
+# ============================================================
+
 export PROTON_FSR4_UPGRADE=1
-#export DXIL_SPIRV_CONFIG=wmma_rdna3_workaround
 
 # default exports
 # if PROTONPATH env doesn't exist, use default path
@@ -161,5 +184,5 @@ echo "Setting WINEPREFIX to: $WINEPREFIX"
 
 #Get first argument (without -u)
 shift $((OPTIND -1))
-umu-run "$@"
+gamemoderun umu-run "$@"
 
