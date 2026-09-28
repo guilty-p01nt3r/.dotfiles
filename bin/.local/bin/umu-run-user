@@ -39,13 +39,9 @@ inject_optiscaler_ini() {
         fi 
 
         local local_ini="$target_dir/fakenvapi.ini"
-        if [[ ! -f "$local_ini" ]]; then
-            cp "$default_nvapi" "$local_ini"
-            echo "-> fakenvapi.ini automatically deployed to: $target_dir"
-        else
-            echo "-> fakenvapi.ini already exists in: $target_dir"
-            cat "$default_nvapi" > "$local_ini"
-            echo "-> fakenvapi.ini overwritten in: $target_dir"
+        if [[ -f "$local_ini" ]]; then
+            trash "$local_ini"
+            echo "-> fakenvapi.ini removed from: $target_dir"
         fi 
     fi
 }
@@ -124,6 +120,13 @@ inject_optiscaler_ini "$@"
 
 export PROTON_FSR4_UPGRADE=1
 
+# ============================================================
+# MangoHud
+# ============================================================
+# disable MangoHud by default, because I will prepend mangohud to the command 
+# so that it works even inside gamescope, and I don't want to have mangohud enabled twice
+export MANGOHUD=0 
+
 # default exports
 # if PROTONPATH env doesn't exist, use default path
   # https://github.com/Open-Wine-Components/umu-launcher/pull/427
@@ -184,5 +187,5 @@ echo "Setting WINEPREFIX to: $WINEPREFIX"
 
 #Get first argument (without -u)
 shift $((OPTIND -1))
-gamemoderun umu-run "$@"
+mangohud gamemoderun umu-run "$@"
 
