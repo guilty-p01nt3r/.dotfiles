@@ -23,6 +23,10 @@ export GOPATH=$HOME/.lang/go
 #fish_add_path $HOME/.cargo/bin
 set PATH $PATH $HOME/.cargo/bin $GOPATH/bin
 
+# Pnpm
+#fish_add_path $HOME/.local/share/pnpm
+#set PATH $PATH $HOME/.local/share/pnpm/bin
+
 ## Perl
 #fish_add_path /home/vince/.perl5/bin
 #export PERL_MM_OPT="INSTALL_BASE=/home/vince/.perl5"
@@ -89,7 +93,6 @@ set fish_cursor_visual block
 set PATH $PATH /home/vince/.local/bin
 
 # Herdr configs
-
 if set -q PROJECT_DIR
     cd $PROJECT_DIR
 end
@@ -98,14 +101,3 @@ for _f in $HOME/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook
     test -r "$_f"; and source "$_f"; and break
 end
 
-# Orca configs
-# Automatically cd into Orca's target worktree directory on new terminal tabs
-if set -q ORCA_WORKTREE_ID
-    # Extract the target directory path following the '::' delimiter
-    set -l target_dir (string split -m 1 '::' -- $ORCA_WORKTREE_ID)[2]
-
-    # Change directory if target_dir is valid and not already $PWD
-    if test -n "$target_dir"; and test -d "$target_dir"; and test "$PWD" != "$target_dir"
-        cd "$target_dir"
-    end
-end
