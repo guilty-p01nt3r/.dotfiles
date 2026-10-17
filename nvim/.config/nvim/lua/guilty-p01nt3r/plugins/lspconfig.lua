@@ -49,6 +49,7 @@ return {
         vim.lsp.enable({
             "bashls",
             "clangd",
+            "rust_analyzer", -- NOT "rust-analyzer": vim.lsp.enable matches lsp/rust_analyzer.lua
             "gopls",
             "html",
             "intelephense",
