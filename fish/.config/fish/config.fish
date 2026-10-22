@@ -60,7 +60,6 @@ alias dls="docker ps -a"
 alias ssh="TERM=xterm-256color /usr/bin/ssh"
 #alias oh="thunar . & disown"
 alias oh="nautilus . & disown"
-alias opencode="~/.local/bin/sopencode"
 alias glow="glow -p -w 0"
 
 # I do not want to shoot myself in the foot
@@ -83,21 +82,8 @@ set fish_cursor_insert line
 set fish_cursor_replace_one underscore
 set fish_cursor_visual block
 
-# Starship theme
-#starship init fish | source
-
 # Icons in terminal
 #source ~/.local/share/icons-in-terminal/icons.fish
 
 # Created by `pipx` on 2026-03-24 22:23:37
 set PATH $PATH /home/vince/.local/bin
-
-# Herdr configs
-if set -q PROJECT_DIR
-    cd $PROJECT_DIR
-end
-
-for _f in $HOME/.config/herdr/plugins/github/herdr-automatic-rename-*/shell/hook.fish
-    test -r "$_f"; and source "$_f"; and break
-end
-
